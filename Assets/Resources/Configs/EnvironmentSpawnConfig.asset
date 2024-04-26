@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f2013c420164abea8d9dab2271ab568, type: 3}
+  m_Name: EnvironmentSpawnConfig
+  m_EditorClassIdentifier: 
+  <IterationsMaxCount>k__BackingField: 1000
+  cells:
+  - <EatableObjectType>k__BackingField: 0
+    <MinDistance>k__BackingField: 3
+    <MaxDistance>k__BackingField: 75
+    <MinCount>k__BackingField: 50
+    <MaxCount>k__BackingField: 60
+    <MinScale>k__BackingField: 0.5
+    <MaxScale>k__BackingField: 1.5
+  - <EatableObjectType>k__BackingField: 0
+    <MinDistance>k__BackingField: 75
+    <MaxDistance>k__BackingField: 150
+    <MinCount>k__BackingField: 60
+    <MaxCount>k__BackingField: 80
+    <MinScale>k__BackingField: 1.5
+    <MaxScale>k__BackingField: 5
+  - <EatableObjectType>k__BackingField: 10
+    <MinDistance>k__BackingField: 100
+    <MaxDistance>k__BackingField: 400
+    <MinCount>k__BackingField: 50
+    <MaxCount>k__BackingField: 50
+    <MinScale>k__BackingField: 4
+    <MaxScale>k__BackingField: 10
+  - <EatableObjectType>k__BackingField: 10
+    <MinDistance>k__BackingField: 400
+    <MaxDistance>k__BackingField: 1500
+    <MinCount>k__BackingField: 75
+    <MaxCount>k__BackingField: 150
+    <MinScale>k__BackingField: 10
+    <MaxScale>k__BackingField: 20
+  - <EatableObjectType>k__BackingField: 20
+    <MinDistance>k__BackingField: 500
+    <MaxDistance>k__BackingField: 5000
+    <MinCount>k__BackingField: 50
+    <MaxCount>k__BackingField: 100
+    <MinScale>k__BackingField: 100
+    <MaxScale>k__BackingField: 200
