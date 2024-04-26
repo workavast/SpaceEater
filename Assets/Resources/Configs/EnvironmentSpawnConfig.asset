@@ -42,10 +42,17 @@ MonoBehaviour:
     <MaxCount>k__BackingField: 150
     <MinScale>k__BackingField: 10
     <MaxScale>k__BackingField: 20
-  - <EatableObjectType>k__BackingField: 20
+  - <EatableObjectType>k__BackingField: 30
     <MinDistance>k__BackingField: 1000
+    <MaxDistance>k__BackingField: 5000
+    <MinCount>k__BackingField: 50
+    <MaxCount>k__BackingField: 75
+    <MinScale>k__BackingField: 40
+    <MaxScale>k__BackingField: 90
+  - <EatableObjectType>k__BackingField: 20
+    <MinDistance>k__BackingField: 2000
     <MaxDistance>k__BackingField: 8000
     <MinCount>k__BackingField: 50
     <MaxCount>k__BackingField: 100
-    <MinScale>k__BackingField: 100
+    <MinScale>k__BackingField: 150
     <MaxScale>k__BackingField: 200

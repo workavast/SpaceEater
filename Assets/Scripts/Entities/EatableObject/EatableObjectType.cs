@@ -5,5 +5,6 @@ namespace SourceCode.Entities.EatableObject
         Asteroid = 0,
         Planet = 10,
         Galaxy = 20,
+        Star = 30
     }
 }
