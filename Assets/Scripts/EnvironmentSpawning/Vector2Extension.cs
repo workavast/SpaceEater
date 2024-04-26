@@ -18,6 +18,26 @@ namespace SourceCode.EnvironmentSpawning
             return center + GetRandomDirection() * randomDistance;
         }
         
+        public static Vector2 ClampInCircle(this Vector2 point, Vector2 center, float radius)
+        {
+            var result = point;
+            var distanceFromCenter = Vector2.Distance(point, center);
+            
+            if (distanceFromCenter > radius)
+            {
+                var newPosDir = point.normalized;
+                result = newPosDir * radius;
+            }
+            
+            return result;
+        }
+        
+        public static bool PointInCircle(this Vector2 point, Vector2 center, float radius)
+        {
+            var distanceFromCenter = Vector2.Distance(point, center);
+            return distanceFromCenter < radius;
+        }
+        
         public static Vector2 GetRandom(Vector2 min, Vector2 max)
         {
             float xRandom = Random.Range(min.x, max.x + 1);

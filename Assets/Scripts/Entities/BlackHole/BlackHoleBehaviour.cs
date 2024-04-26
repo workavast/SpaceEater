@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using SourceCode.BackgroundControl;
 using SourceCode.Core;
+using SourceCode.Core.PlayZone;
 using SourceCode.Entities.EatableObject;
+using SourceCode.EnvironmentSpawning;
 using SourceCode.InputDetectors;
 using UnityEngine;
 using Zenject;
@@ -11,6 +13,7 @@ namespace SourceCode.Entities.BlackHole
 {
     public class BlackHoleBehaviour : EntityBase, ICameraTarget, IBackgroundTarget
     {
+        [Inject] private readonly PlayZoneBehaviour _playZone;
         [Inject] private readonly BlackHoleConfig _config;
         
         private InputDetectorBase _inputDetector;
@@ -41,6 +44,16 @@ namespace SourceCode.Entities.BlackHole
             if(direction == Vector2.zero)
                 return;
             var distance = Size * _config.MoveSpeed * time;
+
+            var expectPosition = (Vector2)transform.position + direction * distance;
+            if (!expectPosition.PointInCircle(Vector2.zero, _playZone.Radius))
+            {
+                var clampPosition = expectPosition.ClampInCircle(Vector2.zero, _playZone.Radius);
+                
+                direction = (clampPosition - (Vector2)transform.position).normalized;
+                distance = Vector2.Distance(clampPosition, transform.position);
+            }
+            
             transform.Translate(direction * distance);
             OnMove?.Invoke(direction, distance);
         }

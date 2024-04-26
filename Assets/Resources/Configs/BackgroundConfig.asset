@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: BackgroundConfig
   m_EditorClassIdentifier: 
   <MoveSpeed>k__BackingField: 0.95
-  <SizeScaler>k__BackingField: 0.9
+  <SizeScaler>k__BackingField: 0.65
   <BackgroundMoveScale>k__BackingField: 0
-  <StarsMoveScale>k__BackingField: 0.025
+  <StarsMoveScale>k__BackingField: 0.03

@@ -40,7 +40,7 @@ namespace SourceCode.BackgroundControl
         
         private void UpdateSize()
         {
-            transform.localScale = Vector3.one * Mathf.Pow(_target.Size, _config.SizeScaler);
+            transform.localScale = Vector3.forward + (Vector3)(Vector2.one * Mathf.Pow(_target.Size, _config.SizeScaler));
         }
     }
 }
