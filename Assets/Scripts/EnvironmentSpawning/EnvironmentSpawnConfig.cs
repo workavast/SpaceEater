@@ -9,7 +9,7 @@ namespace SourceCode.EnvironmentSpawning
     [CreateAssetMenu(fileName = nameof(EnvironmentSpawnConfig), menuName = "Configs/" + nameof(EnvironmentSpawnConfig))]
     public class EnvironmentSpawnConfig : ScriptableObject, ISingleConfig
     {
-        [field: SerializeField, Range(0, 10000)] public int IterationsMaxCount { get; private set; }
+        [field: SerializeField, Range(1, 10000)] public int IterationsMaxCount { get; private set; } = 1;
         [SerializeField] private List<Cell> cells;
 
         public IEnumerable<Cell> Cells => cells;
@@ -32,9 +32,13 @@ namespace SourceCode.EnvironmentSpawning
         [field: SerializeField, Range(0, 1000)] public float MinScale { get; private set; }
         [field: SerializeField, Range(0, 1000)] public float MaxScale { get; private set; }
         
+        [field: SerializeField, Range(-180, 180)] public float MinAngle { get; private set; }
+        [field: SerializeField, Range(-180, 180)] public float MaxAngle { get; private set; }
+        
         private float _prevMaxDistance = 0;
         private float _prevMaxCount = 0;
         private float _prevMaxScale = 0;
+        private float _prevMaxAngle = 0;
         
         public void Validate()
         {
@@ -61,10 +65,32 @@ namespace SourceCode.EnvironmentSpawning
                 else
                     MaxScale = MinScale;
             }
-
+            
+            if (MaxAngle < MinAngle)
+            {
+                if (_prevMaxAngle > MaxAngle)
+                    MinAngle = MaxAngle;
+                else
+                    MaxAngle = MinAngle;
+            }
+            
             _prevMaxDistance = MaxDistance;
             _prevMaxCount = MaxCount;
             _prevMaxScale = MaxScale;
-        }  
+            _prevMaxAngle = MaxAngle;
+        }
+
+        // private static void ClampValue(ref float maxValue, ref float minValue, ref float prevValue)
+        // {
+        //     if (maxValue < minValue)
+        //     {
+        //         if (prevValue > maxValue)
+        //             minValue = maxValue;
+        //         else
+        //             maxValue = minValue;
+        //     }
+        //
+        //     prevValue = maxValue;
+        // }
     }
 }

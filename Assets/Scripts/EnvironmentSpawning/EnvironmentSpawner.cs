@@ -22,7 +22,7 @@ namespace SourceCode
         //TODO: chunks??
         public void Generate()
         {
-            List<(EatableObjectType, Vector2, float)> spawnTuples = new();
+            List<(EatableObjectType, Vector2, float, float)> spawnTuples = new();
             foreach (var cell in _config.Cells)
             {
                 int count = Random.Range(cell.MinCount, cell.MaxCount);
@@ -58,19 +58,21 @@ namespace SourceCode
                         continue;
                     }
                     
-                    spawnTuples.Add((cell.EatableObjectType, position, scale));
+                    var angle = Random.Range(cell.MinAngle, cell.MaxAngle);
+                    spawnTuples.Add((cell.EatableObjectType, position, scale, angle));
                 }
             }
             
             ApplyGeneration(spawnTuples);
         }
 
-        private void ApplyGeneration(List<(EatableObjectType, Vector2, float)> spawnTuples)
+        private void ApplyGeneration(List<(EatableObjectType, Vector2, float, float)> spawnTuples)
         {
             foreach (var tuple in spawnTuples)
             {
                 var newEatableObject = _factory.Create(tuple.Item1, tuple.Item2);
                 newEatableObject.transform.localScale = new Vector3(tuple.Item3, tuple.Item3, 1);
+                newEatableObject.transform.Rotate(Vector3.forward, tuple.Item4);
             }
         }
     }
