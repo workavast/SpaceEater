@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <IterationsMaxCount>k__BackingField: 1000
   cells:
-  - <EatableObjectType>k__BackingField: 0
+  - <StaticEatableObjectType>k__BackingField: 0
     <MinDistance>k__BackingField: 3
     <MaxDistance>k__BackingField: 75
     <MinCount>k__BackingField: 50
@@ -23,7 +23,7 @@ MonoBehaviour:
     <MaxScale>k__BackingField: 1.5
     <MinAngle>k__BackingField: -180
     <MaxAngle>k__BackingField: 180
-  - <EatableObjectType>k__BackingField: 0
+  - <StaticEatableObjectType>k__BackingField: 0
     <MinDistance>k__BackingField: 75
     <MaxDistance>k__BackingField: 150
     <MinCount>k__BackingField: 60
@@ -32,7 +32,7 @@ MonoBehaviour:
     <MaxScale>k__BackingField: 5
     <MinAngle>k__BackingField: -180
     <MaxAngle>k__BackingField: 180
-  - <EatableObjectType>k__BackingField: 10
+  - <StaticEatableObjectType>k__BackingField: 10
     <MinDistance>k__BackingField: 100
     <MaxDistance>k__BackingField: 400
     <MinCount>k__BackingField: 50
@@ -41,7 +41,7 @@ MonoBehaviour:
     <MaxScale>k__BackingField: 10
     <MinAngle>k__BackingField: -45
     <MaxAngle>k__BackingField: 45
-  - <EatableObjectType>k__BackingField: 10
+  - <StaticEatableObjectType>k__BackingField: 10
     <MinDistance>k__BackingField: 400
     <MaxDistance>k__BackingField: 1500
     <MinCount>k__BackingField: 75
@@ -50,7 +50,7 @@ MonoBehaviour:
     <MaxScale>k__BackingField: 20
     <MinAngle>k__BackingField: -45
     <MaxAngle>k__BackingField: 45
-  - <EatableObjectType>k__BackingField: 30
+  - <StaticEatableObjectType>k__BackingField: 30
     <MinDistance>k__BackingField: 1000
     <MaxDistance>k__BackingField: 5000
     <MinCount>k__BackingField: 50
@@ -59,7 +59,7 @@ MonoBehaviour:
     <MaxScale>k__BackingField: 90
     <MinAngle>k__BackingField: -45
     <MaxAngle>k__BackingField: 45
-  - <EatableObjectType>k__BackingField: 20
+  - <StaticEatableObjectType>k__BackingField: 20
     <MinDistance>k__BackingField: 2500
     <MaxDistance>k__BackingField: 8000
     <MinCount>k__BackingField: 50

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 36a1f1391b4d48978e52ba74dfbccba2, type: 3}
-  m_Name: EatableObjectsConfig
+  m_Name: StaticEatableObjectsConfig
   m_EditorClassIdentifier: 
   eatableObjects:
   - {fileID: 7568349143423451891, guid: 1128346d8e2674646b3c13a99aea15ad, type: 3}

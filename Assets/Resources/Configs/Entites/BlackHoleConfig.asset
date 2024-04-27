@@ -9,7 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d59a35594a764b1fa43cec7333d76d0a, type: 3}
-  m_Name: EatableItemConfig
+  m_Script: {fileID: 11500000, guid: 6287eece403f4b3aacc3b52b2ee724e0, type: 3}
+  m_Name: BlackHoleConfig
   m_EditorClassIdentifier: 
-  <EatTime>k__BackingField: 2.5
+  <EatTime>k__BackingField: 0.5
+  <MoveSpeed>k__BackingField: 3
+  <IncreaseScale>k__BackingField: 0.05

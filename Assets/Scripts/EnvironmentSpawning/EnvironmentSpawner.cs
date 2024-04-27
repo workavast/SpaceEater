@@ -1,6 +1,7 @@
 using System.Collections.Generic;
-using SourceCode.Entities.EatableObject;
-using SourceCode.Entities.EatableObject.Factory;
+using SourceCode.Core;
+using SourceCode.Entities.StaticEatableObjects;
+using SourceCode.Entities.StaticEatableObjects.Factory;
 using SourceCode.EnvironmentSpawning;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -10,9 +11,9 @@ namespace SourceCode
     public class EnvironmentSpawner
     {
         private readonly EnvironmentSpawnConfig _config;
-        private readonly EatableObjectsFactory _factory;
+        private readonly StaticEatableObjectsFactory _factory;
         
-        public EnvironmentSpawner(EnvironmentSpawnConfig config, EatableObjectsFactory factory)
+        public EnvironmentSpawner(EnvironmentSpawnConfig config, StaticEatableObjectsFactory factory)
         {
             _config = config;
             _factory = factory;
@@ -22,7 +23,7 @@ namespace SourceCode
         //TODO: chunks??
         public void Generate()
         {
-            List<(EatableObjectType, Vector2, float, float)> spawnTuples = new();
+            List<(StaticEatableObjectType, Vector2, float, float)> spawnTuples = new();
             foreach (var cell in _config.Cells)
             {
                 int count = Random.Range(cell.MinCount, cell.MaxCount);
@@ -59,14 +60,14 @@ namespace SourceCode
                     }
                     
                     var angle = Random.Range(cell.MinAngle, cell.MaxAngle);
-                    spawnTuples.Add((cell.EatableObjectType, position, scale, angle));
+                    spawnTuples.Add((cell.StaticEatableObjectType, position, scale, angle));
                 }
             }
             
             ApplyGeneration(spawnTuples);
         }
 
-        private void ApplyGeneration(List<(EatableObjectType, Vector2, float, float)> spawnTuples)
+        private void ApplyGeneration(List<(StaticEatableObjectType, Vector2, float, float)> spawnTuples)
         {
             foreach (var tuple in spawnTuples)
             {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace SourceCode.EnvironmentSpawning
+namespace SourceCode.Core
 {
     public static class Vector2Extension
     {
@@ -12,7 +12,7 @@ namespace SourceCode.EnvironmentSpawning
             return new Vector2(xRandom, yRandom).normalized;
         }
         
-        public static Vector2 GetPointOnCircle(Vector2 center, float minDistance, float maxDistance)
+        public static Vector2 GetPointOnCircle(this Vector2 center, float minDistance, float maxDistance)
         {
             float randomDistance = Random.Range(minDistance, maxDistance);
             return center + GetRandomDirection() * randomDistance;

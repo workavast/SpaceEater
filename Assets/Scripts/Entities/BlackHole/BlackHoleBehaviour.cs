@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using SourceCode.BackgroundControl;
 using SourceCode.Core;
 using SourceCode.Core.PlayZone;
-using SourceCode.Entities.EatableObject;
-using SourceCode.EnvironmentSpawning;
+using SourceCode.Core.TriggerZone;
 using SourceCode.InputDetectors;
 using UnityEngine;
 using Zenject;
@@ -13,28 +12,37 @@ namespace SourceCode.Entities.BlackHole
 {
     public class BlackHoleBehaviour : EntityBase, ICameraTarget, IBackgroundTarget
     {
+        [SerializeField] private TriggerZone2D triggerZone2D;
+        
         [Inject] private readonly PlayZoneBehaviour _playZone;
         [Inject] private readonly BlackHoleConfig _config;
         
         private InputDetectorBase _inputDetector;
-        
-        private readonly List<EatableObjectBehaviour> _eatableObjects = new(2);
+        private readonly List<EntityBase> _eatableObjects = new(2);
 
         public Transform Transform => transform;
-        
-        public event Action OnUpdateSize;
-        public event Action<Vector2, float> OnMove;
+        protected override EatableObjectConfigBase _configBase => _config;
 
+        public event Action OnUpdateSize;
+        /// <summary>
+        /// return direction and distance of move
+        /// </summary>
+        public event Action<Vector2, float> OnMove;
+        
         protected override void Awake()
         {
             base.Awake();
             
             _inputDetector = new DesktopInput();
+
+            triggerZone2D.OnEnter += EatableObjectEnter;
+            triggerZone2D.OnExit += EatableObjectExit;
         }
 
         private void Update()
         {
             _inputDetector.ManualUpdate();
+            ManualUpdate(Time.deltaTime);
             Move(Time.deltaTime);
         }
 
@@ -58,9 +66,12 @@ namespace SourceCode.Entities.BlackHole
             OnMove?.Invoke(direction, distance);
         }
 
-        private void EatableObjectEnter(EatableObjectBehaviour eatableObjectBehaviour)
+        private void EatableObjectEnter(Collider2D other)
         {
-            if (_eatableObjects.Contains(eatableObjectBehaviour))
+            if (!other.TryGetComponent(out EntityBase staticEatableObject))
+                return;
+            
+            if (_eatableObjects.Contains(staticEatableObject))
             {
 #if UNITY_EDITOR || DEVELOPMENT_BUILD
                 Debug.LogWarning($"Attention! Second enter");
@@ -68,40 +79,31 @@ namespace SourceCode.Entities.BlackHole
                 return;
             }
             
-            if(eatableObjectBehaviour.Size > Size)
+            if(staticEatableObject.Size > Size)
                 return;
             
-            eatableObjectBehaviour.StartEat();
-            eatableObjectBehaviour.OnEaten += IncreaseSize;
-            _eatableObjects.Add(eatableObjectBehaviour);
+            staticEatableObject.OnConsumedWithSize += IncreaseSize;
+            staticEatableObject.StartEat();
+            _eatableObjects.Add(staticEatableObject);
         }
 
-        private void EatableObjectExit(EatableObjectBehaviour eatableObjectBehaviour)
+        private void EatableObjectExit(Collider2D other)
         {
-            if (!_eatableObjects.Contains(eatableObjectBehaviour))
+            if (!other.TryGetComponent(out EntityBase staticEatableObject))
+                return;
+            
+            if (!_eatableObjects.Contains(staticEatableObject))
                 return;
 
-            eatableObjectBehaviour.OnEaten -= IncreaseSize;
-            eatableObjectBehaviour.StopEat();
-            _eatableObjects.Remove(eatableObjectBehaviour);
+            staticEatableObject.OnConsumedWithSize -= IncreaseSize;
+            staticEatableObject.StopEat();
+            _eatableObjects.Remove(staticEatableObject);
         }
 
         private void IncreaseSize(float eatenSize)
         {
-            transform.localScale += Vector3.one * eatenSize * _config.IncreaseScale;
+            transform.localScale += Vector3.one * (eatenSize * _config.IncreaseScale);
             OnUpdateSize?.Invoke();
-        }
-
-        private void OnTriggerEnter2D(Collider2D other)
-        {
-            if (other.TryGetComponent(out EatableObjectBehaviour eatableObjectBehaviour))
-                EatableObjectEnter(eatableObjectBehaviour);
-        }
-        
-        private void OnTriggerExit2D(Collider2D other)
-        {
-            if (other.TryGetComponent(out EatableObjectBehaviour eatableObjectBehaviour))
-                EatableObjectExit(eatableObjectBehaviour);
         }
     }
 }

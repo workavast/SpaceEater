@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using SourceCode.Core.Configs;
-using SourceCode.Entities.EatableObject;
+using SourceCode.Entities.StaticEatableObjects;
 using UnityEngine;
 
 namespace SourceCode.EnvironmentSpawning
@@ -24,7 +24,7 @@ namespace SourceCode.EnvironmentSpawning
     [Serializable]
     public class Cell
     {
-        [field: SerializeField] public EatableObjectType EatableObjectType { get; private set; }
+        [field: SerializeField] public StaticEatableObjectType StaticEatableObjectType { get; private set; }
         [field: SerializeField, Range(0, 100000)] public float MinDistance { get; private set; }
         [field: SerializeField, Range(0, 100000)] public float MaxDistance { get; private set; }
         [field: SerializeField, Range(0, 1000)] public int MinCount { get; private set; }

@@ -2,8 +2,10 @@ using GameCycleFramework;
 using SourceCode.BackgroundControl;
 using SourceCode.CameraMovement;
 using SourceCode.Entities.BlackHole;
-using SourceCode.Entities.EatableObject;
-using SourceCode.Entities.EatableObject.Factory;
+using SourceCode.Entities.Enemies.Factory;
+using SourceCode.Entities.Enemies.Spawning;
+using SourceCode.Entities.StaticEatableObjects;
+using SourceCode.Entities.StaticEatableObjects.Factory;
 using SourceCode.EnvironmentSpawning;
 using UnityEngine;
 using Zenject;
@@ -17,20 +19,25 @@ namespace SourceCode.Core
         [SerializeField] private BlackHoleBehaviour blackHoleBehaviour;
 
         [Inject] private readonly IGameCycleController _gameCycleController;
-        [Inject] private readonly EatableObjectsFactory _eatableObjectsFactory;
+        [Inject] private readonly StaticEatableObjectsFactory _staticEatableObjectsFactory;
         [Inject] private readonly EnvironmentSpawnConfig _environmentSpawnConfig;
+        [Inject] private readonly EnemiesSpawnConfig _enemiesSpawnConfig;
+        [Inject] private readonly EnemiesFactory _enemiesFactory;
         
-        private EatableObjectsUpdater _eatableObjectsUpdater;
-        private EnvironmentSpawner _spawner;
+        private StaticEatableObjectsUpdater _staticEatableObjectsUpdater;
+        private EnvironmentSpawner _environmentSpawner;
+        private EnemiesSpawner _enemiesSpawner;
         
         private void Start()
         {
             FpsCap.Initialize();
             cameraController.SetFollowTarget(blackHoleBehaviour);
             backgroundController.SetTarget(blackHoleBehaviour);
-            _eatableObjectsUpdater = new EatableObjectsUpdater(_gameCycleController, _eatableObjectsFactory);
-            _spawner = new EnvironmentSpawner(_environmentSpawnConfig, _eatableObjectsFactory);
-            _spawner.Generate();
+            _staticEatableObjectsUpdater = new StaticEatableObjectsUpdater(_gameCycleController, _staticEatableObjectsFactory);
+            _environmentSpawner = new EnvironmentSpawner(_environmentSpawnConfig, _staticEatableObjectsFactory);
+            _environmentSpawner.Generate();
+
+            _enemiesSpawner = new EnemiesSpawner(_enemiesSpawnConfig, _enemiesFactory, blackHoleBehaviour);
         }
     }
 }

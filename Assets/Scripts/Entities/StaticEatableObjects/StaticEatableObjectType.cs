@@ -1,6 +1,6 @@
-namespace SourceCode.Entities.EatableObject
+namespace SourceCode.Entities.StaticEatableObjects
 {
-    public enum EatableObjectType
+    public enum StaticEatableObjectType
     {
         Asteroid = 0,
         Planet = 10,
