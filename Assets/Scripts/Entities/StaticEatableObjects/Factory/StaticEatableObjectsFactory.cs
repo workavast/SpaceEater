@@ -30,11 +30,13 @@ namespace SourceCode.Entities.StaticEatableObjects.Factory
             }
         }
 
-        public StaticEatableObject Create(StaticEatableObjectType staticEatableObjectType, Vector2 position)
+        public StaticEatableObject Create(StaticEatableObjectType staticEatableObjectType, Vector2 position, float scale, float rotation)
         {
             var randomPrefabIndex = Random.Range(0, _config.EatableObjects[staticEatableObjectType].Count);
             var eatableGameObject = _container.InstantiatePrefab(_config.EatableObjects[staticEatableObjectType][randomPrefabIndex], position, quaternion.identity, _parents[staticEatableObjectType]);
             var eatableObject = eatableGameObject.GetComponent<StaticEatableObject>();
+            eatableObject.transform.localScale = new Vector3(scale, scale, 1);
+            eatableObject.SetModelRotation(rotation);
             
             OnCreate?.Invoke(eatableObject);
             return eatableObject;

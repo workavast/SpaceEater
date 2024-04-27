@@ -2,11 +2,10 @@ using System.Collections.Generic;
 using SourceCode.Core;
 using SourceCode.Entities.StaticEatableObjects;
 using SourceCode.Entities.StaticEatableObjects.Factory;
-using SourceCode.EnvironmentSpawning;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace SourceCode
+namespace SourceCode.EnvironmentSpawning
 {
     public class EnvironmentSpawner
     {
@@ -40,7 +39,7 @@ namespace SourceCode
                         return;
                     }
 
-                    Vector2 position = Vector2Extension.GetPointOnCircle(Vector2.zero, cell.MinDistance, cell.MaxDistance);
+                    Vector2 position = Vector2.zero.GetPointOnCircle(cell.MinDistance, cell.MaxDistance);
                     var scale = Random.Range(cell.MinScale, cell.MaxScale);
 
                     bool overlap = false;
@@ -70,11 +69,7 @@ namespace SourceCode
         private void ApplyGeneration(List<(StaticEatableObjectType, Vector2, float, float)> spawnTuples)
         {
             foreach (var tuple in spawnTuples)
-            {
-                var newEatableObject = _factory.Create(tuple.Item1, tuple.Item2);
-                newEatableObject.transform.localScale = new Vector3(tuple.Item3, tuple.Item3, 1);
-                newEatableObject.transform.Rotate(Vector3.forward, tuple.Item4);
-            }
+                _factory.Create(tuple.Item1, tuple.Item2, tuple.Item3, tuple.Item4);
         }
     }
 }

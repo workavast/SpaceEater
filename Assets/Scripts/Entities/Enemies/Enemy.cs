@@ -10,7 +10,6 @@ namespace SourceCode.Entities.Enemies
 {
     public class Enemy : EntityBase
     {
-        [SerializeField] private GameObject model;
         [SerializeField] private TriggerZone2D triggerZone;
         
         [Inject] private readonly PlayZoneBehaviour _playZone;
@@ -42,7 +41,7 @@ namespace SourceCode.Entities.Enemies
         public void Initialize(Vector2 newMoveDirection, float modelRotation)
         {
             _moveDirection = newMoveDirection;
-            model.transform.Rotate(Vector3.forward, modelRotation);
+            SetModelRotation(modelRotation);
         }
         
         private void Move(float deltaTime)

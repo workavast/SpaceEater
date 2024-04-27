@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f0d8d73038d4454acaa4459a1b9fb03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  model: {fileID: 1771054257941596142}
   staticEatableObjectType: 0
 --- !u!58 &1771054257529472720
 CircleCollider2D:

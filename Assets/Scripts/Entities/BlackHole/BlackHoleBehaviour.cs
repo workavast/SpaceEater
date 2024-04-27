@@ -7,6 +7,7 @@ using SourceCode.Core.TriggerZone;
 using SourceCode.InputDetectors;
 using UnityEngine;
 using Zenject;
+using Random = UnityEngine.Random;
 
 namespace SourceCode.Entities.BlackHole
 {
@@ -32,6 +33,9 @@ namespace SourceCode.Entities.BlackHole
         protected override void Awake()
         {
             base.Awake();
+
+            var modelRotation = Random.Range(-_config.ModelRotation, _config.ModelRotation);
+            SetModelRotation(modelRotation);
             
             _inputDetector = new DesktopInput();
 

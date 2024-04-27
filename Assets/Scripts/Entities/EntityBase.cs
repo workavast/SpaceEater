@@ -7,6 +7,8 @@ namespace SourceCode.Entities
     [RequireComponent(typeof(CircleCollider2D))]
     public abstract class EntityBase : MonoBehaviour
     {
+        [SerializeField] private GameObject model;
+        
         private float _colliderRadius;
         private Timer _eatTimer;
         private bool _isConsumed;
@@ -46,6 +48,11 @@ namespace SourceCode.Entities
             OnManualUpdate?.Invoke(deltaTime);
         }
 
+        public void SetModelRotation(float modelRotation)
+        {
+            model.transform.Rotate(Vector3.forward, modelRotation);
+        }
+        
         public void StartEat()
         {
             if (_isConsumed)

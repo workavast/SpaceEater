@@ -8,5 +8,8 @@ namespace SourceCode.Entities.BlackHole
     {
         [field: SerializeField, Range(0, 10)] public float MoveSpeed { get; private set; }
         [field: SerializeField, Range(0, 10)] public float IncreaseScale { get; private set; }
+        [SerializeField, Range(0, 180)] private float modelRotation;
+
+        public float ModelRotation => modelRotation;
     }
 }

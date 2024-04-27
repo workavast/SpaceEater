@@ -15,7 +15,7 @@ MonoBehaviour:
   spawnChance: 0.75
   moveAngle: 5
   modelRotation: 60
-  spawnPercentageStep: 50
+  spawnPercentageStep: 40
   minDistanceFromPlayer: 25
   maxDistanceFromPlayer: 30
   minScalePercentage: 75
