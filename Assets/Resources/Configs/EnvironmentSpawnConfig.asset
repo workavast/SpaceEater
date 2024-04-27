@@ -60,7 +60,7 @@ MonoBehaviour:
     <MinAngle>k__BackingField: -45
     <MaxAngle>k__BackingField: 45
   - <EatableObjectType>k__BackingField: 20
-    <MinDistance>k__BackingField: 2000
+    <MinDistance>k__BackingField: 2500
     <MaxDistance>k__BackingField: 8000
     <MinCount>k__BackingField: 50
     <MaxCount>k__BackingField: 100
