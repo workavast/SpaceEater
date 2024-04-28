@@ -15,7 +15,7 @@ namespace SourceCode.Entities.BlackHole
     {
         [SerializeField] private TriggerZone2D triggerZone2D;
         
-        [Inject] private readonly PlayZoneBehaviour _playZone;
+        [Inject] private readonly PlayZoneConfig _playZoneConfig;
         [Inject] private readonly BlackHoleConfig _config;
         
         private InputDetectorBase _inputDetector;
@@ -58,9 +58,9 @@ namespace SourceCode.Entities.BlackHole
             var distance = Size * _config.MoveSpeed * time;
 
             var expectPosition = (Vector2)transform.position + direction * distance;
-            if (!expectPosition.PointInCircle(Vector2.zero, _playZone.Radius))
+            if (!expectPosition.PointInCircle(Vector2.zero, _playZoneConfig.Radius))
             {
-                var clampPosition = expectPosition.ClampInCircle(Vector2.zero, _playZone.Radius);
+                var clampPosition = expectPosition.ClampInCircle(Vector2.zero, _playZoneConfig.Radius);
                 
                 direction = (clampPosition - (Vector2)transform.position).normalized;
                 distance = Vector2.Distance(clampPosition, transform.position);

@@ -14,7 +14,8 @@ namespace SourceCode.Entities.Enemies.Spawning
         [SerializeField, Range(0, 100)] private float maxDistanceFromPlayer;
         [SerializeField, Range(0, 1000)] private float minScalePercentage;
         [SerializeField, Range(0, 1000)] private float maxScalePercentage;
-
+        [SerializeField, Range(0, 1000)] private float maxEnemySize;
+        
         public float SpawnChance => spawnChance;
         public float MoveAngle => moveAngle;
         public float ModelRotation => modelRotation;
@@ -23,6 +24,7 @@ namespace SourceCode.Entities.Enemies.Spawning
         public float MaxDistanceFromPlayer => maxDistanceFromPlayer;
         public float MinScalePercentage => minScalePercentage/100;
         public float MaxScalePercentage => maxScalePercentage/100;
+        public float MaxEnemySize => maxEnemySize;
         
         private float _prevMaxDistanceFromPlayer;
         private float _prevMaxScale;

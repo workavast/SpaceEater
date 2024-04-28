@@ -1,6 +1,7 @@
 using GameCycleFramework;
 using SourceCode.BackgroundControl;
 using SourceCode.CameraMovement;
+using SourceCode.Core.PlayZone;
 using SourceCode.Entities.BlackHole;
 using SourceCode.Entities.Enemies.Factory;
 using SourceCode.Entities.Enemies.Spawning;
@@ -23,6 +24,7 @@ namespace SourceCode.Core
         [Inject] private readonly EnvironmentSpawnConfig _environmentSpawnConfig;
         [Inject] private readonly EnemiesSpawnConfig _enemiesSpawnConfig;
         [Inject] private readonly EnemiesFactory _enemiesFactory;
+        [Inject] private readonly PlayZoneConfig _playZoneConfig;
         
         private StaticEatableObjectsUpdater _staticEatableObjectsUpdater;
         private EnvironmentSpawner _environmentSpawner;
@@ -37,7 +39,7 @@ namespace SourceCode.Core
             _environmentSpawner = new EnvironmentSpawner(_environmentSpawnConfig, _staticEatableObjectsFactory);
             _environmentSpawner.Generate();
 
-            _enemiesSpawner = new EnemiesSpawner(_enemiesSpawnConfig, _enemiesFactory, blackHoleBehaviour);
+            _enemiesSpawner = new EnemiesSpawner(_enemiesSpawnConfig, _enemiesFactory, blackHoleBehaviour, _playZoneConfig);
         }
     }
 }

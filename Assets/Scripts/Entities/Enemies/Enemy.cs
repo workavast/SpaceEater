@@ -12,7 +12,7 @@ namespace SourceCode.Entities.Enemies
     {
         [SerializeField] private TriggerZone2D triggerZone;
         
-        [Inject] private readonly PlayZoneBehaviour _playZone;
+        [Inject] private readonly PlayZoneConfig _playZoneConfig;
         [Inject] private readonly EnemiesConfig _config;
         
         private Vector2 _moveDirection;
@@ -51,7 +51,7 @@ namespace SourceCode.Entities.Enemies
             var distance = Size * _config.MoveSpeed * deltaTime;
 
             var expectPosition = (Vector2)transform.position + direction * distance;
-            if (!expectPosition.PointInCircle(Vector2.zero, _playZone.Radius))
+            if (!expectPosition.PointInCircle(Vector2.zero, _playZoneConfig.Radius))
                 _moveDirection = direction = -direction;
             
             transform.Translate(direction * distance);

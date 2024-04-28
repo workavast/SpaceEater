@@ -1,4 +1,5 @@
 using SourceCode.Core;
+using SourceCode.Core.PlayZone;
 using SourceCode.Entities.BlackHole;
 using SourceCode.Entities.Enemies.Factory;
 using UnityEngine;
@@ -10,15 +11,17 @@ namespace SourceCode.Entities.Enemies.Spawning
         private readonly EnemiesSpawnConfig _config;
         private readonly EnemiesFactory _factory;
         private readonly BlackHoleBehaviour _blackHoleBehaviour;
+        private readonly PlayZoneConfig _playZoneConfig;
 
         private float _blackHolePrevSize;
         
-        public EnemiesSpawner(EnemiesSpawnConfig config, EnemiesFactory factory, BlackHoleBehaviour blackHoleBehaviour)
+        public EnemiesSpawner(EnemiesSpawnConfig config, EnemiesFactory factory, BlackHoleBehaviour blackHoleBehaviour, PlayZoneConfig playZoneConfig)
         {
             _config = config;
             _factory = factory;
             _blackHoleBehaviour = blackHoleBehaviour;
-
+            _playZoneConfig = playZoneConfig;
+            
             _blackHoleBehaviour.OnUpdateSize += TrySpawnEnemy;
             _blackHolePrevSize = _blackHoleBehaviour.Size;
         }
@@ -37,16 +40,21 @@ namespace SourceCode.Entities.Enemies.Spawning
 
             var blackHolePosition = (Vector2)_blackHoleBehaviour.transform.position;
             var enemySpawnPosition = blackHolePosition.GetPointOnCircle(_config.MinDistanceFromPlayer * blackHoleSize, _config.MaxDistanceFromPlayer * blackHoleSize);
+
+            if (!enemySpawnPosition.PointInCircle(Vector2.zero, _playZoneConfig.Radius))
+                return;
+            
             var enemyAdditionalScale = Random.Range(blackHoleSize * _config.MinScalePercentage, blackHoleSize * _config.MaxScalePercentage);
-            var enemyMoveDirectionAngle = Random.Range(-_config.MoveAngle, _config.MoveAngle);
-                
+            enemyAdditionalScale = Mathf.Clamp(enemyAdditionalScale, 0, _config.MaxEnemySize);
+            
             var enemyMoveDirection = (blackHolePosition - enemySpawnPosition).normalized;
+            var enemyMoveDirectionAngle = Random.Range(-_config.MoveAngle, _config.MoveAngle);
             enemyMoveDirection = Quaternion.Euler(0, 0, enemyMoveDirectionAngle) * enemyMoveDirection;
             
             var enemyRotation = Random.Range(-_config.ModelRotation, _config.ModelRotation);
 
             _factory.Create(enemySpawnPosition, enemyRotation, blackHoleSize + enemyAdditionalScale, enemyMoveDirection);
-                
+            
             _blackHolePrevSize = _blackHoleBehaviour.Size;
         }
     }
