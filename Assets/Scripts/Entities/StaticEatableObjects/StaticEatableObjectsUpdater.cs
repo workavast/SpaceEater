@@ -5,19 +5,18 @@ using UnityEngine;
 
 namespace SourceCode.Entities.StaticEatableObjects
 {
-    public class StaticEatableObjectsUpdater : IGameCycleUpdate
+    public class StaticEatableObjectsUpdater
     {
         private readonly StaticEatableObjectsFactory _factory;
         private readonly List<StaticEatableObject> _eatableObjects = new();
 
-        public StaticEatableObjectsUpdater(IGameCycleController gameCycleController, StaticEatableObjectsFactory factory)
+        public StaticEatableObjectsUpdater(StaticEatableObjectsFactory factory)
         {
             _factory = factory;
-            gameCycleController.AddListener(GameCycleState.Gameplay, this);
             _factory.OnCreate += Add;
         }
 
-        public void GameCycleUpdate()
+        public void ManualUpdate()
         {
             var time = Time.deltaTime;
             for (int i = 0; i < _eatableObjects.Count; i++)

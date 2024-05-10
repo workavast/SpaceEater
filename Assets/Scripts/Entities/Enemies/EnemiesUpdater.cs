@@ -1,23 +1,21 @@
 using System.Collections.Generic;
-using GameCycleFramework;
 using SourceCode.Entities.Enemies.Factory;
 using UnityEngine;
 
 namespace SourceCode.Entities.Enemies
 {
-    public class EnemiesUpdater : IGameCycleUpdate
+    public class EnemiesUpdater
     {
         private readonly EnemiesFactory _factory;
         private readonly List<Enemy> _enemies = new();
 
-        public EnemiesUpdater(IGameCycleController gameCycleController, EnemiesFactory factory)
+        public EnemiesUpdater(EnemiesFactory factory)
         {
             _factory = factory;
-            gameCycleController.AddListener(GameCycleState.Gameplay, this);
             _factory.OnCreate += Add;
         }
 
-        public void GameCycleUpdate()
+        public void ManualUpdate()
         {
             var time = Time.deltaTime;
             for (int i = 0; i < _enemies.Count; i++)
@@ -27,7 +25,7 @@ namespace SourceCode.Entities.Enemies
         private void Add(Enemy enemy)
         {
             if(_enemies.Contains(enemy))
-                Debug.LogError($"Duplicate of {enemy}");
+                Debug.LogWarning($"Duplicate of {enemy}");
             else
             {
                 enemy.OnRemove += Remove;

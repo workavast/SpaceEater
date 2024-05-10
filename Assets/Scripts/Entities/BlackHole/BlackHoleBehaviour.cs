@@ -41,13 +41,9 @@ namespace SourceCode.Entities.BlackHole
 
             triggerZone2D.OnEnter += EatableObjectEnter;
             triggerZone2D.OnExit += EatableObjectExit;
-        }
 
-        private void Update()
-        {
-            _inputDetector.ManualUpdate();
-            ManualUpdate(Time.deltaTime);
-            Move(Time.deltaTime);
+            OnManualUpdate += deltaTime => _inputDetector.ManualUpdate();
+            OnManualUpdate += Move;
         }
 
         private void Move(float time)

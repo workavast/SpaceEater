@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4a9da3a01ee44b79c4152f5b7bfd9e3, type: 3}
   m_Name: EnemiesConfig
   m_EditorClassIdentifier: 
-  <EatTime>k__BackingField: 1.5
+  <EatTime>k__BackingField: 0.35
   <MoveSpeed>k__BackingField: 5

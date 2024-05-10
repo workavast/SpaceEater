@@ -124,7 +124,7 @@ namespace YG
         {
             Message("Reset Save Progress");
             int idSave = savesData.idSave;
-            savesData = new SavesYG { idSave = idSave, isFirstSession = false };
+            savesData = new SavesYG { idSave = idSave, isFirstSession = savesData.isFirstSession };
 
             if (Time.unscaledTime < 0.5f)
             {

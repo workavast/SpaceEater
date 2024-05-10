@@ -47,7 +47,8 @@ namespace SourceCode.Core.Configs
 
             var repositories = configs.OfType<ConfigsRepository>();
             var singleConfigs = configs.Where(c => c is ISingleConfig);
-
+            Debug.Log($"{configs.Length} || {repositories.Count()} || {singleConfigs.Count()}");
+            
             foreach (var repository in repositories)
             {
                 repository.configs = new List<ScriptableObject>();

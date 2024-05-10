@@ -1,4 +1,5 @@
-﻿
+﻿using SourceCode.Core.GlobalData;
+
 namespace YG
 {
     [System.Serializable]
@@ -17,12 +18,10 @@ namespace YG
         public bool[] openLevels = new bool[3];
 
         // Ваши сохранения
-
-        // ...
-
+        public PlayerGlobalDataSave playerGlobalDataSave;
         // Поля (сохранения) можно удалять и создавать новые. При обновлении игры сохранения ломаться не должны
 
-
+        
         // Вы можете выполнить какие то действия при загрузке сохранений
         public SavesYG()
         {

@@ -33,10 +33,10 @@ namespace SourceCode.Entities.Enemies
             OnConsumed += () => { OnRemove?.Invoke(this); };
         }
 
-        private void Update()
-        {
-            ManualUpdate(Time.deltaTime);
-        }
+        // private void Update()
+        // {
+        //     ManualUpdate(Time.deltaTime);
+        // }
 
         public void Initialize(Vector2 newMoveDirection, float modelRotation)
         {
