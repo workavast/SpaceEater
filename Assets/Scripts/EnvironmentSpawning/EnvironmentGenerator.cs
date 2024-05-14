@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using SourceCode.Core;
 using SourceCode.Entities.StaticEatableObjects;
@@ -7,12 +8,14 @@ using Random = UnityEngine.Random;
 
 namespace SourceCode.EnvironmentSpawning
 {
-    public class EnvironmentSpawner
+    public class EnvironmentGenerator
     {
         private readonly EnvironmentSpawnConfig _config;
         private readonly StaticEatableObjectsFactory _factory;
+
+        public event Action Generated;
         
-        public EnvironmentSpawner(EnvironmentSpawnConfig config, StaticEatableObjectsFactory factory)
+        public EnvironmentGenerator(EnvironmentSpawnConfig config, StaticEatableObjectsFactory factory)
         {
             _config = config;
             _factory = factory;
@@ -70,6 +73,8 @@ namespace SourceCode.EnvironmentSpawning
         {
             foreach (var tuple in spawnTuples)
                 _factory.Create(tuple.Item1, tuple.Item2, tuple.Item3, tuple.Item4);
+            
+            Generated?.Invoke();
         }
     }
 }

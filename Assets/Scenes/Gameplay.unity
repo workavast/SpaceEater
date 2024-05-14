@@ -883,11 +883,11 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 8
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2418,8 +2418,8 @@ MonoBehaviour:
   m_Follow: {fileID: 635450637}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 10
-    NearClipPlane: 0.3
+    OrthographicSize: 8
+    NearClipPlane: 0
     FarClipPlane: 1000
     Dutch: 0
     ModeOverride: 0

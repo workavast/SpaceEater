@@ -20,4 +20,4 @@ MonoBehaviour:
   maxDistanceFromPlayer: 30
   minScalePercentage: 75
   maxScalePercentage: 175
-  maxEnemySize: 700
+  maxEnemySize: 300

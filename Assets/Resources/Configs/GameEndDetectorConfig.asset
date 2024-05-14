@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a173cc3ea8504b4c99cb744ca91e1d07, type: 3}
-  m_Name: CameraConfig
+  m_Script: {fileID: 11500000, guid: 21c39634b7074df592ea835455fa2c4e, type: 3}
+  m_Name: GameEndDetectorConfig
   m_EditorClassIdentifier: 
-  <OrthographicSizeScale>k__BackingField: 1
+  staticObjectsConsumedPercentageForEnd: 0.95

@@ -1,5 +1,4 @@
 using SourceCode.Bootstraps.GameFMS;
-using SourceCode.Entities;
 using SourceCode.Ui.UiSystem;
 using SourceCode.Ui.UiSystem.Screens.Gameplay;
 
@@ -8,12 +7,14 @@ namespace SourceCode.Bootstraps.GameplayScene
     public class GameStateSwitcher
     {
         private readonly GameStateMachine _gameStateMachine;
-        
-        public GameStateSwitcher(GameStateMachine gameStateMachine, EntityBase entity)
+        private readonly EndGameDetector _endGameDetector;
+
+        public GameStateSwitcher(GameStateMachine gameStateMachine, EndGameDetector endGameDetector)
         {
             _gameStateMachine = gameStateMachine;
-            
-            entity.OnConsumed += OnGameEnded;
+            _endGameDetector = endGameDetector;
+
+            _endGameDetector.GameEnded += OnGameEnded;
             
             var gameplayMainScreen = UI_ScreenRepository.GetScreen<GameplayMainScreen>();
             gameplayMainScreen.PauseButtonClicked += OnGamePaused;

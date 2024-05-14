@@ -1,42 +1,23 @@
-using System.Collections.Generic;
-using GameCycleFramework;
-using SourceCode.Entities.StaticEatableObjects.Factory;
+using System.Linq;
 using UnityEngine;
 
 namespace SourceCode.Entities.StaticEatableObjects
 {
     public class StaticEatableObjectsUpdater
     {
-        private readonly StaticEatableObjectsFactory _factory;
-        private readonly List<StaticEatableObject> _eatableObjects = new();
+        private readonly StaticEatableObjectsRepository _staticEatableObjectsRepository;
 
-        public StaticEatableObjectsUpdater(StaticEatableObjectsFactory factory)
+        public StaticEatableObjectsUpdater(StaticEatableObjectsRepository staticEatableObjectsRepository)
         {
-            _factory = factory;
-            _factory.OnCreate += Add;
+            _staticEatableObjectsRepository = staticEatableObjectsRepository;
         }
 
         public void ManualUpdate()
         {
             var time = Time.deltaTime;
-            for (int i = 0; i < _eatableObjects.Count; i++)
-                _eatableObjects[i].ManualUpdate(time);
-        }
-
-        private void Add(StaticEatableObject staticEatableObject)
-        {
-            if(_eatableObjects.Contains(staticEatableObject))
-                Debug.LogError($"Duplicate of {staticEatableObject} with type {staticEatableObject.StaticEatableObjectType}");
-            else
-            {
-                staticEatableObject.OnRemoveStaticEatableObject += Remove;
-                _eatableObjects.Add(staticEatableObject);
-            }
-        }
-
-        private void Remove(StaticEatableObject staticEatableObject)
-        {
-            _eatableObjects.Remove(staticEatableObject);
+            var objects = _staticEatableObjectsRepository.EatableObjects.ToList();
+            for (int i = 0; i < objects.Count; i++)
+                objects[i].ManualUpdate(time);
         }
     }
 }

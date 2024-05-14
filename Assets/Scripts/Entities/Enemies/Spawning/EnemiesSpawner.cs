@@ -45,7 +45,6 @@ namespace SourceCode.Entities.Enemies.Spawning
                 return;
             
             var enemyAdditionalScale = Random.Range(blackHoleSize * _config.MinScalePercentage, blackHoleSize * _config.MaxScalePercentage);
-            enemyAdditionalScale = Mathf.Clamp(enemyAdditionalScale, 0, _config.MaxEnemySize);
             
             var enemyMoveDirection = (blackHolePosition - enemySpawnPosition).normalized;
             var enemyMoveDirectionAngle = Random.Range(-_config.MoveAngle, _config.MoveAngle);
@@ -53,7 +52,8 @@ namespace SourceCode.Entities.Enemies.Spawning
             
             var enemyRotation = Random.Range(-_config.ModelRotation, _config.ModelRotation);
 
-            _factory.Create(enemySpawnPosition, enemyRotation, blackHoleSize + enemyAdditionalScale, enemyMoveDirection);
+            var enemyScale = Mathf.Clamp(blackHoleSize + enemyAdditionalScale, 0, _config.MaxEnemySize);
+            _factory.Create(enemySpawnPosition, enemyRotation, enemyScale, enemyMoveDirection);
             
             _blackHolePrevSize = _blackHoleBehaviour.Size;
         }

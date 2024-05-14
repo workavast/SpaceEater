@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: BlackHoleConfig
   m_EditorClassIdentifier: 
   <EatTime>k__BackingField: 0.5
-  <MoveSpeed>k__BackingField: 3
-  <IncreaseScale>k__BackingField: 0.05
+  <MoveSpeed>k__BackingField: 5
+  <IncreaseScale>k__BackingField: 0.035
   modelRotation: 30

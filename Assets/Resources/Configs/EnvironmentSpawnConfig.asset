@@ -17,8 +17,8 @@ MonoBehaviour:
   - <StaticEatableObjectType>k__BackingField: 0
     <MinDistance>k__BackingField: 3
     <MaxDistance>k__BackingField: 75
-    <MinCount>k__BackingField: 50
-    <MaxCount>k__BackingField: 60
+    <MinCount>k__BackingField: 60
+    <MaxCount>k__BackingField: 80
     <MinScale>k__BackingField: 0.5
     <MaxScale>k__BackingField: 1.5
     <MinAngle>k__BackingField: -180

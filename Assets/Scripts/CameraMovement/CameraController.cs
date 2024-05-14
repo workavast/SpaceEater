@@ -9,12 +9,16 @@ namespace SourceCode.CameraMovement
     public class CameraController : MonoBehaviour
     {
         [Inject] private readonly CameraConfig _config;
-        
+
+        private float _initialSize;
         private CinemachineVirtualCamera _cinemachineVirtualCamera;
         private ICameraTarget _cameraTarget;
         
         private void Awake()
-            => _cinemachineVirtualCamera = GetComponent<CinemachineVirtualCamera>();
+        {
+            _cinemachineVirtualCamera = GetComponent<CinemachineVirtualCamera>();
+            _initialSize = _cinemachineVirtualCamera.m_Lens.OrthographicSize;
+        }
 
         public void SetFollowTarget(ICameraTarget cameraTarget)
         {
@@ -29,7 +33,7 @@ namespace SourceCode.CameraMovement
 
         private void UpdateSize()
         {
-            _cinemachineVirtualCamera.m_Lens.OrthographicSize = _cameraTarget.Size * _config.OrthographicSizeScale;
+            _cinemachineVirtualCamera.m_Lens.OrthographicSize = _cameraTarget.Size * _initialSize * _config.OrthographicSizeScale;
         }
     }
 }

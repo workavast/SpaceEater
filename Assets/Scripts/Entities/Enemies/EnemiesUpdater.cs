@@ -1,41 +1,24 @@
-using System.Collections.Generic;
-using SourceCode.Entities.Enemies.Factory;
+using System.Linq;
 using UnityEngine;
 
 namespace SourceCode.Entities.Enemies
 {
     public class EnemiesUpdater
     {
-        private readonly EnemiesFactory _factory;
-        private readonly List<Enemy> _enemies = new();
+        private readonly EnemiesRepository _enemiesRepository;
 
-        public EnemiesUpdater(EnemiesFactory factory)
+        public EnemiesUpdater(EnemiesRepository enemiesRepository)
         {
-            _factory = factory;
-            _factory.OnCreate += Add;
+            _enemiesRepository = enemiesRepository;
         }
 
         public void ManualUpdate()
         {
             var time = Time.deltaTime;
-            for (int i = 0; i < _enemies.Count; i++)
-                _enemies[i].ManualUpdate(time);
-        }
-
-        private void Add(Enemy enemy)
-        {
-            if(_enemies.Contains(enemy))
-                Debug.LogWarning($"Duplicate of {enemy}");
-            else
-            {
-                enemy.OnRemove += Remove;
-                _enemies.Add(enemy);
-            }
-        }
-
-        private void Remove(Enemy enemy)
-        {
-            _enemies.Remove(enemy);
+            var enemies = _enemiesRepository.Enemies.ToList();
+            
+            for (int i = 0; i < enemies.Count; i++)
+                enemies[i].ManualUpdate(time);
         }
     }
 }

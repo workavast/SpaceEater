@@ -18,15 +18,11 @@ namespace SourceCode.Bootstraps.GameFMS
             _activeState.Enter();
         }
 
-        public void ManualUpdate()
-        {
-            _activeState.ManualUpdate();
-        }
+        public void ManualUpdate() 
+            => _activeState.ManualUpdate();
 
         public void ManualFixedUpdate()
-        {
-            _activeState.ManualFixedUpdate();
-        }
+            => _activeState.ManualFixedUpdate();
 
         public void SetState<TGameState>() 
             where TGameState : GameStateBase
