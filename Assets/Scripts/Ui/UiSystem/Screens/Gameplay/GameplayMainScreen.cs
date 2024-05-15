@@ -12,7 +12,7 @@ namespace SourceCode.Ui.UiSystem.Screens.Gameplay
 
         private void Awake()
         {
-            pauseButton.onClick.AddListener(() => { PauseButtonClicked?.Invoke(); });
+            pauseButton.onClick.AddListener(() => PauseButtonClicked?.Invoke());
         }
         
         private void Update()

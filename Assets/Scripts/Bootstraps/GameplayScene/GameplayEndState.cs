@@ -27,7 +27,7 @@ namespace SourceCode.Bootstraps.GameplayScene
         
         public override void Enter()
         {
-            _uiController.SetScreen(ScreenType.GameplayEnd);
+            _uiController.SetScreen<GameplayEndScreen>();
             var gameplayEndScreen = UI_ScreenRepository.GetScreen<GameplayEndScreen>();
             gameplayEndScreen.SetGameSuccess(_playerController.PlayerIsAlive);
         }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6287eece403f4b3aacc3b52b2ee724e0, type: 3}
   m_Name: BlackHoleConfig
   m_EditorClassIdentifier: 
-  <EatTime>k__BackingField: 0.5
+  <EatTime>k__BackingField: 0.3
   <MoveSpeed>k__BackingField: 5
   <IncreaseScale>k__BackingField: 0.035
   modelRotation: 30

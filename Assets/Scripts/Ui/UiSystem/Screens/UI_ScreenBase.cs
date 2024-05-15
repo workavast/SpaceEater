@@ -9,10 +9,5 @@ namespace SourceCode.Ui.UiSystem.Screens
 
         public void SetActive(bool isActive)
             => gameObject.SetActive(isActive);
-        
-        public virtual void _LoadScene(int sceneBuildIndex)
-        {
-            UIController.LoadScene(sceneBuildIndex);
-        }
     }
 }

@@ -1,7 +1,5 @@
-using System.Collections.Generic;
 using SourceCode.Ui.UiSystem.Screens;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace SourceCode.Ui.UiSystem
 {
@@ -22,31 +20,14 @@ namespace SourceCode.Ui.UiSystem
                 Debug.LogWarning("No have active screen");
         }
 
-        public void SetScreen(ScreenType screen)
+        public void SetScreen<TScreen>()
+            where TScreen : UI_ScreenBase
         {
-            var newScreen = UI_ScreenRepository.GetScreen(screen);
+            var newScreen = UI_ScreenRepository.GetScreen<TScreen>();
             
             _uiActive.SetActive(false);
             _uiActive = newScreen;
             _uiActive.SetActive(true);
         }    
-    
-        public void LoadScene(int sceneBuildIndex)
-        {
-            if (sceneBuildIndex == -1)
-            {
-                int currentSceneNum = SceneManager.GetActiveScene().buildIndex;
-                SceneManager.LoadScene(currentSceneNum, LoadSceneMode.Single);
-            }
-            else
-            {
-                SceneManager.LoadScene(sceneBuildIndex);
-            }
-        }
-
-        public void Quit()
-        {
-            Application.Quit();
-        }
     }
 }

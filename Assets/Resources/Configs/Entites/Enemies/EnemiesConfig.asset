@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: EnemiesConfig
   m_EditorClassIdentifier: 
   <EatTime>k__BackingField: 0.35
-  <MoveSpeed>k__BackingField: 5
+  <MoveSpeed>k__BackingField: 6.5

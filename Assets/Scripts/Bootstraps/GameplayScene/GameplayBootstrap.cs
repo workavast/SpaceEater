@@ -61,7 +61,7 @@ namespace SourceCode.Bootstraps.GameplayScene
             _enemiesRepository = new EnemiesRepository(_enemiesFactory);
             _enemiesUpdater = new EnemiesUpdater(_enemiesRepository);
             
-            //_enemiesSpawner = new EnemiesSpawner(_enemiesSpawnConfig, _enemiesFactory, blackHoleBehaviour, _playZoneConfig);
+            _enemiesSpawner = new EnemiesSpawner(_enemiesSpawnConfig, _enemiesFactory, blackHoleBehaviour, _playZoneConfig);
             
             _environmentGenerator = new EnvironmentGenerator(_environmentSpawnConfig, _staticEatableObjectsFactory);
             

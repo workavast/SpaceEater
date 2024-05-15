@@ -10,7 +10,8 @@ namespace SourceCode.Bootstraps.MainMenuScene
         [Inject] private UI_Controller _uiController;
         
         private GameSceneLoader _gameSceneLoader;
-        
+        private UiScreenSwitcher _uiScreenSwitcher;
+
         private void Start()
         {
             YandexPluginGameReadyApiInitializer.Initialize();
@@ -18,6 +19,7 @@ namespace SourceCode.Bootstraps.MainMenuScene
 
             _uiController.Initialize();
             _gameSceneLoader = new GameSceneLoader();
+            _uiScreenSwitcher = new UiScreenSwitcher(_uiController);
         }
     }
 }

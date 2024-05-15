@@ -1,5 +1,6 @@
 using SourceCode.Bootstraps.GameFMS;
 using SourceCode.Ui.UiSystem;
+using SourceCode.Ui.UiSystem.Screens.Gameplay;
 
 namespace SourceCode.Bootstraps.GameplayScene
 {
@@ -14,7 +15,7 @@ namespace SourceCode.Bootstraps.GameplayScene
         
         public override void Enter()
         {
-            _uiController.SetScreen(ScreenType.GameplayMenu);
+            _uiController.SetScreen<GameplayMenuScreen>();
         }
 
         public override void Exit()
