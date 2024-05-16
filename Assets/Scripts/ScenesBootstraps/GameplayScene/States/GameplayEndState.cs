@@ -1,10 +1,10 @@
-using SourceCode.Bootstraps.GameFMS;
 using SourceCode.Entities.Enemies;
 using SourceCode.Entities.StaticEatableObjects;
+using SourceCode.ScenesBootstraps.SceneFSM;
 using SourceCode.Ui.UiSystem;
 using SourceCode.Ui.UiSystem.Screens.Gameplay;
 
-namespace SourceCode.Bootstraps.GameplayScene
+namespace SourceCode.ScenesBootstraps.GameplayScene.States
 {
     public class GameplayEndState : GameStateBase
     {
@@ -13,6 +13,14 @@ namespace SourceCode.Bootstraps.GameplayScene
         private readonly StaticEatableObjectsUpdater _staticEatableObjectsUpdater;
         private readonly PlayerController _playerController;
 
+        public GameplayEndState(GameplaySceneContext context)
+        {
+            _uiController = context.UIController;
+            _enemiesUpdater = context.EnemiesUpdater;
+            _staticEatableObjectsUpdater = context.StaticEatableObjectsUpdater;
+            _playerController = context.PlayerController;
+        }
+        
         public GameplayEndState(
             UI_Controller uiController, 
             EnemiesUpdater enemiesUpdater, 

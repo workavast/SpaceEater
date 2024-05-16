@@ -1,10 +1,10 @@
-using SourceCode.Bootstraps.GameFMS;
 using SourceCode.Entities.Enemies;
 using SourceCode.Entities.StaticEatableObjects;
+using SourceCode.ScenesBootstraps.SceneFSM;
 using SourceCode.Ui.UiSystem;
 using SourceCode.Ui.UiSystem.Screens.Gameplay;
 
-namespace SourceCode.Bootstraps.GameplayScene
+namespace SourceCode.ScenesBootstraps.GameplayScene.States
 {
     public class GameplayMainState : GameStateBase
     {
@@ -13,16 +13,12 @@ namespace SourceCode.Bootstraps.GameplayScene
         private readonly StaticEatableObjectsUpdater _staticEatableObjectsUpdater;
         private readonly PlayerController _playerController;
 
-        public GameplayMainState(
-            UI_Controller uiController, 
-            EnemiesUpdater enemiesUpdater, 
-            StaticEatableObjectsUpdater staticEatableObjectsUpdater,
-            PlayerController playerController)
+        public GameplayMainState(GameplaySceneContext context)
         {
-            _uiController = uiController;
-            _enemiesUpdater = enemiesUpdater;
-            _staticEatableObjectsUpdater = staticEatableObjectsUpdater;
-            _playerController = playerController;
+            _uiController = context.UIController;
+            _enemiesUpdater = context.EnemiesUpdater;
+            _staticEatableObjectsUpdater = context.StaticEatableObjectsUpdater;
+            _playerController = context.PlayerController;
         }
         
         public override void Enter()

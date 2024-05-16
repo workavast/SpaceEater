@@ -1,7 +1,7 @@
 using SourceCode.Core.Configs;
 using UnityEngine;
 
-namespace SourceCode.Bootstraps.GameplayScene
+namespace SourceCode.ScenesBootstraps.GameplayScene
 {
     [CreateAssetMenu(fileName = nameof(GameEndDetectorConfig), menuName = "Configs/" + nameof(GameEndDetectorConfig))]
     public class GameEndDetectorConfig : ScriptableObject, ISingleConfig

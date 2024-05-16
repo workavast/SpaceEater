@@ -2,7 +2,7 @@ using SourceCode.Ui.UiSystem;
 using SourceCode.Ui.UiSystem.Screens.Gameplay;
 using UnityEngine.SceneManagement;
 
-namespace SourceCode.Bootstraps.GameplayScene
+namespace SourceCode.ScenesBootstraps.GameplayScene
 {
     public class GameSceneLoader
     {

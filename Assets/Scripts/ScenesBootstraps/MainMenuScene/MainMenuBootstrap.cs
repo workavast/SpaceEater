@@ -3,7 +3,7 @@ using SourceCode.Ui.UiSystem;
 using UnityEngine;
 using Zenject;
 
-namespace SourceCode.Bootstraps.MainMenuScene
+namespace SourceCode.ScenesBootstraps.MainMenuScene
 {
     public class MainMenuBootstrap : MonoBehaviour
     {

@@ -1,4 +1,4 @@
-namespace SourceCode.Bootstraps.GameFMS
+namespace SourceCode.ScenesBootstraps.SceneFSM
 {
     public abstract class GameStateBase
     {

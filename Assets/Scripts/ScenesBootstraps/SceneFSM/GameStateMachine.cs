@@ -1,23 +1,26 @@
 using System;
 using System.Collections.Generic;
 
-namespace SourceCode.Bootstraps.GameFMS
+namespace SourceCode.ScenesBootstraps.SceneFSM
 {
     public class GameStateMachine
     {
         private readonly Dictionary<Type, GameStateBase> _states;
         private GameStateBase _activeState; 
 
-        public GameStateMachine(Type initialState, List<GameStateBase> states)
+        public GameStateMachine(List<GameStateBase> states)
         {
             _states = new Dictionary<Type, GameStateBase>();
             foreach (var state in states)
                 _states.Add(state.GetType(), state);
+        }
 
+        public void Init(Type initialState)
+        {
             _activeState = _states[initialState];
             _activeState.Enter();
         }
-
+        
         public void ManualUpdate() 
             => _activeState.ManualUpdate();
 

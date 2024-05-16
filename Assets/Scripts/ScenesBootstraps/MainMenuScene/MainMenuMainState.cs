@@ -1,6 +1,6 @@
-using SourceCode.Bootstraps.GameFMS;
+using SourceCode.ScenesBootstraps.SceneFSM;
 
-namespace SourceCode.Bootstraps.GameplayScene
+namespace SourceCode.ScenesBootstraps.MainMenuScene
 {
     public class MainMenuMainState : GameStateBase
     {

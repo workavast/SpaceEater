@@ -3,7 +3,7 @@ using SourceCode.Entities;
 using SourceCode.Entities.StaticEatableObjects;
 using SourceCode.EnvironmentSpawning;
 
-namespace SourceCode.Bootstraps.GameplayScene
+namespace SourceCode.ScenesBootstraps.GameplayScene
 {
     public class EndGameDetector
     {

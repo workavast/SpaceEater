@@ -1,16 +1,16 @@
-using SourceCode.Bootstraps.GameFMS;
+using SourceCode.ScenesBootstraps.SceneFSM;
 using SourceCode.Ui.UiSystem;
 using SourceCode.Ui.UiSystem.Screens.Gameplay;
 
-namespace SourceCode.Bootstraps.GameplayScene
+namespace SourceCode.ScenesBootstraps.GameplayScene.States
 {
     public class GameplayPauseState : GameStateBase
     {
         private readonly UI_Controller _uiController;
 
-        public GameplayPauseState(UI_Controller uiController)
+        public GameplayPauseState(GameplaySceneContext context)
         {
-            _uiController = uiController;
+            _uiController = context.UIController;
         }
         
         public override void Enter()

@@ -1,7 +1,7 @@
 using SourceCode.Ui.UiSystem;
 using SourceCode.Ui.UiSystem.Screens.MainMenu;
 
-namespace SourceCode.Bootstraps.MainMenuScene
+namespace SourceCode.ScenesBootstraps.MainMenuScene
 {
     public class UiScreenSwitcher
     {

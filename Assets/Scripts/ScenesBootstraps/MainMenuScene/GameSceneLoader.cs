@@ -1,9 +1,8 @@
 using SourceCode.Ui.UiSystem;
-using SourceCode.Ui.UiSystem.Screens.Gameplay;
 using SourceCode.Ui.UiSystem.Screens.MainMenu;
 using UnityEngine.SceneManagement;
 
-namespace SourceCode.Bootstraps.MainMenuScene
+namespace SourceCode.ScenesBootstraps.MainMenuScene
 {
     public class GameSceneLoader
     {
