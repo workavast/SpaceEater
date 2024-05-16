@@ -4,8 +4,8 @@ using SourceCode.Entities.Enemies;
 using SourceCode.Entities.Enemies.Factory;
 using SourceCode.Entities.Enemies.Spawning;
 using SourceCode.Entities.StaticEatableObjects;
+using SourceCode.Entities.StaticEatableObjects.EnvironmentSpawning;
 using SourceCode.Entities.StaticEatableObjects.Factory;
-using SourceCode.EnvironmentSpawning;
 using SourceCode.Ui.UiSystem;
 
 namespace SourceCode.ScenesBootstraps.GameplayScene

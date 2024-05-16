@@ -3,7 +3,7 @@ using SourceCode.BackgroundControl;
 using SourceCode.CameraMovement;
 using SourceCode.Core;
 using SourceCode.Entities.BlackHole;
-using SourceCode.EnvironmentSpawning;
+using SourceCode.Entities.StaticEatableObjects.EnvironmentSpawning;
 using SourceCode.ScenesBootstraps.SceneFSM;
 using SourceCode.Ui.UiSystem;
 

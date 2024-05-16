@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
-using SourceCode.BackgroundControl;
+using CameraMovement;
 using SourceCode.Core;
+using SourceCode.Core.InputDetectors;
 using SourceCode.Core.PlayZone;
 using SourceCode.Core.TriggerZone;
-using SourceCode.InputDetectors;
 using UnityEngine;
 using Zenject;
 using Random = UnityEngine.Random;

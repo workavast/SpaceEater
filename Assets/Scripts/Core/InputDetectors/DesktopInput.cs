@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace SourceCode.InputDetectors
+namespace SourceCode.Core.InputDetectors
 {
     public class DesktopInput : InputDetectorBase
     {

@@ -1,4 +1,4 @@
-using Settings;
+using SourceCode.Core.GlobalData;
 using UnityEngine;
 
 namespace Initializers

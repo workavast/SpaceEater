@@ -1,12 +1,11 @@
 using System;
 using System.Collections.Generic;
 using SourceCode.Core;
-using SourceCode.Entities.StaticEatableObjects;
 using SourceCode.Entities.StaticEatableObjects.Factory;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace SourceCode.EnvironmentSpawning
+namespace SourceCode.Entities.StaticEatableObjects.EnvironmentSpawning
 {
     public class EnvironmentGenerator
     {

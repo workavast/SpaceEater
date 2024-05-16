@@ -1,7 +1,7 @@
 using System;
 using SourceCode.Entities;
 using SourceCode.Entities.StaticEatableObjects;
-using SourceCode.EnvironmentSpawning;
+using SourceCode.Entities.StaticEatableObjects.EnvironmentSpawning;
 
 namespace SourceCode.ScenesBootstraps.GameplayScene
 {

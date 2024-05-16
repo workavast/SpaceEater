@@ -1,11 +1,10 @@
 using System;
-using SourceCode.Core.GlobalData;
 using SourceCode.Core.GlobalData.Localization;
 using SourceCode.Core.GlobalData.Volume;
 using UnityEngine;
 using YG;
 
-namespace Settings
+namespace SourceCode.Core.GlobalData
 {
     public class PlayerGlobalData
     {

@@ -18,7 +18,6 @@ namespace SourceCode.Audio
             _volumeSettings = volumeSettings;
         }
 
-        public float MasterVolume => _volumeSettings.MasterVolume;
         public float OstVolume => _volumeSettings.OstVolume;
         public float EffectsVolume => _volumeSettings.EffectsVolume;
 

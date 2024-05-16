@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace SourceCode.BackgroundControl
+namespace SourceCode.Core
 {
     public interface IBackgroundTarget
     {
