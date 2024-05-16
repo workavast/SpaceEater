@@ -216,6 +216,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   model: {fileID: 1815106400861435463}
+  animator: {fileID: 84928997272637846}
   triggerZone: {fileID: 4738261604113881031}
 --- !u!58 &2208101982885862808
 CircleCollider2D:

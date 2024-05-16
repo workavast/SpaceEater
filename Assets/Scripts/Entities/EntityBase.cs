@@ -8,6 +8,7 @@ namespace SourceCode.Entities
     public abstract class EntityBase : MonoBehaviour
     {
         [SerializeField] private GameObject model;
+        [SerializeField] private Animator animator;
         
         private float _colliderRadius;
         private Timer _eatTimer;
@@ -46,6 +47,12 @@ namespace SourceCode.Entities
         {
             _eatTimer.Tick(deltaTime);
             OnManualUpdate?.Invoke(deltaTime);
+        }
+
+        public void SetAnimationState(bool isActive)
+        {
+            if (animator != null)
+                animator.speed = isActive ? 1 : 0;
         }
 
         public void SetModelRotation(float modelRotation)

@@ -52,6 +52,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1771054257529472723, guid: 6d2a77c6aa52da54e9c2c9854e35b3ad, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 2984340771460133014}
+    - target: {fileID: 1771054257529472723, guid: 6d2a77c6aa52da54e9c2c9854e35b3ad, type: 3}
       propertyPath: eatableObjectType
       value: 10
       objectReference: {fileID: 0}
