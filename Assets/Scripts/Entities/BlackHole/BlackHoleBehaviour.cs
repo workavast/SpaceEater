@@ -18,7 +18,7 @@ namespace SourceCode.Entities.BlackHole
         [Inject] private readonly PlayZoneConfig _playZoneConfig;
         [Inject] private readonly BlackHoleConfig _config;
         
-        private InputDetectorBase _inputDetector;
+        private IInputDetector _inputDetector;
         private readonly List<EntityBase> _eatableObjects = new(2);
 
         public Transform Transform => transform;
@@ -37,13 +37,16 @@ namespace SourceCode.Entities.BlackHole
             var modelRotation = Random.Range(-_config.ModelRotation, _config.ModelRotation);
             SetModelRotation(modelRotation);
             
-            _inputDetector = new DesktopInput();
-
             triggerZone2D.OnEnter += EatableObjectEnter;
             triggerZone2D.OnExit += EatableObjectExit;
 
-            OnManualUpdate += deltaTime => _inputDetector.ManualUpdate();
             OnManualUpdate += Move;
+        }
+
+        public void Init(IInputDetector inputDetector)
+        {
+            _inputDetector = inputDetector;
+            OnManualUpdate += deltaTime => _inputDetector.ManualUpdate();
         }
 
         private void Move(float time)

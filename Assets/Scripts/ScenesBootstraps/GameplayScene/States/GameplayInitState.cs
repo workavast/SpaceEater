@@ -2,6 +2,7 @@ using System;
 using SourceCode.BackgroundControl;
 using SourceCode.CameraMovement;
 using SourceCode.Core;
+using SourceCode.Core.InputDetectors;
 using SourceCode.Entities.BlackHole;
 using SourceCode.Entities.StaticEatableObjects.EnvironmentSpawning;
 using SourceCode.ScenesBootstraps.SceneFSM;
@@ -16,6 +17,7 @@ namespace SourceCode.ScenesBootstraps.GameplayScene.States
         private readonly BackgroundController _backgroundController;
         private readonly EnvironmentGenerator _environmentGenerator;
         private readonly BlackHoleBehaviour _blackHoleBehaviour;
+        private readonly IInputDetector _inputDetector;
 
         public event Action Initialized;
 
@@ -29,6 +31,7 @@ namespace SourceCode.ScenesBootstraps.GameplayScene.States
             _uiController = context.UIController;
             _environmentGenerator = context.EnvironmentGenerator;
             _blackHoleBehaviour = context.BlackHoleBehaviour;
+            _inputDetector = context.InputDetector;
         }
 
         public override void Enter()
@@ -38,6 +41,7 @@ namespace SourceCode.ScenesBootstraps.GameplayScene.States
             
             _uiController.Initialize();
             
+            _blackHoleBehaviour.Init(_inputDetector);
             _cameraController.SetFollowTarget(_blackHoleBehaviour);
             _backgroundController.SetTarget(_blackHoleBehaviour);
             

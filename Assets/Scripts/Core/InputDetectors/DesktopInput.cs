@@ -1,13 +1,23 @@
+using Joystick_Pack.Scripts.Joysticks;
 using UnityEngine;
 
 namespace SourceCode.Core.InputDetectors
 {
-    public class DesktopInput : InputDetectorBase
+    public class DesktopInput : IInputDetector
     {
-        public override void ManualUpdate()
+        private readonly Joystick _joystick;
+        
+        public Vector2 MoveDirection { get; private set; }
+
+        public DesktopInput(Joystick joystick)
         {
-            var hor = Input.GetAxis("Horizontal");
-            var vert = Input.GetAxis("Vertical");
+            _joystick = joystick;
+        }
+
+        public void ManualUpdate()
+        {
+            var hor = Input.GetAxis("Horizontal") + _joystick.Horizontal;
+            var vert = Input.GetAxis("Vertical") + _joystick.Vertical;
 
             MoveDirection = new Vector2(hor, vert);
         }

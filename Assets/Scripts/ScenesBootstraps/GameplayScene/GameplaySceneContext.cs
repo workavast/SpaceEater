@@ -1,3 +1,4 @@
+using SourceCode.Core.InputDetectors;
 using SourceCode.Core.PlayZone;
 using SourceCode.Entities.BlackHole;
 using SourceCode.Entities.Enemies;
@@ -7,6 +8,7 @@ using SourceCode.Entities.StaticEatableObjects;
 using SourceCode.Entities.StaticEatableObjects.EnvironmentSpawning;
 using SourceCode.Entities.StaticEatableObjects.Factory;
 using SourceCode.Ui.UiSystem;
+using SourceCode.Ui.UiSystem.Screens.Gameplay;
 
 namespace SourceCode.ScenesBootstraps.GameplayScene
 {
@@ -22,6 +24,7 @@ namespace SourceCode.ScenesBootstraps.GameplayScene
         public readonly EnemiesUpdater EnemiesUpdater;
         public readonly EnvironmentGenerator EnvironmentGenerator;
         public readonly EndGameDetector EndGameDetector;
+        public readonly IInputDetector InputDetector;
         
         public GameplaySceneContext(
             UI_Controller uiController,
@@ -47,6 +50,9 @@ namespace SourceCode.ScenesBootstraps.GameplayScene
             EnvironmentGenerator = new EnvironmentGenerator(environmentSpawnConfig, staticEatableObjectsFactory);
             EndGameDetector = new EndGameDetector(gameEndDetectorConfig, BlackHoleBehaviour, EnvironmentGenerator, 
                 StaticEatableObjectsRepository);
+
+            var joystick = UI_ScreenRepository.GetScreen<GameplayMainScreen>().Joystick;
+            InputDetector = new DesktopInput(joystick);
         }
     }
 }
