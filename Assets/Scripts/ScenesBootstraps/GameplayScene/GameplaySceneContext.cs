@@ -15,6 +15,7 @@ namespace SourceCode.ScenesBootstraps.GameplayScene
     public class GameplaySceneContext
     {
         public readonly BlackHoleBehaviour BlackHoleBehaviour;
+        public readonly SceneLoader SceneLoader;
         public readonly UI_Controller UIController;
         public readonly PlayerController PlayerController;
         public readonly StaticEatableObjectsRepository StaticEatableObjectsRepository;
@@ -53,6 +54,7 @@ namespace SourceCode.ScenesBootstraps.GameplayScene
 
             var joystick = UI_ScreenRepository.GetScreen<GameplayMainScreen>().Joystick;
             InputDetector = new DesktopInput(joystick);
+            SceneLoader = new SceneLoader();
         }
     }
 }

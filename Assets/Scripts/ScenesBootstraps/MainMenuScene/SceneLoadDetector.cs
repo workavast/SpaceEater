@@ -1,18 +1,21 @@
 using SourceCode.Ui.UiSystem;
 using SourceCode.Ui.UiSystem.Screens.MainMenu;
-using UnityEngine.SceneManagement;
 
 namespace SourceCode.ScenesBootstraps.MainMenuScene
 {
-    public class GameSceneLoader
+    public class SceneLoadDetector
     {
-        public GameSceneLoader()
+        private readonly SceneLoader _sceneLoader;
+
+        public SceneLoadDetector(SceneLoader sceneLoader)
         {
+            _sceneLoader = sceneLoader;
+            
             var mainMenuScreen = UI_ScreenRepository.GetScreen<MainMenuScreen>();
             mainMenuScreen.PlayButtonClicked += () => LoadScene(2);
         }
 
-        private static void LoadScene(int sceneIndex)
-            => SceneManager.LoadScene(sceneIndex);
+        private void LoadScene(int sceneIndex)
+            => _sceneLoader.LoadScene(sceneIndex);
     }
 }

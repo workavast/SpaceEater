@@ -18,6 +18,7 @@ namespace SourceCode.ScenesBootstraps.GameplayScene.States
         private readonly EnvironmentGenerator _environmentGenerator;
         private readonly BlackHoleBehaviour _blackHoleBehaviour;
         private readonly IInputDetector _inputDetector;
+        private readonly SceneLoader _sceneLoader;
 
         public event Action Initialized;
 
@@ -32,6 +33,7 @@ namespace SourceCode.ScenesBootstraps.GameplayScene.States
             _environmentGenerator = context.EnvironmentGenerator;
             _blackHoleBehaviour = context.BlackHoleBehaviour;
             _inputDetector = context.InputDetector;
+            _sceneLoader = context.SceneLoader;
         }
 
         public override void Enter()
@@ -46,6 +48,7 @@ namespace SourceCode.ScenesBootstraps.GameplayScene.States
             _backgroundController.SetTarget(_blackHoleBehaviour);
             
             _environmentGenerator.Generate();
+            _sceneLoader.Init();
             
             Initialized?.Invoke();
         }

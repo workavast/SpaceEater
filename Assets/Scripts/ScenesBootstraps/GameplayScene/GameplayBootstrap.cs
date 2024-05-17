@@ -31,7 +31,6 @@ namespace SourceCode.ScenesBootstraps.GameplayScene
 
         private GameStateMachine _gameStateMachine;
         private GameStateSwitcher _gameStateSwitcher;
-        private GameSceneLoader _gameSceneLoader;
         private GameplaySceneContext _gameplaySceneContext;
         
         private void Start()
@@ -45,8 +44,9 @@ namespace SourceCode.ScenesBootstraps.GameplayScene
                 _playZoneConfig, 
                 _environmentSpawnConfig, 
                 _gameEndDetectorConfig);
-            _gameSceneLoader = new GameSceneLoader(); 
-
+            
+            var gameplaySceneLoadDetector = new GameplaySceneLoadDetector(_gameplaySceneContext.SceneLoader);
+            
             var gameplayInitState = new GameplayInitState(_gameplaySceneContext, cameraController, backgroundController);
             var states = new List<GameStateBase>
             {

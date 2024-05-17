@@ -4,10 +4,14 @@ using UnityEngine.SceneManagement;
 
 namespace SourceCode.ScenesBootstraps.GameplayScene
 {
-    public class GameSceneLoader
+    public class GameplaySceneLoadDetector
     {
-        public GameSceneLoader()
+        private readonly SceneLoader _sceneLoader;
+
+        public GameplaySceneLoadDetector(SceneLoader sceneLoader)
         {
+            _sceneLoader = sceneLoader;
+            
             var gameplayMenuScreen = UI_ScreenRepository.GetScreen<GameplayMenuScreen>();
             gameplayMenuScreen.MainMenuButtonClicked += () => LoadScene(1);
         
@@ -16,7 +20,7 @@ namespace SourceCode.ScenesBootstraps.GameplayScene
             gameplayEndScreen.MainMenuButtonClicked += () => LoadScene(1);
         }
 
-        private static void LoadScene(int sceneIndex)
-            => SceneManager.LoadScene(sceneIndex);
+        private void LoadScene(int sceneIndex)
+            => _sceneLoader.LoadScene(sceneIndex);
     }
 }

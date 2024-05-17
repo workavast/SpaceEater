@@ -1,5 +1,5 @@
 {
-    "idSave": 2,
+    "idSave": 19,
     "isFirstSession": false,
     "language": "ru",
     "promptDone": false,
@@ -12,7 +12,6 @@
     ],
     "playerGlobalDataSave": {
         "volumeSettingsSave": {
-            "MasterVolume": 0.5,
             "OstVolume": 0.5,
             "EffectsVolume": 0.5
         },

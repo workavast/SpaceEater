@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using SourceCode;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Initializers
@@ -9,6 +10,7 @@ namespace Initializers
         [SerializeField] private int sceneIndex;
         
         private int _inits;
+        private SceneLoader _sceneLoader;
 
         private readonly InitializerBase[] _initializers =
         {
@@ -21,7 +23,7 @@ namespace Initializers
                 }
             )
         };
-        
+
         private void Awake()
         {
             _inits = _initializers.Length;
@@ -32,6 +34,8 @@ namespace Initializers
 
         private void Start()
         {
+            _sceneLoader = new SceneLoader();
+            _sceneLoader.Init();
             foreach (var initializer in _initializers)
                 initializer.Init();
         }
@@ -41,7 +45,7 @@ namespace Initializers
             _inits -= 1;
 
             if (_inits <= 0)
-                SceneManager.LoadScene(sceneIndex);
+                _sceneLoader.LoadScene(sceneIndex);
         }
     }
 }
