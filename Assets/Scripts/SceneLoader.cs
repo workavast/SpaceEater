@@ -1,5 +1,5 @@
 using System;
-using SourceCode.Ui.UiSystem.Screens;
+using SourceCode.Ui;
 using UnityEngine.SceneManagement;
 
 namespace SourceCode

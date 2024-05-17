@@ -9,15 +9,19 @@ namespace SourceCode.ScenesBootstraps.GameplayScene
     {
         private readonly GameStateMachine _gameStateMachine;
         private readonly EndGameDetector _endGameDetector;
+        private readonly GameplayInitState _gameplayInitState;
+        private readonly GameplayLoadingScreenFadeState _gameplayLoadingScreenFadeState;
 
         public GameStateSwitcher(GameStateMachine gameStateMachine, EndGameDetector endGameDetector, 
-            GameplayInitState gameplayInitState)
+            GameplayInitState gameplayInitState, GameplayLoadingScreenFadeState gameplayLoadingScreenFadeState)
         {
             _gameStateMachine = gameStateMachine;
             _endGameDetector = endGameDetector;
-            
-            gameplayInitState.Initialized += OnGameInitialized;
-                
+            _gameplayInitState = gameplayInitState;
+            _gameplayLoadingScreenFadeState = gameplayLoadingScreenFadeState;
+
+            _gameplayInitState.Initialized += OnGameInitialized;
+            _gameplayLoadingScreenFadeState.FadeEnded += OnGameFadeEnded;
             _endGameDetector.GameEnded += OnGameEnded;
             
             var gameplayMainScreen = UI_ScreenRepository.GetScreen<GameplayMainScreen>();
@@ -28,8 +32,11 @@ namespace SourceCode.ScenesBootstraps.GameplayScene
         }
         
         private void OnGameInitialized()
+            => _gameStateMachine.SetState<GameplayLoadingScreenFadeState>();
+
+        private void OnGameFadeEnded() 
             => _gameStateMachine.SetState<GameplayMainState>();
-        
+
         private void OnGameEnded()
             => _gameStateMachine.SetState<GameplayEndState>();
         

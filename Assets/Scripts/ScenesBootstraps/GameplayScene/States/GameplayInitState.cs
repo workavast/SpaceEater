@@ -49,7 +49,7 @@ namespace SourceCode.ScenesBootstraps.GameplayScene.States
             
             _environmentGenerator.Generate();
             _sceneLoader.Init();
-            
+
             Initialized?.Invoke();
         }
 
