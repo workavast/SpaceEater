@@ -17,10 +17,10 @@ namespace Joystick_Pack.Scripts.Joysticks
             base.OnPointerDown(eventData);
         }
 
-        public override void OnPointerUp(PointerEventData eventData)
+        public override void Reset()
         {
             background.gameObject.SetActive(false);
-            base.OnPointerUp(eventData);
+            base.Reset();
         }
     }
 }

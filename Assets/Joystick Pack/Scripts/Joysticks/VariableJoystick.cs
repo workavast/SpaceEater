@@ -41,12 +41,12 @@ namespace Joystick_Pack.Scripts.Joysticks
             base.OnPointerDown(eventData);
         }
 
-        public override void OnPointerUp(PointerEventData eventData)
+        public override void Reset()
         {
             if(joystickType != JoystickType.Fixed)
                 background.gameObject.SetActive(false);
 
-            base.OnPointerUp(eventData);
+            base.Reset();
         }
 
         protected override void HandleInput(float magnitude, Vector2 normalised, Vector2 radius, Camera cam)

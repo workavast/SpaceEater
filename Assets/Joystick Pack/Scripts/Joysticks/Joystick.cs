@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace Joystick_Pack.Scripts.Joysticks
@@ -10,7 +11,6 @@ namespace Joystick_Pack.Scripts.Joysticks
         [SerializeField] private AxisOptions axisOptions = AxisOptions.Both;
         [SerializeField] private bool snapX = false;
         [SerializeField] private bool snapY = false;
-
         [SerializeField] protected RectTransform background = null;
         [SerializeField] private RectTransform handle = null;
         
@@ -45,10 +45,8 @@ namespace Joystick_Pack.Scripts.Joysticks
             handle.anchoredPosition = Vector2.zero;
         }
 
-        public virtual void OnPointerDown(PointerEventData eventData)
-        {
-            OnDrag(eventData);
-        }
+        public virtual void OnPointerDown(PointerEventData eventData) 
+            => OnDrag(eventData);
 
         public void OnDrag(PointerEventData eventData)
         {
@@ -117,12 +115,18 @@ namespace Joystick_Pack.Scripts.Joysticks
             return 0;
         }
 
-        public virtual void OnPointerUp(PointerEventData eventData)
+        public void OnPointerUp(PointerEventData eventData)
+            => Reset();
+
+        private void OnDisable() 
+            => Reset();
+
+        public virtual void Reset()
         {
             _input = Vector2.zero;
             handle.anchoredPosition = Vector2.zero;
         }
-
+        
         protected Vector2 ScreenPointToAnchoredPosition(Vector2 screenPosition)
         {
             Vector2 localPoint = Vector2.zero;
