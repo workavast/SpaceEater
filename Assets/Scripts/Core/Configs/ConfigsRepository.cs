@@ -9,21 +9,22 @@ namespace SourceCode.Core.Configs
     [CreateAssetMenu(fileName = nameof(ConfigsRepository), menuName = "Configs/" + nameof(ConfigsRepository))]
     public class ConfigsRepository : ScriptableObject
     {
-        [SerializeField] private List<ScriptableObject> configs = new();
-
-        private Dictionary<Type, ISingleConfig> _configs;
-
-        public IEnumerable<ISingleConfig> Configs => _configs.Values;
+        private static readonly List<ScriptableObject> ConfigsList = new();
+        private List<ScriptableObject> _configsVisualisation = new();
+        private Dictionary<Type, ISingleConfig> _configsDictionary;
         
+        public IEnumerable<ISingleConfig> Configs => _configsDictionary.Values;
+
 #if UNITY_EDITOR
-        private void OnEnable()
+        private void OnEnable() 
             => Refresh();
 
         private void Refresh()
         {
-            _configs = new Dictionary<Type, ISingleConfig>(configs.Count);
+            _configsVisualisation = ConfigsList;
+            _configsDictionary = new Dictionary<Type, ISingleConfig>(ConfigsList.Count);
 
-            foreach (var config in configs)
+            foreach (var config in ConfigsList)
             {
                 if(config is not ISingleConfig singleConfig)
                     continue;
@@ -33,10 +34,10 @@ namespace SourceCode.Core.Configs
 
                 var type = singleConfig.GetType();
 
-                if (_configs.ContainsKey(type))
+                if (_configsDictionary.ContainsKey(type))
                     Debug.LogError($"Duplicate of {type} {config}");
                 else
-                    _configs.Add(type, singleConfig);
+                    _configsDictionary.Add(type, singleConfig);
             }
         }
 
@@ -45,16 +46,12 @@ namespace SourceCode.Core.Configs
         {
             var configs = Resources.LoadAll<ScriptableObject>("Configs");
 
-            var repositories = configs.OfType<ConfigsRepository>();
             var singleConfigs = configs.Where(c => c is ISingleConfig);
-            Debug.Log($"{configs.Length} || {repositories.Count()} || {singleConfigs.Count()}");
+            Debug.Log($"{configs.Length} || {singleConfigs.Count()}");
             
-            foreach (var repository in repositories)
-            {
-                repository.configs = new List<ScriptableObject>();
-                foreach (var singConfig in singleConfigs)
-                    repository.configs.Add(singConfig);
-            }
+            ConfigsList.Clear();
+            foreach (var singConfig in singleConfigs)
+                ConfigsList.Add(singConfig);
         }
 #endif
     }

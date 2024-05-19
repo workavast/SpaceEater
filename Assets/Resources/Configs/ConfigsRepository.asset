@@ -12,4 +12,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95406cd7c0834c71820c27d0987a9610, type: 3}
   m_Name: ConfigsRepository
   m_EditorClassIdentifier: 
-  configs: []
