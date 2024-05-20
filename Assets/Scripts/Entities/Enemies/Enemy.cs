@@ -25,12 +25,12 @@ namespace SourceCode.Entities.Enemies
         {
             base.Awake();
 
-            OnManualUpdate += Move;
+            ManualUpdated += Move;
 
             triggerZone.OnEnter += PlayerEnter;
             triggerZone.OnExit += PlayerExit;
             
-            OnConsumed += () => { OnRemove?.Invoke(this); };
+            Consumed += () => { OnRemove?.Invoke(this); };
         }
 
         // private void Update()

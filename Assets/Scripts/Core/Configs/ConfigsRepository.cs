@@ -47,7 +47,6 @@ namespace SourceCode.Core.Configs
             var configs = Resources.LoadAll<ScriptableObject>("Configs");
 
             var singleConfigs = configs.Where(c => c is ISingleConfig);
-            Debug.Log($"{configs.Length} || {singleConfigs.Count()}");
             
             ConfigsList.Clear();
             foreach (var singConfig in singleConfigs)

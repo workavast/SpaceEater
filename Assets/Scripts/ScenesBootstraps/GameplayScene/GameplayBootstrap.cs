@@ -1,16 +1,9 @@
 using System.Collections.Generic;
 using SourceCode.BackgroundControl;
 using SourceCode.CameraMovement;
-using SourceCode.Core.Ad;
-using SourceCode.Core.PlayZone;
-using SourceCode.Entities.BlackHole;
-using SourceCode.Entities.Enemies.Factory;
-using SourceCode.Entities.Enemies.Spawning;
-using SourceCode.Entities.StaticEatableObjects.EnvironmentSpawning;
-using SourceCode.Entities.StaticEatableObjects.Factory;
+using SourceCode.ScenesBootstraps.GameplayScene.Context;
 using SourceCode.ScenesBootstraps.GameplayScene.States;
 using SourceCode.ScenesBootstraps.SceneFSM;
-using SourceCode.Ui.UiSystem;
 using UnityEngine;
 using Zenject;
 
@@ -20,35 +13,14 @@ namespace SourceCode.ScenesBootstraps.GameplayScene
     {
         [SerializeField] private CameraController cameraController;
         [SerializeField] private BackgroundController backgroundController;
-        [SerializeField] private BlackHoleBehaviour blackHoleBehaviour;
 
-        [Inject] private readonly GameEndDetectorConfig _gameEndDetectorConfig;
-        [Inject] private readonly StaticEatableObjectsFactory _staticEatableObjectsFactory;
-        [Inject] private readonly EnvironmentSpawnConfig _environmentSpawnConfig;
-        [Inject] private readonly EnemiesSpawnConfig _enemiesSpawnConfig;
-        [Inject] private readonly EnemiesFactory _enemiesFactory;
-        [Inject] private readonly PlayZoneConfig _playZoneConfig;
-        [Inject] private readonly UI_Controller _uiController;
-        [Inject] private readonly AdPreparingConfig _adPreparingConfig;
-        [Inject] private readonly AdController _adController;
+        [Inject] private readonly GameplaySceneContext _gameplaySceneContext;
 
         private GameStateMachine _gameStateMachine;
         private GameStateSwitcher _gameStateSwitcher;
-        private GameplaySceneContext _gameplaySceneContext;
         
         private void Start()
         {
-            _gameplaySceneContext = new GameplaySceneContext(
-                _uiController,
-                blackHoleBehaviour, 
-                _enemiesFactory, 
-                _staticEatableObjectsFactory,
-                _enemiesSpawnConfig, 
-                _playZoneConfig, 
-                _environmentSpawnConfig, 
-                _gameEndDetectorConfig,
-                _adController);
-            
             var gameplaySceneLoadDetector = new GameplaySceneLoadDetector(_gameplaySceneContext.SceneLoader);
             
             var gameplayInitState = new GameplayInitState(_gameplaySceneContext, cameraController, backgroundController);

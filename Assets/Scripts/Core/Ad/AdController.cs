@@ -14,7 +14,7 @@ namespace SourceCode.Core.Ad
         public event Action AdPrepared;
         public event Action AdActivationTriggered;
 
-        private AdController(AdPreparingConfig config)
+        public AdController(AdPreparingConfig config)
         {
             _adPreparingTimer = new Timer(config.AdPreparingTime, 0, true);
             _adPreparingTimer.OnTimerEnd += () =>

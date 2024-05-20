@@ -5,20 +5,21 @@ using SourceCode.Core;
 using SourceCode.Core.InputDetectors;
 using SourceCode.Core.PlayZone;
 using SourceCode.Core.TriggerZone;
+using SourceCode.ScenesBootstraps.GameplayScene.EndGameDetection;
 using UnityEngine;
 using Zenject;
 using Random = UnityEngine.Random;
 
 namespace SourceCode.Entities.BlackHole
 {
-    public class BlackHoleBehaviour : EntityBase, ICameraTarget, IBackgroundTarget
+    public class BlackHoleBehaviour : EntityBase, ICameraTarget, IBackgroundTarget, IEndGameDetectionTarget
     {
         [SerializeField] private TriggerZone2D triggerZone2D;
         
         [Inject] private readonly PlayZoneConfig _playZoneConfig;
         [Inject] private readonly BlackHoleConfig _config;
+        [Inject] private readonly IInputDetector _inputDetector;
         
-        private IInputDetector _inputDetector;
         private readonly List<EntityBase> _eatableObjects = new(2);
 
         public Transform Transform => transform;
@@ -40,15 +41,10 @@ namespace SourceCode.Entities.BlackHole
             triggerZone2D.OnEnter += EatableObjectEnter;
             triggerZone2D.OnExit += EatableObjectExit;
 
-            OnManualUpdate += Move;
+            ManualUpdated += deltaTime => _inputDetector.ManualUpdate();
+            ManualUpdated += Move;
         }
-
-        public void Init(IInputDetector inputDetector)
-        {
-            _inputDetector = inputDetector;
-            OnManualUpdate += deltaTime => _inputDetector.ManualUpdate();
-        }
-
+        
         private void Move(float time)
         {
             var direction = _inputDetector.MoveDirection;
@@ -85,7 +81,7 @@ namespace SourceCode.Entities.BlackHole
             if(staticEatableObject.Size > Size)
                 return;
             
-            staticEatableObject.OnConsumedWithSize += IncreaseSize;
+            staticEatableObject.ConsumedWithSize += IncreaseSize;
             staticEatableObject.StartEat();
             _eatableObjects.Add(staticEatableObject);
         }
@@ -98,7 +94,7 @@ namespace SourceCode.Entities.BlackHole
             if (!_eatableObjects.Contains(staticEatableObject))
                 return;
 
-            staticEatableObject.OnConsumedWithSize -= IncreaseSize;
+            staticEatableObject.ConsumedWithSize -= IncreaseSize;
             staticEatableObject.StopEat();
             _eatableObjects.Remove(staticEatableObject);
         }

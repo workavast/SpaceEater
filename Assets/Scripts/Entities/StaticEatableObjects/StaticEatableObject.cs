@@ -19,7 +19,7 @@ namespace SourceCode.Entities.StaticEatableObjects
         {
             base.Awake();
 
-            OnConsumed += RemoveStaticEatableObject;
+            Consumed += RemoveStaticEatableObject;
         }
 
         private void RemoveStaticEatableObject()

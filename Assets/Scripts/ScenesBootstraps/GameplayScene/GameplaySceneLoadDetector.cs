@@ -1,6 +1,5 @@
 using SourceCode.Ui.UiSystem;
 using SourceCode.Ui.UiSystem.Screens.Gameplay;
-using UnityEngine.SceneManagement;
 
 namespace SourceCode.ScenesBootstraps.GameplayScene
 {

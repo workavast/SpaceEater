@@ -9,7 +9,7 @@ namespace SourceCode.Core.InputDetectors
         
         public Vector2 MoveDirection { get; private set; }
 
-        public DesktopInput(Joystick joystick)
+        private DesktopInput(Joystick joystick)
         {
             _joystick = joystick;
         }

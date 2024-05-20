@@ -5,7 +5,7 @@ using SourceCode.Entities.StaticEatableObjects.Factory;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace SourceCode.Entities.StaticEatableObjects.EnvironmentSpawning
+namespace SourceCode.Entities.StaticEatableObjects.EnvironmentGeneration
 {
     public class EnvironmentGenerator
     {
@@ -20,7 +20,7 @@ namespace SourceCode.Entities.StaticEatableObjects.EnvironmentSpawning
             _factory = factory;
         }
 
-        //TODO: spawn more bigs objects early then more small objects
+        //TODO: spawn more big objects early then more small objects??
         //TODO: chunks??
         public void Generate()
         {

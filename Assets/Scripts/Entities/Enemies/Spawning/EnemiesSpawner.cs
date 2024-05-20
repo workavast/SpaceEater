@@ -12,7 +12,7 @@ namespace SourceCode.Entities.Enemies.Spawning
         private readonly EnemiesFactory _factory;
         private readonly BlackHoleBehaviour _blackHoleBehaviour;
         private readonly PlayZoneConfig _playZoneConfig;
-
+        
         private float _blackHolePrevSize;
         
         public EnemiesSpawner(EnemiesSpawnConfig config, EnemiesFactory factory, BlackHoleBehaviour blackHoleBehaviour, PlayZoneConfig playZoneConfig)
@@ -21,7 +21,10 @@ namespace SourceCode.Entities.Enemies.Spawning
             _factory = factory;
             _blackHoleBehaviour = blackHoleBehaviour;
             _playZoneConfig = playZoneConfig;
-            
+        }
+
+        public void Init()
+        {
             _blackHoleBehaviour.OnUpdateSize += TrySpawnEnemy;
             _blackHolePrevSize = _blackHoleBehaviour.Size;
         }
@@ -31,7 +34,7 @@ namespace SourceCode.Entities.Enemies.Spawning
             var blackHoleSize = _blackHoleBehaviour.Size;
             var curStep = blackHoleSize / _blackHolePrevSize - 1;
 
-            if (!(curStep >= _config.SpawnPercentageStep)) 
+            if (curStep < _config.SpawnPercentageStep) 
                 return;
 
             var spawnChance = Random.Range(0f, 1f);

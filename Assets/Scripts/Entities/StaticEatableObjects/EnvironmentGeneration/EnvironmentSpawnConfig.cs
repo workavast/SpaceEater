@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using SourceCode.Core.Configs;
 using UnityEngine;
 
-namespace SourceCode.Entities.StaticEatableObjects.EnvironmentSpawning
+namespace SourceCode.Entities.StaticEatableObjects.EnvironmentGeneration
 {
     [CreateAssetMenu(fileName = nameof(EnvironmentSpawnConfig), menuName = "Configs/" + nameof(EnvironmentSpawnConfig))]
     public class EnvironmentSpawnConfig : ScriptableObject, ISingleConfig

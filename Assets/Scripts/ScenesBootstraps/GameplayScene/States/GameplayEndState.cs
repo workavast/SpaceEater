@@ -1,5 +1,6 @@
 using SourceCode.Entities.Enemies;
 using SourceCode.Entities.StaticEatableObjects;
+using SourceCode.ScenesBootstraps.GameplayScene.Context;
 using SourceCode.ScenesBootstraps.SceneFSM;
 using SourceCode.Ui.UiSystem;
 using SourceCode.Ui.UiSystem.Screens.Gameplay;

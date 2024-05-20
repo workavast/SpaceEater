@@ -20,9 +20,9 @@ namespace SourceCode.Entities
         /// <summary>
         /// return size of entity
         /// </summary>
-        public event Action<float> OnConsumedWithSize;
-        public event Action OnConsumed;
-        protected event Action<float> OnManualUpdate; 
+        public event Action<float> ConsumedWithSize;
+        public event Action Consumed;
+        protected event Action<float> ManualUpdated; 
         
         protected virtual void Awake()
         {
@@ -37,8 +37,8 @@ namespace SourceCode.Entities
             _eatTimer = new Timer(_configBase.EatTime, 0, true);
             _eatTimer.OnTimerEnd += () =>
             {
-                OnConsumed?.Invoke();
-                OnConsumedWithSize?.Invoke(Size);
+                Consumed?.Invoke();
+                ConsumedWithSize?.Invoke(Size);
                 Destroy(gameObject);
             };
         }
@@ -46,7 +46,7 @@ namespace SourceCode.Entities
         public void ManualUpdate(float deltaTime)
         {
             _eatTimer.Tick(deltaTime);
-            OnManualUpdate?.Invoke(deltaTime);
+            ManualUpdated?.Invoke(deltaTime);
         }
 
         public void SetAnimationState(bool isActive)

@@ -12,7 +12,7 @@ namespace SourceCode.ScenesBootstraps.GameplayScene
         public PlayerController(BlackHoleBehaviour blackHoleBehaviour)
         {
             _blackHoleBehaviour = blackHoleBehaviour;
-            blackHoleBehaviour.OnConsumed += () => PlayerIsAlive = false;
+            blackHoleBehaviour.Consumed += () => PlayerIsAlive = false;
         }
 
         public void ManualUpdate()

@@ -1,9 +1,9 @@
 using System;
-using SourceCode.Entities;
+using SourceCode.Entities.BlackHole;
 using SourceCode.Entities.StaticEatableObjects;
-using SourceCode.Entities.StaticEatableObjects.EnvironmentSpawning;
+using SourceCode.Entities.StaticEatableObjects.EnvironmentGeneration;
 
-namespace SourceCode.ScenesBootstraps.GameplayScene
+namespace SourceCode.ScenesBootstraps.GameplayScene.EndGameDetection
 {
     public class EndGameDetector
     {
@@ -15,7 +15,7 @@ namespace SourceCode.ScenesBootstraps.GameplayScene
         
         public event Action GameEnded;
         
-        public EndGameDetector(GameEndDetectorConfig config, EntityBase entity, EnvironmentGenerator environmentGenerator, 
+        public EndGameDetector(GameEndDetectorConfig config, IEndGameDetectionTarget blackHoleBehaviour, EnvironmentGenerator environmentGenerator, 
             StaticEatableObjectsRepository staticEatableObjectsRepository)
         {
             _config = config;
@@ -25,7 +25,7 @@ namespace SourceCode.ScenesBootstraps.GameplayScene
             
             environmentGenerator.Generated += OnLevelGenerated;
             
-            entity.OnConsumed += () => GameEnded?.Invoke();
+            blackHoleBehaviour.Consumed += () => GameEnded?.Invoke();
         }
 
         private void OnLevelGenerated()
