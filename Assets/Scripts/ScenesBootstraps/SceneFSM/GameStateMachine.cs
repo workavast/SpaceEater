@@ -6,8 +6,11 @@ namespace SourceCode.ScenesBootstraps.SceneFSM
     public class GameStateMachine
     {
         private readonly Dictionary<Type, GameStateBase> _states;
-        private GameStateBase _activeState; 
+        private GameStateBase _activeState;
 
+        public Type CurrentState => _activeState.GetType();
+        public event Action<Type> StateSwitched;
+        
         public GameStateMachine(List<GameStateBase> states)
         {
             _states = new Dictionary<Type, GameStateBase>();
@@ -38,6 +41,7 @@ namespace SourceCode.ScenesBootstraps.SceneFSM
             _activeState.Exit();
             _activeState = _states[type];
             _activeState.Enter();
+            StateSwitched?.Invoke(type);
         }
     }
 }

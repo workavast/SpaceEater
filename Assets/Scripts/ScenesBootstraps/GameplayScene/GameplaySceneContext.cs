@@ -1,3 +1,4 @@
+using SourceCode.Core.Ad;
 using SourceCode.Core.InputDetectors;
 using SourceCode.Core.PlayZone;
 using SourceCode.Entities.BlackHole;
@@ -26,7 +27,8 @@ namespace SourceCode.ScenesBootstraps.GameplayScene
         public readonly EnvironmentGenerator EnvironmentGenerator;
         public readonly EndGameDetector EndGameDetector;
         public readonly IInputDetector InputDetector;
-        
+        public readonly AdController AdController;
+
         public GameplaySceneContext(
             UI_Controller uiController,
             BlackHoleBehaviour blackHoleBehaviour, 
@@ -35,10 +37,12 @@ namespace SourceCode.ScenesBootstraps.GameplayScene
             EnemiesSpawnConfig enemiesSpawnConfig, 
             PlayZoneConfig playZoneConfig,
             EnvironmentSpawnConfig environmentSpawnConfig,
-            GameEndDetectorConfig gameEndDetectorConfig)
+            GameEndDetectorConfig gameEndDetectorConfig,
+            AdController adController)
         {
             UIController = uiController;
             BlackHoleBehaviour = blackHoleBehaviour;
+            AdController = adController;
             PlayerController = new PlayerController(BlackHoleBehaviour);
             
             StaticEatableObjectsRepository = new StaticEatableObjectsRepository(staticEatableObjectsFactory);

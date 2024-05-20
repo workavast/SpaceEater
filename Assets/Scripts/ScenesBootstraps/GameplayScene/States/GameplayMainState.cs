@@ -1,3 +1,4 @@
+using SourceCode.Core.Ad;
 using SourceCode.Entities.Enemies;
 using SourceCode.Entities.StaticEatableObjects;
 using SourceCode.ScenesBootstraps.SceneFSM;
@@ -12,13 +13,15 @@ namespace SourceCode.ScenesBootstraps.GameplayScene.States
         private readonly EnemiesUpdater _enemiesUpdater;
         private readonly StaticEatableObjectsUpdater _staticEatableObjectsUpdater;
         private readonly PlayerController _playerController;
-
+        private readonly IAdTrigger _adTrigger;
+        
         public GameplayMainState(GameplaySceneContext context)
         {
             _uiController = context.UIController;
             _enemiesUpdater = context.EnemiesUpdater;
             _staticEatableObjectsUpdater = context.StaticEatableObjectsUpdater;
             _playerController = context.PlayerController;
+            _adTrigger = context.AdController;
         }
         
         public override void Enter()
@@ -35,6 +38,8 @@ namespace SourceCode.ScenesBootstraps.GameplayScene.States
             _enemiesUpdater.ManualUpdate();
             _staticEatableObjectsUpdater.ManualUpdate();
             _playerController.ManualUpdate();
+
+            _adTrigger.TryActivateFullScreenAd();
         }
 
         public override void ManualFixedUpdate()

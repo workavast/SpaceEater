@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using SourceCode.BackgroundControl;
 using SourceCode.CameraMovement;
+using SourceCode.Core.Ad;
 using SourceCode.Core.PlayZone;
 using SourceCode.Entities.BlackHole;
 using SourceCode.Entities.Enemies.Factory;
@@ -28,6 +29,8 @@ namespace SourceCode.ScenesBootstraps.GameplayScene
         [Inject] private readonly EnemiesFactory _enemiesFactory;
         [Inject] private readonly PlayZoneConfig _playZoneConfig;
         [Inject] private readonly UI_Controller _uiController;
+        [Inject] private readonly AdPreparingConfig _adPreparingConfig;
+        [Inject] private readonly AdController _adController;
 
         private GameStateMachine _gameStateMachine;
         private GameStateSwitcher _gameStateSwitcher;
@@ -43,24 +46,27 @@ namespace SourceCode.ScenesBootstraps.GameplayScene
                 _enemiesSpawnConfig, 
                 _playZoneConfig, 
                 _environmentSpawnConfig, 
-                _gameEndDetectorConfig);
+                _gameEndDetectorConfig,
+                _adController);
             
             var gameplaySceneLoadDetector = new GameplaySceneLoadDetector(_gameplaySceneContext.SceneLoader);
             
             var gameplayInitState = new GameplayInitState(_gameplaySceneContext, cameraController, backgroundController);
             var gameplayLoadingScreenFadeState = new GameplayLoadingScreenFadeState();
+            var gameplayAdShowState = new GameplayAdShowState(_gameplaySceneContext);
             var states = new List<GameStateBase>
             {
                 gameplayInitState,
                 gameplayLoadingScreenFadeState,
+                gameplayAdShowState,
                 new GameplayMainState(_gameplaySceneContext),
                 new GameplayPauseState(_gameplaySceneContext),
                 new GameplayEndState(_gameplaySceneContext)
             };
             _gameStateMachine = new GameStateMachine(states);
             _gameStateSwitcher = new GameStateSwitcher(_gameStateMachine, _gameplaySceneContext.EndGameDetector,
-                gameplayInitState, gameplayLoadingScreenFadeState);
-            
+                gameplayInitState, gameplayLoadingScreenFadeState, gameplayAdShowState, _gameplaySceneContext.AdController);
+
             _gameStateMachine.Init(typeof(GameplayInitState));
         }
 
