@@ -6,9 +6,9 @@ namespace SourceCode.Core
     public interface IBackgroundTarget
     {
         public Transform Transform { get; }
-        public float Size { get; }
+        public float TargetSize { get; }
 
-        public event Action OnUpdateSize;
+        public event Action OnUpdateTargetSize;
         public event Action<Vector2, float> OnMove;
     }
 }

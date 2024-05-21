@@ -1,3 +1,4 @@
+using System;
 using SourceCode.Core;
 using UnityEngine;
 using Zenject;
@@ -6,42 +7,27 @@ namespace SourceCode.BackgroundControl
 {
     public class BackgroundController : MonoBehaviour
     {
-        [SerializeField] private GameObject background;
-        [SerializeField] private GameObject stars;
+        [SerializeField] private Transform background;
+        [SerializeField] private Transform stars;
         
         [Inject] private readonly BackgroundConfig _config;
-        
-        private IBackgroundTarget _target;
-        
+
+        private BackgroundMover _backgroundMover;
+        private BackgroundSizeUpdater _backgroundSizeUpdater;
+
+        private void Awake()
+        {
+            _backgroundMover = new BackgroundMover(transform, background, stars, _config);
+            _backgroundSizeUpdater = new BackgroundSizeUpdater(transform, _config);
+        }
+
         public void SetTarget(IBackgroundTarget newTarget)
         {
-            if (_target != null)
-            {
-                _target.OnUpdateSize -= UpdateSize;
-                _target.OnMove -= Move;
-            }
+            if (newTarget == null)
+                throw new NullReferenceException($"newTarget is null");
             
-            _target = newTarget;
-            _target.OnUpdateSize += UpdateSize;
-            _target.OnMove += Move;
-            UpdateSize();
-
-            var direction = (_target.Transform.position - transform.position).normalized;
-            var distance = Vector2.Distance(_target.Transform.position, transform.position);
-            Move(direction, distance);
-        }
-
-        private void Move(Vector2 direction, float distance)
-        {
-            var velocity = direction * (distance * _config.MoveSpeed);
-            transform.Translate(velocity);
-            background.transform.Translate(velocity * _config.BackgroundMoveScale);
-            stars.transform.Translate(velocity * _config.StarsMoveScale);
-        }
-        
-        private void UpdateSize()
-        {
-            transform.localScale = Vector3.forward + (Vector3)(Vector2.one * Mathf.Pow(_target.Size, _config.SizeScaler));
+            _backgroundMover.SetTarget(newTarget);
+            _backgroundSizeUpdater.SetTarget(newTarget);
         }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using CameraMovement;
 using Cinemachine;
 using UnityEngine;
@@ -10,30 +11,23 @@ namespace SourceCode.CameraMovement
     {
         [Inject] private readonly CameraConfig _config;
 
-        private float _initialSize;
+        private CameraLensSizeUpdater _cameraLensSizeUpdater;
         private CinemachineVirtualCamera _cinemachineVirtualCamera;
-        private ICameraTarget _cameraTarget;
         
         private void Awake()
         {
             _cinemachineVirtualCamera = GetComponent<CinemachineVirtualCamera>();
-            _initialSize = _cinemachineVirtualCamera.m_Lens.OrthographicSize;
-        }
-
-        public void SetFollowTarget(ICameraTarget cameraTarget)
-        {
-            if (_cameraTarget != null)
-                _cameraTarget.OnUpdateSize -= UpdateSize;
             
-            _cameraTarget = cameraTarget;
-            _cinemachineVirtualCamera.Follow = cameraTarget.Transform;
-            _cameraTarget.OnUpdateSize += UpdateSize;
-            UpdateSize();
+            _cameraLensSizeUpdater = new CameraLensSizeUpdater(_cinemachineVirtualCamera, _config);
         }
 
-        private void UpdateSize()
+        public void SetFollowTarget(ICameraTarget newTarget)
         {
-            _cinemachineVirtualCamera.m_Lens.OrthographicSize = _cameraTarget.Size * _initialSize * _config.OrthographicSizeScale;
+            if (newTarget == null)
+                throw new NullReferenceException($"newTarget is null");
+            
+            _cameraLensSizeUpdater.SetTarget(newTarget);
+            _cinemachineVirtualCamera.Follow = newTarget.Transform;
         }
     }
 }

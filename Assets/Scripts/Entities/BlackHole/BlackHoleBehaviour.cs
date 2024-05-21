@@ -21,11 +21,13 @@ namespace SourceCode.Entities.BlackHole
         [Inject] private readonly IInputDetector _inputDetector;
         
         private readonly List<EntityBase> _eatableObjects = new(2);
-
+        private BlackHoleSizeUpdater _blackHoleSizeUpdater;
+        
+        public float TargetSize { get; private set; }
         public Transform Transform => transform;
         protected override EatableObjectConfigBase _configBase => _config;
 
-        public event Action OnUpdateSize;
+        public event Action OnUpdateTargetSize;
         /// <summary>
         /// return direction and distance of move
         /// </summary>
@@ -34,7 +36,7 @@ namespace SourceCode.Entities.BlackHole
         protected override void Awake()
         {
             base.Awake();
-
+            TargetSize = Size;
             var modelRotation = Random.Range(-_config.ModelRotation, _config.ModelRotation);
             SetModelRotation(modelRotation);
             
@@ -43,6 +45,8 @@ namespace SourceCode.Entities.BlackHole
 
             ManualUpdated += deltaTime => _inputDetector.ManualUpdate();
             ManualUpdated += Move;
+
+            _blackHoleSizeUpdater = new BlackHoleSizeUpdater(this, _config);
         }
         
         private void Move(float time)
@@ -81,7 +85,7 @@ namespace SourceCode.Entities.BlackHole
             if(staticEatableObject.Size > Size)
                 return;
             
-            staticEatableObject.ConsumedWithSize += IncreaseSize;
+            staticEatableObject.ConsumedWithSize += UpdateSize;
             staticEatableObject.StartEat();
             _eatableObjects.Add(staticEatableObject);
         }
@@ -94,15 +98,16 @@ namespace SourceCode.Entities.BlackHole
             if (!_eatableObjects.Contains(staticEatableObject))
                 return;
 
-            staticEatableObject.ConsumedWithSize -= IncreaseSize;
+            staticEatableObject.ConsumedWithSize -= UpdateSize;
             staticEatableObject.StopEat();
             _eatableObjects.Remove(staticEatableObject);
         }
 
-        private void IncreaseSize(float eatenSize)
+        private void UpdateSize(float eatenSize)
         {
-            transform.localScale += Vector3.one * (eatenSize * _config.IncreaseScale);
-            OnUpdateSize?.Invoke();
+            TargetSize = transform.localScale.x + eatenSize * _config.IncreaseScale;
+            OnUpdateTargetSize?.Invoke();
+            _blackHoleSizeUpdater.IncreaseSize();
         }
     }
 }

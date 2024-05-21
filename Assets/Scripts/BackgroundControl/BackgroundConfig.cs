@@ -1,3 +1,4 @@
+using DG.Tweening;
 using SourceCode.Core.Configs;
 using UnityEngine;
 
@@ -12,5 +13,8 @@ namespace SourceCode.BackgroundControl
         [field: SerializeField, Range(0, 2)] public float BackgroundMoveScale { get; private set; }
         [field: SerializeField, Range(0, 2)] public float StarsMoveScale { get; private set; }
 
+        [field: Header("Change scale animation:")]
+        [field: SerializeField, Min(0)] public float ChangeScaleDuration { get; private set; } = 1;
+        [field: SerializeField] public Ease ChangeScaleEaseType { get; private set; }
     }
 }

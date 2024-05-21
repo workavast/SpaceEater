@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: CameraConfig
   m_EditorClassIdentifier: 
   <OrthographicSizeScale>k__BackingField: 1
+  <ChangeScaleDuration>k__BackingField: 0.75
+  <ChangeScaleEaseType>k__BackingField: 3

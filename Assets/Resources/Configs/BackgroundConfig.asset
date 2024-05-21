@@ -16,3 +16,5 @@ MonoBehaviour:
   <SizeScaler>k__BackingField: 0.65
   <BackgroundMoveScale>k__BackingField: 0
   <StarsMoveScale>k__BackingField: 0.04
+  <ChangeScaleDuration>k__BackingField: 0.75
+  <ChangeScaleEaseType>k__BackingField: 1

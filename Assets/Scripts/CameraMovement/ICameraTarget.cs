@@ -5,9 +5,9 @@ namespace CameraMovement
 {
     public interface ICameraTarget
     {
-        public float Size { get; }
+        public float TargetSize { get; }
         public Transform Transform { get; }
         
-        public event Action OnUpdateSize;
+        public event Action OnUpdateTargetSize;
     }
 }

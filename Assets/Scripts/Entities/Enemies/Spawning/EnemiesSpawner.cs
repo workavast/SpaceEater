@@ -25,7 +25,7 @@ namespace SourceCode.Entities.Enemies.Spawning
 
         public void Init()
         {
-            _blackHoleBehaviour.OnUpdateSize += TrySpawnEnemy;
+            _blackHoleBehaviour.OnUpdateTargetSize += TrySpawnEnemy;
             _blackHolePrevSize = _blackHoleBehaviour.Size;
         }
 
