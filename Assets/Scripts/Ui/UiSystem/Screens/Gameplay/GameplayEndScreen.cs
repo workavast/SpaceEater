@@ -1,4 +1,5 @@
 ﻿using System;
+using SourceCode.Ui.AnimationBlocks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,8 +9,10 @@ namespace SourceCode.Ui.UiSystem.Screens.Gameplay
     {
         [SerializeField] private Button restartButton;
         [SerializeField] private Button mainMenuButton;
-        [SerializeField] private GameObject darkBackground;
         [SerializeField] private SuccessMark successMark;
+        [SerializeField] private AnimationFadeBlock animationFadeBlock;
+        [SerializeField] private AnimationMoveBlock animationMoveBlockUp;
+        [SerializeField] private AnimationMoveBlock animationMoveBlockDown;
 
         public event Action RestartButtonClicked;
         public event Action MainMenuButtonClicked;
@@ -23,6 +26,27 @@ namespace SourceCode.Ui.UiSystem.Screens.Gameplay
             mainMenuButton.onClick.AddListener(() => MainMenuButtonClicked?.Invoke());
         }
 
+        protected override void Show()
+        {
+            gameObject.SetActive(true);
+            animationFadeBlock.Show(null);
+            animationMoveBlockUp.Show(null);
+            animationMoveBlockDown.Show(null);
+        }
+
+        protected override void Hide()
+        {
+            animationFadeBlock.Hide(null);
+            animationMoveBlockUp.Hide(null);
+            animationMoveBlockDown.Hide(null);
+        }
+
+        private void TryDeactivateScreen()
+        {
+            if(!animationFadeBlock.IsActive && !animationMoveBlockUp.IsActive && !animationMoveBlockDown.IsActive)
+                gameObject.SetActive(false);
+        }
+        
         [Serializable]
         private class SuccessMark
         {

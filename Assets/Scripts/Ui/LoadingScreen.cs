@@ -1,10 +1,13 @@
 using System;
+using SourceCode.Ui.AnimationBlocks;
 using UnityEngine;
 
 namespace SourceCode.Ui
 {
     public class LoadingScreen : MonoBehaviour
     {
+        [SerializeField] private AnimationFadeBlock animationFadeBlock;
+        
         public static LoadingScreen Instance;
 
         public bool IsShow { get; private set; }
@@ -27,15 +30,18 @@ namespace SourceCode.Ui
         public void StartLoading()
         {
             gameObject.SetActive(true);
+            animationFadeBlock.Show(null);
             IsShow = true;
         }
 
         public void EndLoading()
         {
-            IsShow = false;
-            gameObject.SetActive(false);
-            
-            FadeAnimationEnded?.Invoke();
+            animationFadeBlock.Hide(() =>
+            {
+                IsShow = false;
+                gameObject.SetActive(false);
+                FadeAnimationEnded?.Invoke();
+            });
         }
     }
 }
