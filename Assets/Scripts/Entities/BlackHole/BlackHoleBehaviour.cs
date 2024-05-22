@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using CameraMovement;
+using EventBusFramework;
+using SourceCode.Audio.AudioSources;
 using SourceCode.Core;
 using SourceCode.Core.InputDetectors;
 using SourceCode.Core.PlayZone;
@@ -19,6 +21,7 @@ namespace SourceCode.Entities.BlackHole
         [Inject] private readonly PlayZoneConfig _playZoneConfig;
         [Inject] private readonly BlackHoleConfig _config;
         [Inject] private readonly IInputDetector _inputDetector;
+        [Inject] private readonly EventBus _eventBus;
         
         private readonly List<EntityBase> _eatableObjects = new(2);
         private BlackHoleSizeUpdater _blackHoleSizeUpdater;
@@ -85,6 +88,7 @@ namespace SourceCode.Entities.BlackHole
             if(staticEatableObject.Size > Size)
                 return;
             
+            staticEatableObject.Consumed += OnConsumeObject;
             staticEatableObject.ConsumedWithSize += UpdateSize;
             staticEatableObject.StartEat();
             _eatableObjects.Add(staticEatableObject);
@@ -98,11 +102,17 @@ namespace SourceCode.Entities.BlackHole
             if (!_eatableObjects.Contains(staticEatableObject))
                 return;
 
+            staticEatableObject.Consumed -= OnConsumeObject;
             staticEatableObject.ConsumedWithSize -= UpdateSize;
             staticEatableObject.StopEat();
             _eatableObjects.Remove(staticEatableObject);
         }
 
+        private void OnConsumeObject()
+        {
+            _eventBus.Invoke(new ObjectConsumed());
+        }
+        
         private void UpdateSize(float eatenSize)
         {
             TargetSize = transform.localScale.x + eatenSize * _config.IncreaseScale;
