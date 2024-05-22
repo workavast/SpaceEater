@@ -1,6 +1,5 @@
 ﻿using SourceCode;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Initializers
 {
@@ -11,21 +10,21 @@ namespace Initializers
         
         private int _inits;
         private SceneLoader _sceneLoader;
-
-        private readonly InitializerBase[] _initializers =
-        {
-            new YandexSdkInitializer(new InitializerBase[]
-                {
-                    new PlayerGlobalDataInitializer(new InitializerBase[]
-                    {
-                        new LocalizationInitializer()
-                    }),
-                }
-            )
-        };
-
+        private InitializerBase[] _initializers;
+        
         private void Awake()
         {
+            _initializers = new InitializerBase[]{
+                new YandexSdkInitializer(this, new InitializerBase[]
+                    {
+                        new PlayerGlobalDataInitializer(new InitializerBase[]
+                        {
+                            new LocalizationInitializer()
+                        }),
+                    }
+                )
+            };
+            
             _inits = _initializers.Length;
             
             foreach (var initializer in _initializers)

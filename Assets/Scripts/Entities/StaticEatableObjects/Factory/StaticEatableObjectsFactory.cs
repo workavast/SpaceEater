@@ -10,12 +10,19 @@ namespace SourceCode.Entities.StaticEatableObjects.Factory
 {
     public class StaticEatableObjectsFactory : MonoBehaviour
     {
-        [Inject] private readonly StaticEatableObjectsConfig _config;
-        [Inject] private readonly DiContainer _container;
+        private DiContainer _container;
         
         private readonly Dictionary<StaticEatableObjectType, Transform> _parents = new();
+        private readonly Dictionary<StaticEatableObjectType, List<StaticEatableObject>> _eatableObjects = new();
 
         public event Action<StaticEatableObject> OnCreate;
+
+        [Inject]
+        public void Construct(StaticEatableObjectsConfig config, DiContainer diContainer)
+        {
+            InitEatableObjects(config.EatableObjectsList);
+            _container = diContainer;
+        }
         
         private void Awake()
         {
@@ -32,9 +39,9 @@ namespace SourceCode.Entities.StaticEatableObjects.Factory
 
         public StaticEatableObject Create(StaticEatableObjectType staticEatableObjectType, Vector2 position, float scale, float rotation)
         {
-            var randomPrefabIndex = Random.Range(0, _config.EatableObjects[staticEatableObjectType].Count);
+            var randomPrefabIndex = Random.Range(0, _eatableObjects[staticEatableObjectType].Count);
             var eatableGameObject = _container.InstantiatePrefab(
-                _config.EatableObjects[staticEatableObjectType][randomPrefabIndex], position, 
+                _eatableObjects[staticEatableObjectType][randomPrefabIndex], position, 
                 quaternion.identity, _parents[staticEatableObjectType]);
             var eatableObject = eatableGameObject.GetComponent<StaticEatableObject>();
             eatableObject.transform.localScale = new Vector3(scale, scale, 1);
@@ -42,6 +49,18 @@ namespace SourceCode.Entities.StaticEatableObjects.Factory
             
             OnCreate?.Invoke(eatableObject);
             return eatableObject;
+        }
+        
+        private void InitEatableObjects(IEnumerable<StaticEatableObject> eatableObjects)
+        {
+            _eatableObjects.Clear();
+            foreach (var eatableObject in eatableObjects)
+            {
+                if (_eatableObjects.ContainsKey(eatableObject.StaticEatableObjectType))
+                    _eatableObjects[eatableObject.StaticEatableObjectType].Add(eatableObject);
+                else
+                    _eatableObjects.Add(eatableObject.StaticEatableObjectType, new List<StaticEatableObject>(){eatableObject});
+            }
         }
     }
 }
