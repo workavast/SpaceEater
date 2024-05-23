@@ -115,7 +115,7 @@ namespace SourceCode.Entities.BlackHole
         
         private void UpdateSize(float eatenSize)
         {
-            TargetSize = transform.localScale.x + eatenSize * _config.IncreaseScale;
+            TargetSize += eatenSize * _config.IncreaseScale;
             OnUpdateTargetSize?.Invoke();
             _blackHoleSizeUpdater.IncreaseSize();
         }
