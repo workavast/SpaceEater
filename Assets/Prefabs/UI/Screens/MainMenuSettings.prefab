@@ -528,7 +528,7 @@ GameObject:
   - component: {fileID: 365275669517095072}
   - component: {fileID: 793883329833864982}
   - component: {fileID: 2558389647559672020}
-  - component: {fileID: 8057293439838835044}
+  - component: {fileID: 7954403256499674521}
   m_Layer: 5
   m_Name: RU
   m_TagString: Untagged
@@ -594,7 +594,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &8057293439838835044
+--- !u!114 &7954403256499674521
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -603,7 +603,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4984947012068229336}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: cdd66753dbba47fd8ca759b4566e8c4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -637,7 +637,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2558389647559672020}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7954403256499674521}
+        m_TargetAssemblyTypeName: SourceCode.Ui.Elements.LocalizationButton, Assembly-CSharp
+        m_MethodName: _ChangeLocalization
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5255697481265276577
 GameObject:
   m_ObjectHideFlags: 0
@@ -1413,7 +1425,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8321889050455988678}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: cdd66753dbba47fd8ca759b4566e8c4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -1447,7 +1459,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4792254187041850441}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 167406684067200687}
+        m_TargetAssemblyTypeName: SourceCode.Ui.Elements.LocalizationButton, Assembly-CSharp
+        m_MethodName: _ChangeLocalization
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8520451049054657617
 GameObject:
   m_ObjectHideFlags: 0
@@ -1610,7 +1634,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8712777982910080667}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: cdd66753dbba47fd8ca759b4566e8c4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -1644,7 +1668,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1753282753959615426}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8386534124896187563}
+        m_TargetAssemblyTypeName: SourceCode.Ui.Elements.LocalizationButton, Assembly-CSharp
+        m_MethodName: _ChangeLocalization
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8735659662194037972
 GameObject:
   m_ObjectHideFlags: 0
@@ -1728,9 +1764,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7217929167612419488}
     m_Modifications:
+    - target: {fileID: 3217779576233826174, guid: 8303d0049d639614a881be70f64db2a8, type: 3}
+      propertyPath: m_fontSize
+      value: 125.3
+      objectReference: {fileID: 0}
     - target: {fileID: 3217779576571956596, guid: 8303d0049d639614a881be70f64db2a8, type: 3}
       propertyPath: m_Name
-      value: Button
+      value: Back
       objectReference: {fileID: 0}
     - target: {fileID: 3217779576571956597, guid: 8303d0049d639614a881be70f64db2a8, type: 3}
       propertyPath: m_Pivot.x
@@ -1807,6 +1847,14 @@ PrefabInstance:
     - target: {fileID: 3217779576571956597, guid: 8303d0049d639614a881be70f64db2a8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5515769930053215413, guid: 8303d0049d639614a881be70f64db2a8, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 5158891520
+      objectReference: {fileID: 0}
+    - target: {fileID: 5515769930053215413, guid: 8303d0049d639614a881be70f64db2a8, type: 3}
+      propertyPath: m_StringReference.m_TableReference.m_TableCollectionName
+      value: GUID:88986f3436349a049b97451e98ac467a
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8303d0049d639614a881be70f64db2a8, type: 3}

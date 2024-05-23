@@ -17,8 +17,31 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 0647900998a88fd4c86e396b785f18eb
   m_SerializeEntries:
-  - m_GUID: 8fcb6ee055ae3844a9e217a861c414a6
-    m_Address: MainMenu_ru
+  - m_GUID: cec437495de83334ea897a54fa2820cc
+    m_Address: MainMenuMain_ru
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ru
+  - m_GUID: 12566bf86d70ad744b4a9f64d9b125e8
+    m_Address: GameplaySettings_ru
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ru
+    - Preload
+  - m_GUID: 3acf732828d9a4442b8ce57a4381dabf
+    m_Address: MainMenuSettings_ru
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ru
+    - Preload
+  - m_GUID: 3aa8523b8f7d2d74b829be1d0afe9ee6
+    m_Address: GameplayEndScreen_ru
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ru
+    - Preload
+  - m_GUID: b9566b4fd70e520479bc43f276c5fff1
+    m_Address: AdPreparingScreen_ru
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-ru

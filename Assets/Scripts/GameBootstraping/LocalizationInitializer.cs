@@ -1,6 +1,6 @@
 using SourceCode.Core.GlobalData;
 using UnityEngine;
-// using UnityEngine.Localization.Settings;
+using UnityEngine.Localization.Settings;
 using YG;
 
 namespace Initializers
@@ -14,8 +14,8 @@ namespace Initializers
 
         private async void InitLocalizationSettings()
         {
-            // var handleTask = LocalizationSettings.InitializationOperation;
-            // await handleTask.Task;
+            var handleTask = LocalizationSettings.InitializationOperation;
+            await handleTask.Task;
 
             int langIndex = 1;
             if (PlayerGlobalData.Instance.IsFirstSession)
@@ -23,13 +23,13 @@ namespace Initializers
                 switch (YandexGame.lang)
                 {
                     case "ru":
-                        langIndex = 0;
+                        langIndex = 1;
                         break;
                     case "tr":
                         langIndex = 2;
                         break;
                     default://en
-                        langIndex = 1;
+                        langIndex = 0;
                         break;
                 }
                 Debug.Log($"-||- InitLocalization isFirstSession: {YandexGame.lang} | {langIndex}");
@@ -40,10 +40,10 @@ namespace Initializers
                 langIndex = PlayerGlobalData.Instance.LocalizationSettings.LocalizationId;
             }
             
-            // LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[langIndex];
+            LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[langIndex];
             
-            // var handleTask2 = LocalizationSettings.InitializationOperation;
-            // await handleTask2.Task;
+            var handleTask2 = LocalizationSettings.InitializationOperation;
+            await handleTask2.Task;
             PlayerGlobalData.Instance.LocalizationSettings.ChangeLocalization(langIndex);
 
             Debug.Log("-||- LocalizationInitializer");

@@ -17,17 +17,17 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 51c3584545a43ad4fa96117e92ff3df7
   m_SerializeEntries:
-  - m_GUID: 4751865655e8c304f9e32ed3b4ef50d4
+  - m_GUID: f64760eac0635bb469f88ef193f0e4e1
     m_Address: English (en)
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale
-  - m_GUID: f808c6371c569f14e8cfc4f55a83cf76
+  - m_GUID: 61485d50eb660bc4e9fc2a1f5706a8b9
     m_Address: Russian (ru)
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale
-  - m_GUID: 49158594620bd2549bba346a9310908f
+  - m_GUID: e7da4895f5c14e7439c063082b0aa6e2
     m_Address: Turkish (tr)
     m_ReadOnly: 1
     m_SerializedLabels:
