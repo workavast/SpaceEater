@@ -1450,6 +1450,10 @@ PrefabInstance:
       propertyPath: m_text
       value: MainMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 3217779576233826174, guid: 8303d0049d639614a881be70f64db2a8, type: 3}
+      propertyPath: m_fontSize
+      value: 96.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3217779576571956596, guid: 8303d0049d639614a881be70f64db2a8, type: 3}
       propertyPath: m_Name
       value: MainMenu
@@ -1532,11 +1536,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5515769930053215413, guid: 8303d0049d639614a881be70f64db2a8, type: 3}
       propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
-      value: 39803842560
+      value: 57998733312
       objectReference: {fileID: 0}
     - target: {fileID: 5515769930053215413, guid: 8303d0049d639614a881be70f64db2a8, type: 3}
       propertyPath: m_StringReference.m_TableReference.m_TableCollectionName
-      value: GUID:3e7ae88f85841794195b863e8f342fbd
+      value: GUID:3bb2ba63d4fe4404fb02c8367c9bc0c4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8303d0049d639614a881be70f64db2a8, type: 3}
@@ -1566,6 +1570,10 @@ PrefabInstance:
     - target: {fileID: 3217779576233826174, guid: 8303d0049d639614a881be70f64db2a8, type: 3}
       propertyPath: m_text
       value: Continue
+      objectReference: {fileID: 0}
+    - target: {fileID: 3217779576233826174, guid: 8303d0049d639614a881be70f64db2a8, type: 3}
+      propertyPath: m_fontSize
+      value: 112.15
       objectReference: {fileID: 0}
     - target: {fileID: 3217779576571956596, guid: 8303d0049d639614a881be70f64db2a8, type: 3}
       propertyPath: m_Name
@@ -1649,11 +1657,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5515769930053215413, guid: 8303d0049d639614a881be70f64db2a8, type: 3}
       propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
-      value: 7767748608
+      value: 80656363520
       objectReference: {fileID: 0}
     - target: {fileID: 5515769930053215413, guid: 8303d0049d639614a881be70f64db2a8, type: 3}
       propertyPath: m_StringReference.m_TableReference.m_TableCollectionName
-      value: GUID:3e7ae88f85841794195b863e8f342fbd
+      value: GUID:3bb2ba63d4fe4404fb02c8367c9bc0c4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8303d0049d639614a881be70f64db2a8, type: 3}

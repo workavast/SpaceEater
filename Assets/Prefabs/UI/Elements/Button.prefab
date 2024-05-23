@@ -94,7 +94,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 96
+  m_fontSize: 125.3
   m_fontSizeBase: 96
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -150,9 +150,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_StringReference:
     m_TableReference:
-      m_TableCollectionName: GUID:632f6da9a06b1e440946a9b898a933d6
+      m_TableCollectionName: GUID:3bb2ba63d4fe4404fb02c8367c9bc0c4
     m_TableEntryReference:
-      m_KeyId: 57726103552
+      m_KeyId: 6492680192
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0

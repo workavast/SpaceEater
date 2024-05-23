@@ -10,35 +10,55 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
-  m_Name: GameplayEndScreen Shared Data
+  m_Name: FullTable Shared Data
   m_EditorClassIdentifier: 
-  m_TableCollectionName: GameplayEndScreen
-  m_TableCollectionNameGuidString: 6cfdd1878ff58c44d8a5717ee816135e
+  m_TableCollectionName: FullTable
+  m_TableCollectionNameGuidString: 3bb2ba63d4fe4404fb02c8367c9bc0c4
   m_Entries:
-  - m_Id: 408701267968
-    m_Key: Success
+  - m_Id: 6492680192
+    m_Key: Play
     m_Metadata:
       m_Items: []
-  - m_Id: 434336854016
-    m_Key: Restart
+  - m_Id: 23697715200
+    m_Key: Settings
     m_Metadata:
       m_Items: []
-  - m_Id: 464879775744
+  - m_Id: 36054134784
+    m_Key: Back
+    m_Metadata:
+      m_Items: []
+  - m_Id: 57998733312
     m_Key: MainMenu
     m_Metadata:
       m_Items: []
-  - m_Id: 500489416704
-    m_Key: UnSuccess
+  - m_Id: 80656363520
+    m_Key: Continue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 109253128192
+    m_Key: YouWin
+    m_Metadata:
+      m_Items: []
+  - m_Id: 139737329664
+    m_Key: YouLose
+    m_Metadata:
+      m_Items: []
+  - m_Id: 163225432064
+    m_Key: Restart
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2684966825984
+    m_Key: AdAfter
     m_Metadata:
       m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
-    rid: 8079136092345073696
+    rid: 8079136107269455872
   references:
     version: 2
     RefIds:
-    - rid: 8079136092345073696
+    - rid: 8079136107269455872
       type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
       data:
-        m_CustomEpoch: 1716411727841
+        m_CustomEpoch: 1716467189430

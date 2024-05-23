@@ -17,20 +17,8 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: fe3f4efdf68c74f45a2fd8655059762d
   m_SerializeEntries:
-  - m_GUID: 88986f3436349a049b97451e98ac467a
-    m_Address: Assets/Resources/Localization/Tables/MainMenuSettings Shared Data.asset
-    m_ReadOnly: 1
-    m_SerializedLabels: []
-  - m_GUID: 3e7ae88f85841794195b863e8f342fbd
-    m_Address: Assets/Resources/Localization/Tables/GameplaySettings Shared Data.asset
-    m_ReadOnly: 1
-    m_SerializedLabels: []
-  - m_GUID: 6cfdd1878ff58c44d8a5717ee816135e
-    m_Address: Assets/Resources/Localization/Tables/GameplayEndScreen Shared Data.asset
-    m_ReadOnly: 1
-    m_SerializedLabels: []
-  - m_GUID: f10e3ffa8bd41614a921341fc76d4ab1
-    m_Address: Assets/Resources/Localization/Tables/AdPreparingScreen Shared Data.asset
+  - m_GUID: 3bb2ba63d4fe4404fb02c8367c9bc0c4
+    m_Address: Assets/Resources/Localization/Tables/FullTable Shared Data.asset
     m_ReadOnly: 1
     m_SerializedLabels: []
   m_ReadOnly: 1

@@ -247,6 +247,10 @@ PrefabInstance:
       propertyPath: m_text
       value: Settings
       objectReference: {fileID: 0}
+    - target: {fileID: 3217779576233826174, guid: 8303d0049d639614a881be70f64db2a8, type: 3}
+      propertyPath: m_fontSize
+      value: 124.4
+      objectReference: {fileID: 0}
     - target: {fileID: 3217779576571956596, guid: 8303d0049d639614a881be70f64db2a8, type: 3}
       propertyPath: m_Name
       value: Settings
@@ -329,7 +333,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5515769930053215413, guid: 8303d0049d639614a881be70f64db2a8, type: 3}
       propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
-      value: 71265316864
+      value: 23697715200
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8303d0049d639614a881be70f64db2a8, type: 3}
