@@ -4,6 +4,7 @@ using SourceCode.ScenesBootstraps.GameplayScene.Context;
 using SourceCode.ScenesBootstraps.SceneFSM;
 using SourceCode.Ui.UiSystem;
 using SourceCode.Ui.UiSystem.Screens.Gameplay;
+using YG;
 
 namespace SourceCode.ScenesBootstraps.GameplayScene.States
 {
@@ -39,6 +40,7 @@ namespace SourceCode.ScenesBootstraps.GameplayScene.States
             _uiController.SetScreen<GameplayEndScreen>();
             var gameplayEndScreen = UI_ScreenRepository.GetScreen<GameplayEndScreen>();
             gameplayEndScreen.SetGameSuccess(_playerController.PlayerIsAlive);
+            YandexGame.ReviewShow(YandexGame.auth);
         }
 
         public override void Exit()
