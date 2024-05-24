@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <EatTime>k__BackingField: 0.3
   <MoveSpeed>k__BackingField: 5
-  <IncreaseScale>k__BackingField: 0.035
+  <IncreaseScale>k__BackingField: 0.04
   <ModelRotation>k__BackingField: 30
   <ChangeScaleDuration>k__BackingField: 0.75
   <ChangeScaleEaseType>k__BackingField: 2
