@@ -1,11 +1,14 @@
 using SourceCode.Entities.Enemies.Factory;
 using SourceCode.Entities.Enemies.Spawning;
+using UnityEngine;
 using Zenject;
 
 namespace SourceCode.Entities.Enemies
 {
     public class EnemiesInstaller : MonoInstaller
     {
+        [SerializeField] private bool useEnemiesSpawner = true;
+        
         public override void InstallBindings()
         {
             EnemiesFactoryBinding();
@@ -32,7 +35,10 @@ namespace SourceCode.Entities.Enemies
         
         private void EnemiesSpawnerBinding()
         {
-            Container.BindInterfacesAndSelfTo<EnemiesSpawner>().FromNew().AsSingle();
+            if (useEnemiesSpawner)
+                Container.BindInterfacesAndSelfTo<EnemiesSpawner>().FromNew().AsSingle();
+            else
+                Container.BindInterfacesAndSelfTo<UnActiveEnemiesSpawner>().FromNew().AsSingle();
         }
     }
 }

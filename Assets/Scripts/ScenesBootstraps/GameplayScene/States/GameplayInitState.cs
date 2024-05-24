@@ -19,7 +19,7 @@ namespace SourceCode.ScenesBootstraps.GameplayScene.States
         private readonly EnvironmentGenerator _environmentGenerator;
         private readonly BlackHoleBehaviour _blackHoleBehaviour;
         private readonly SceneLoader _sceneLoader;
-        private readonly EnemiesSpawner _enemiesSpawner;
+        private readonly IEnemySpawner _enemiesSpawner;
 
         public event Action Initialized;
 

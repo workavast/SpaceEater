@@ -37,7 +37,7 @@ namespace SourceCode.ScenesBootstraps.GameplayScene
             };
             _gameStateMachine = new GameStateMachine(states);
             _gameStateSwitcher = new GameStateSwitcher(_gameStateMachine, _gameplaySceneContext.EndGameDetector,
-                gameplayInitState, gameplayLoadingScreenFadeState, gameplayAdShowState, _gameplaySceneContext.AdController);
+                gameplayInitState, gameplayLoadingScreenFadeState, gameplayAdShowState, _gameplaySceneContext.AdTrigger);
 
             _gameStateMachine.Init(typeof(GameplayInitState));
         }

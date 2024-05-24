@@ -14,24 +14,24 @@ namespace SourceCode.ScenesBootstraps.GameplayScene
         private readonly GameplayInitState _gameplayInitState;
         private readonly GameplayLoadingScreenFadeState _gameplayLoadingScreenFadeState;
         private readonly GameplayAdShowState _gameplayAdShowState;
-        private readonly AdController _adController;
+        private readonly IAdTrigger _adTrigger;
 
         public GameStateSwitcher(GameStateMachine gameStateMachine, EndGameDetector endGameDetector, 
             GameplayInitState gameplayInitState, GameplayLoadingScreenFadeState gameplayLoadingScreenFadeState, 
-            GameplayAdShowState gameplayAdShowState, AdController adController)
+            GameplayAdShowState gameplayAdShowState, IAdTrigger adTrigger)
         {
             _gameStateMachine = gameStateMachine;
             _endGameDetector = endGameDetector;
             _gameplayInitState = gameplayInitState;
             _gameplayLoadingScreenFadeState = gameplayLoadingScreenFadeState;
             _gameplayAdShowState = gameplayAdShowState;
-            _adController = adController;
+            _adTrigger = adTrigger;
 
             _gameplayInitState.Initialized += OnGameInitialized;
             _gameplayLoadingScreenFadeState.FadeEnded += OnGameFadeEnded;
             _endGameDetector.GameEnded += OnGameEnded;
             _gameplayAdShowState.AdShowEnded += OnAdShowEnded;
-            _adController.AdActivationTriggered += OnAdActivationTriggered;
+            _adTrigger.AdActivationTriggered += OnAdActivationTriggered;
             
             var gameplayMainScreen = UI_ScreenRepository.GetScreen<GameplayMainScreen>();
             gameplayMainScreen.PauseButtonClicked += OnGamePaused;

@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace SourceCode.Entities.Enemies.Spawning
 {
-    public class EnemiesSpawner
+    public class EnemiesSpawner : IEnemySpawner
     {
         private readonly EnemiesSpawnConfig _config;
         private readonly EnemiesFactory _factory;

@@ -26,8 +26,8 @@ namespace SourceCode.Entities.StaticEatableObjects.EnvironmentGeneration
         [field: SerializeField] public StaticEatableObjectType StaticEatableObjectType { get; private set; }
         [field: SerializeField, Range(0, 100000)] public float MinDistance { get; private set; }
         [field: SerializeField, Range(0, 100000)] public float MaxDistance { get; private set; }
-        [field: SerializeField, Range(0, 1000)] public int MinCount { get; private set; }
-        [field: SerializeField, Range(0, 1000)] public int MaxCount { get; private set; }
+        [field: SerializeField, Range(0, 5000)] public int MinCount { get; private set; }
+        [field: SerializeField, Range(0, 5000)] public int MaxCount { get; private set; }
         [field: SerializeField, Range(0, 1000)] public float MinScale { get; private set; }
         [field: SerializeField, Range(0, 1000)] public float MaxScale { get; private set; }
         

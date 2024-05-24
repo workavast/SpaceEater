@@ -4,7 +4,7 @@ using YG;
 
 namespace SourceCode.Core.Ad
 {
-    public class AdController : IAdTrigger, IAdPreparingTimer
+    public class AdController : IAdTrigger, IAdTriggerActivator, IAdPreparingTimer
     {
         private readonly Timer _adPreparingTimer;
 

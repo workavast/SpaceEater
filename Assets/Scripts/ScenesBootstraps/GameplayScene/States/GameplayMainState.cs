@@ -14,7 +14,7 @@ namespace SourceCode.ScenesBootstraps.GameplayScene.States
         private readonly EnemiesUpdater _enemiesUpdater;
         private readonly StaticEatableObjectsUpdater _staticEatableObjectsUpdater;
         private readonly PlayerController _playerController;
-        private readonly IAdTrigger _adTrigger;
+        private readonly IAdTriggerActivator _adTriggerActivator;
         
         public GameplayMainState(GameplaySceneContext context)
         {
@@ -22,7 +22,7 @@ namespace SourceCode.ScenesBootstraps.GameplayScene.States
             _enemiesUpdater = context.EnemiesUpdater;
             _staticEatableObjectsUpdater = context.StaticEatableObjectsUpdater;
             _playerController = context.PlayerController;
-            _adTrigger = context.AdController;
+            _adTriggerActivator = context.AdTriggerActivator;
         }
         
         public override void Enter()
@@ -40,7 +40,7 @@ namespace SourceCode.ScenesBootstraps.GameplayScene.States
             _staticEatableObjectsUpdater.ManualUpdate();
             _playerController.ManualUpdate();
 
-            _adTrigger.TryActivateFullScreenAd();
+            _adTriggerActivator.TryActivateFullScreenAd();
         }
 
         public override void ManualFixedUpdate()

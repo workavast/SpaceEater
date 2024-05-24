@@ -18,27 +18,29 @@ namespace SourceCode.ScenesBootstraps.GameplayScene.Context
         public readonly StaticEatableObjectsRepository StaticEatableObjectsRepository;
         public readonly StaticEatableObjectsUpdater StaticEatableObjectsUpdater;
         public readonly EnemiesRepository EnemiesRepository;
-        public readonly EnemiesSpawner EnemiesSpawner;
+        public readonly IEnemySpawner EnemiesSpawner;
         public readonly EnemiesUpdater EnemiesUpdater;
         public readonly EnvironmentGenerator EnvironmentGenerator;
         public readonly EndGameDetector EndGameDetector;
-        public readonly AdController AdController;
+        public readonly IAdTrigger AdTrigger;
+        public readonly IAdTriggerActivator AdTriggerActivator;
+        public readonly IAdPreparingTimer AdPreparingTimer;
 
         private GameplaySceneContext(
             UI_Controller uiController,
             BlackHoleBehaviour blackHoleBehaviour, 
-            AdController adController,
+            IAdTrigger adTrigger,
             EnemiesRepository enemiesRepository,
             EnemiesUpdater enemiesUpdater,
-            EnemiesSpawner enemiesSpawner,
+            IEnemySpawner enemiesSpawner,
             StaticEatableObjectsRepository staticEatableObjectsRepository,
             StaticEatableObjectsUpdater staticEatableObjectsUpdater,
             PlayerController playerController,
             EnvironmentGenerator environmentGenerator,
-            EndGameDetector endGameDetector)
+            EndGameDetector endGameDetector, IAdTriggerActivator adTriggerActivator, IAdPreparingTimer adPreparingTimer)
         {
             UIController = uiController;
-            AdController = adController;
+            AdTrigger = adTrigger;
             BlackHoleBehaviour = blackHoleBehaviour;
             PlayerController = playerController;
             
@@ -51,6 +53,8 @@ namespace SourceCode.ScenesBootstraps.GameplayScene.Context
 
             EnvironmentGenerator = environmentGenerator;
             EndGameDetector = endGameDetector;
+            AdTriggerActivator = adTriggerActivator;
+            AdPreparingTimer = adPreparingTimer;
 
             SceneLoader = new SceneLoader();
         }
