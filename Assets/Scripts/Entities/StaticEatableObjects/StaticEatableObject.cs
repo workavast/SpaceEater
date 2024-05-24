@@ -24,5 +24,11 @@ namespace SourceCode.Entities.StaticEatableObjects
 
         private void RemoveStaticEatableObject()
             => OnRemoveStaticEatableObject?.Invoke(this);
+
+        public void ManualRemoveStaticEatableObject()
+        {
+            RemoveStaticEatableObject();
+            Destroy(gameObject);
+        }
     }
 }

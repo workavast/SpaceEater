@@ -1,4 +1,5 @@
 using SourceCode.Entities.StaticEatableObjects.Factory;
+using SourceCode.Entities.StaticEatableObjects.StaticEatableObjectsBySizeRemoving;
 using Zenject;
 
 namespace SourceCode.Entities.StaticEatableObjects
@@ -10,6 +11,7 @@ namespace SourceCode.Entities.StaticEatableObjects
             StaticEatableObjectsFactoryBinding();
             StaticEatableObjectsRepositoryBinding();
             StaticEatableObjectsUpdaterBinding();
+            StaticEatableObjectsBySizeRemoverBinding();
         }
 
         private void StaticEatableObjectsFactoryBinding()
@@ -26,6 +28,11 @@ namespace SourceCode.Entities.StaticEatableObjects
         private void StaticEatableObjectsUpdaterBinding()
         {
             Container.Bind<StaticEatableObjectsUpdater>().FromNew().AsSingle();
+        }
+
+        private void StaticEatableObjectsBySizeRemoverBinding()
+        {
+            Container.BindInterfacesAndSelfTo<StaticEatableObjectsBySizeRemover>().FromNew().AsSingle().NonLazy();
         }
     }
 }

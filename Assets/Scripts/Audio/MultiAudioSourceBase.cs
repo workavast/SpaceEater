@@ -26,7 +26,7 @@ namespace SourceCode.Audio
         
         private void OnDestroy()
         {
-            _eventBus.UnSubscribe(this);
+            _eventBus?.UnSubscribe(this);
             OnDestroyEvent();
         }
 

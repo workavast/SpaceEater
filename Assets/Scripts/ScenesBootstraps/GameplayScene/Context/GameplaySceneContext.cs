@@ -4,6 +4,7 @@ using SourceCode.Entities.Enemies;
 using SourceCode.Entities.Enemies.Spawning;
 using SourceCode.Entities.StaticEatableObjects;
 using SourceCode.Entities.StaticEatableObjects.EnvironmentGeneration;
+using SourceCode.Entities.StaticEatableObjects.StaticEatableObjectsBySizeRemoving;
 using SourceCode.ScenesBootstraps.GameplayScene.EndGameDetection;
 using SourceCode.Ui.UiSystem;
 
@@ -25,11 +26,11 @@ namespace SourceCode.ScenesBootstraps.GameplayScene.Context
         public readonly IAdTrigger AdTrigger;
         public readonly IAdTriggerActivator AdTriggerActivator;
         public readonly IAdPreparingTimer AdPreparingTimer;
+        public readonly IStaticEatableObjectsBySizeRemover StaticEatableObjectsBySizeRemover;
 
         private GameplaySceneContext(
             UI_Controller uiController,
             BlackHoleBehaviour blackHoleBehaviour, 
-            IAdTrigger adTrigger,
             EnemiesRepository enemiesRepository,
             EnemiesUpdater enemiesUpdater,
             IEnemySpawner enemiesSpawner,
@@ -37,7 +38,11 @@ namespace SourceCode.ScenesBootstraps.GameplayScene.Context
             StaticEatableObjectsUpdater staticEatableObjectsUpdater,
             PlayerController playerController,
             EnvironmentGenerator environmentGenerator,
-            EndGameDetector endGameDetector, IAdTriggerActivator adTriggerActivator, IAdPreparingTimer adPreparingTimer)
+            EndGameDetector endGameDetector, 
+            IAdTrigger adTrigger,
+            IAdTriggerActivator adTriggerActivator, 
+            IAdPreparingTimer adPreparingTimer,
+            IStaticEatableObjectsBySizeRemover staticEatableObjectsBySizeRemover)
         {
             UIController = uiController;
             AdTrigger = adTrigger;
@@ -55,6 +60,7 @@ namespace SourceCode.ScenesBootstraps.GameplayScene.Context
             EndGameDetector = endGameDetector;
             AdTriggerActivator = adTriggerActivator;
             AdPreparingTimer = adPreparingTimer;
+            StaticEatableObjectsBySizeRemover = staticEatableObjectsBySizeRemover;
 
             SceneLoader = new SceneLoader();
         }
