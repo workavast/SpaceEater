@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using SourceCode.Core;
 using SourceCode.Entities.StaticEatableObjects.Factory;
 using UnityEngine;
@@ -65,15 +67,35 @@ namespace SourceCode.Entities.StaticEatableObjects.EnvironmentGeneration
                 }
             }
             
-            ApplyGeneration(spawnTuples);
+            _factory.StartCoroutine(ApplyGeneration(spawnTuples));
         }
-
-        private void ApplyGeneration(List<(StaticEatableObjectType, Vector2, float, float)> spawnTuples)
+        
+        private IEnumerator ApplyGeneration(List<(StaticEatableObjectType, Vector2, float, float)> spawnTuples)
         {
-            foreach (var tuple in spawnTuples)
+            for (int i = 0; i < spawnTuples.Count; i++)
+            {
+                var tuple = spawnTuples[i];
                 _factory.Create(tuple.Item1, tuple.Item2, tuple.Item3, tuple.Item4);
+                
+                if (i % 50 == 0)
+                    yield return Task.Delay(60);
+            }
             
             Generated?.Invoke();
         }
+
+        // private async Task ApplyGeneration(List<(StaticEatableObjectType, Vector2, float, float)> spawnTuples)
+        // {
+        //     for (int i = 0; i < spawnTuples.Count; i++)
+        //     {
+        //         var tuple = spawnTuples[i];
+        //         _factory.Create(tuple.Item1, tuple.Item2, tuple.Item3, tuple.Item4);
+        //         
+        //         if (i % 50 == 0)
+        //             await Task.Delay(50);
+        //     }
+        //     
+        //     Generated?.Invoke();
+        // }
     }
 }

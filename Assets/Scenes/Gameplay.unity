@@ -1532,7 +1532,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55af0f3afb314237890db8bf7b92b09f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useEnemiesSpawner: 0
+  useEnemiesSpawner: 1
 --- !u!1 &1283268687
 GameObject:
   m_ObjectHideFlags: 0
@@ -1794,7 +1794,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5fa807f3bd34a5a8d32f272767435b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useAd: 0
+  useAd: 1
 --- !u!1 &1672540871
 GameObject:
   m_ObjectHideFlags: 0

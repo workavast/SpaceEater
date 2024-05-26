@@ -35,17 +35,17 @@ MonoBehaviour:
   - <StaticEatableObjectType>k__BackingField: 10
     <MinDistance>k__BackingField: 500
     <MaxDistance>k__BackingField: 4000
-    <MinCount>k__BackingField: 500
-    <MaxCount>k__BackingField: 750
+    <MinCount>k__BackingField: 400
+    <MaxCount>k__BackingField: 600
     <MinScale>k__BackingField: 10
     <MaxScale>k__BackingField: 20
     <MinAngle>k__BackingField: -45
     <MaxAngle>k__BackingField: 45
   - <StaticEatableObjectType>k__BackingField: 10
     <MinDistance>k__BackingField: 100
-    <MaxDistance>k__BackingField: 3500
-    <MinCount>k__BackingField: 750
-    <MaxCount>k__BackingField: 1000
+    <MaxDistance>k__BackingField: 3250
+    <MinCount>k__BackingField: 600
+    <MaxCount>k__BackingField: 700
     <MinScale>k__BackingField: 4
     <MaxScale>k__BackingField: 10
     <MinAngle>k__BackingField: -45
@@ -53,35 +53,35 @@ MonoBehaviour:
   - <StaticEatableObjectType>k__BackingField: 0
     <MinDistance>k__BackingField: 500
     <MaxDistance>k__BackingField: 2000
-    <MinCount>k__BackingField: 300
-    <MaxCount>k__BackingField: 400
+    <MinCount>k__BackingField: 200
+    <MaxCount>k__BackingField: 300
     <MinScale>k__BackingField: 5
     <MaxScale>k__BackingField: 7.5
     <MinAngle>k__BackingField: -180
     <MaxAngle>k__BackingField: 180
   - <StaticEatableObjectType>k__BackingField: 0
     <MinDistance>k__BackingField: 50
-    <MaxDistance>k__BackingField: 1800
-    <MinCount>k__BackingField: 600
-    <MaxCount>k__BackingField: 800
+    <MaxDistance>k__BackingField: 1500
+    <MinCount>k__BackingField: 400
+    <MaxCount>k__BackingField: 500
     <MinScale>k__BackingField: 2.5
     <MaxScale>k__BackingField: 5
     <MinAngle>k__BackingField: -180
     <MaxAngle>k__BackingField: 180
   - <StaticEatableObjectType>k__BackingField: 0
     <MinDistance>k__BackingField: 75
-    <MaxDistance>k__BackingField: 1000
-    <MinCount>k__BackingField: 1000
-    <MaxCount>k__BackingField: 1200
+    <MaxDistance>k__BackingField: 700
+    <MinCount>k__BackingField: 600
+    <MaxCount>k__BackingField: 800
     <MinScale>k__BackingField: 1.5
     <MaxScale>k__BackingField: 2.5
     <MinAngle>k__BackingField: -180
     <MaxAngle>k__BackingField: 180
   - <StaticEatableObjectType>k__BackingField: 0
     <MinDistance>k__BackingField: 4
-    <MaxDistance>k__BackingField: 350
-    <MinCount>k__BackingField: 500
-    <MaxCount>k__BackingField: 600
+    <MaxDistance>k__BackingField: 300
+    <MinCount>k__BackingField: 300
+    <MaxCount>k__BackingField: 400
     <MinScale>k__BackingField: 0.5
     <MaxScale>k__BackingField: 1.5
     <MinAngle>k__BackingField: -180

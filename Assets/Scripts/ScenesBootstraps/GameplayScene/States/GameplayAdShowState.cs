@@ -30,11 +30,13 @@ namespace SourceCode.ScenesBootstraps.GameplayScene.States
         {
             _uiController.SetScreen<GameplayAdShowScreen>();
             YandexGame.CloseFullAdEvent += OnAdShowed;
+            YandexGame.ErrorFullAdEvent += OnAdShowed;
         }
 
         public override void Exit()
         {
             YandexGame.CloseFullAdEvent -= OnAdShowed;
+            YandexGame.ErrorFullAdEvent -= OnAdShowed;
         }
 
         public override void ManualUpdate()

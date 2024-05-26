@@ -46,10 +46,12 @@ namespace SourceCode.ScenesBootstraps.GameplayScene.States
             _backgroundController.SetTarget(_blackHoleBehaviour);
             _enemiesSpawner.Init();
             
+            _environmentGenerator.Generated += () =>
+            {
+                _sceneLoader.Init();
+                Initialized?.Invoke();
+            };
             _environmentGenerator.Generate();
-            _sceneLoader.Init();
-
-            Initialized?.Invoke();
         }
 
         public override void Exit()

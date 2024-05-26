@@ -518,8 +518,6 @@ namespace YG
         public void CloseFullAd(string wasShown)
         {
             nowFullAd = false;
-            CloseFullscreenAd.Invoke();
-            CloseFullAdEvent?.Invoke();
             timerShowAd = 0;
 #if !UNITY_EDITOR
             if (wasShown == "true")
@@ -536,6 +534,8 @@ namespace YG
                 else Message("Реклама не была показана. Следующий запрос через: " + infoYG.fullscreenAdInterval);
             }
 #endif
+            CloseFullscreenAd.Invoke();
+            CloseFullAdEvent?.Invoke();
         }
         public void CloseFullAd() => CloseFullAd("true");
 

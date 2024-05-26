@@ -19,7 +19,6 @@ namespace SourceCode.Core.Ad
             _adPreparingTimer = new Timer(config.AdPreparingTime, 0, true);
             _adPreparingTimer.OnTimerEnd += () =>
             {
-                _adPreparingTimer.Reset(true);
                 AdPrepared?.Invoke();
             };
         }

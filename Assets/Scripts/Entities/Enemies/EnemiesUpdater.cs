@@ -1,4 +1,4 @@
-using System.Linq;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace SourceCode.Entities.Enemies
@@ -6,6 +6,7 @@ namespace SourceCode.Entities.Enemies
     public class EnemiesUpdater
     {
         private readonly EnemiesRepository _enemiesRepository;
+        private readonly List<Enemy> _buffer = new(8);
 
         public EnemiesUpdater(EnemiesRepository enemiesRepository)
         {
@@ -15,10 +16,10 @@ namespace SourceCode.Entities.Enemies
         public void ManualUpdate()
         {
             var time = Time.deltaTime;
-            var enemies = _enemiesRepository.Enemies.ToList();
-            
-            for (int i = 0; i < enemies.Count; i++)
-                enemies[i].ManualUpdate(time);
+            _buffer.Clear();
+            _buffer.AddRange(_enemiesRepository.Enemies);
+            for (int i = 0; i < _buffer.Count; i++)
+                _buffer[i].ManualUpdate(time);
         }
     }
 }
