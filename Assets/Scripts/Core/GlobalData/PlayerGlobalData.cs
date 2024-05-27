@@ -1,8 +1,8 @@
 using System;
 using SourceCode.Core.GlobalData.Localization;
 using SourceCode.Core.GlobalData.Volume;
+using SourceCode.Core.SavingAndLoading;
 using UnityEngine;
-using YG;
 
 namespace SourceCode.Core.GlobalData
 {
@@ -15,60 +15,42 @@ namespace SourceCode.Core.GlobalData
         public readonly LocalizationSettings LocalizationSettings = new();
      
         public bool IsFirstSession { get; private set; }
+
+        private ISaveAndLoader _saveAndLoader;
         
         public event Action OnInit;
 
         public void Initialize()
         {
-            YandexGame.GetDataEvent += GetData;
-            YandexGame.GetDataEvent += SubsAfterFirstLoad;
+            Debug.Log("-||- PlayerGlobalData initializing");
 
-            Debug.Log("-||- load start");
-            YandexGame.LoadProgress();
-        }
-
-        public static void ResetSaves()
-        {
-            Debug.Log("-||- Reset saves");
-            YandexGame.ResetSaveProgress();
-            YandexGame.SaveProgress();
+#if PLATFORM_WEBGL
+            _saveAndLoader = new YandexGamesSaveAndLoader();
+#endif
+            
+            LoadData();
+            SubsAfterFirstLoad();
         }
         
-        private void GetData()
+        public void ResetSaves() 
+            => _saveAndLoader.ResetSaves();
+        
+        private void LoadData()
         {
-            IsFirstSession = YandexGame.savesData.isFirstSession;
-            if (IsFirstSession)
-            {
-                YandexGame.savesData.isFirstSession = false;
-                
-                SaveData();
-                Debug.Log("-||- First get data");
-                //default values in settings is a default save values, so we can just return
-                return;
-            }
+            var save = _saveAndLoader.LoadData(out var isFirstSession);
             
-            Debug.Log("-||- Not first get data");
-            var save = YandexGame.savesData.playerGlobalDataSave;
+            IsFirstSession = isFirstSession;
             VolumeSettings.LoadData(save.volumeSettingsSave);
             LocalizationSettings.SetData(save.localizationSettingsSave);
         }
         
-        private void SaveData()
-        {
-            Debug.Log("-||- SaveData");
+        private void SaveData() 
+            => _saveAndLoader.Save(this);
 
-            var save = new PlayerGlobalDataSave(VolumeSettings, LocalizationSettings);
-            
-            YandexGame.savesData.playerGlobalDataSave = save;
-            YandexGame.SaveProgress();
-        }
-        
         private void SubsAfterFirstLoad()
         {
             Debug.Log("-||- SubsAfterFirstLoad");
             
-            YandexGame.GetDataEvent -= SubsAfterFirstLoad;
-
             ISettings[] settings =
             {
                 VolumeSettings, 
@@ -76,8 +58,6 @@ namespace SourceCode.Core.GlobalData
             };
             foreach (var setting in settings)
                 setting.OnChange += SaveData;
-            
-            YandexGame.GetDataEvent -= SubsAfterFirstLoad;
             
             OnInit?.Invoke();
         }
