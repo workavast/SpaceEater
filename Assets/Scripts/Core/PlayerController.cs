@@ -1,7 +1,7 @@
 using SourceCode.Entities.BlackHole;
 using UnityEngine;
 
-namespace SourceCode.ScenesBootstraps.GameplayScene
+namespace SourceCode.Core
 {
     public class PlayerController
     {

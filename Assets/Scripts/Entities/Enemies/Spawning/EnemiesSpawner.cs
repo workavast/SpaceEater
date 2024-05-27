@@ -1,7 +1,7 @@
 using SourceCode.Core;
-using SourceCode.Core.PlayZone;
 using SourceCode.Entities.BlackHole;
 using SourceCode.Entities.Enemies.Factory;
+using SourceCode.PlayZone;
 using UnityEngine;
 
 namespace SourceCode.Entities.Enemies.Spawning

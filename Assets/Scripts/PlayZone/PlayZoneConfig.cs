@@ -1,7 +1,7 @@
-using SourceCode.Core.Configs;
+using SourceCode.ConfigsCore;
 using UnityEngine;
 
-namespace SourceCode.Core.PlayZone
+namespace SourceCode.PlayZone
 {
     [CreateAssetMenu(fileName = nameof(PlayZoneConfig), menuName = "Configs/" + nameof(PlayZoneConfig))]
     public class PlayZoneConfig : ScriptableObject, ISingleConfig

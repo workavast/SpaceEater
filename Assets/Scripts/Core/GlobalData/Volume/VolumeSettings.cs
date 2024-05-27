@@ -14,12 +14,6 @@ namespace SourceCode.Core.GlobalData.Volume
             OstVolume = 0.5f;
             EffectsVolume = 0.5f;
         }
-            
-        public VolumeSettings(float ostVolume, float effectsVolume)
-        {
-            OstVolume  = ostVolume;
-            EffectsVolume = effectsVolume;
-        }
     
         public void ChangeOstVolume(float newVolume)
         {

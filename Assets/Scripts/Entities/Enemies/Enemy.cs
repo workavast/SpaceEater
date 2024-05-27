@@ -1,8 +1,8 @@
 using System;
 using SourceCode.Core;
-using SourceCode.Core.PlayZone;
-using SourceCode.Core.TriggerZone;
 using SourceCode.Entities.BlackHole;
+using SourceCode.PlayZone;
+using SourceCode.TriggerZone;
 using UnityEngine;
 using Zenject;
 

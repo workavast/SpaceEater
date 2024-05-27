@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using SourceCode.Core.Configs;
+using SourceCode.ConfigsCore;
 using UnityEngine;
 
 namespace SourceCode.Entities.StaticEatableObjects.Factory

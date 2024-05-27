@@ -1,4 +1,4 @@
-using SourceCode.Core.Configs;
+using SourceCode.ConfigsCore;
 using UnityEngine;
 
 namespace SourceCode.Entities.Enemies

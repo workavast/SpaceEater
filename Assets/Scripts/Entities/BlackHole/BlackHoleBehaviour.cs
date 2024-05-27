@@ -1,13 +1,14 @@
 using System;
 using System.Collections.Generic;
-using CameraMovement;
 using EventBusFramework;
 using SourceCode.Audio.AudioSources;
+using SourceCode.BackgroundControl;
+using SourceCode.CameraMovement;
 using SourceCode.Core;
-using SourceCode.Core.InputDetectors;
-using SourceCode.Core.PlayZone;
-using SourceCode.Core.TriggerZone;
+using SourceCode.InputDetection;
+using SourceCode.PlayZone;
 using SourceCode.ScenesBootstraps.GameplayScene.EndGameDetection;
+using SourceCode.TriggerZone;
 using UnityEngine;
 using Zenject;
 using Random = UnityEngine.Random;

@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace CameraMovement
+namespace SourceCode.CameraMovement
 {
     public interface ICameraTarget
     {

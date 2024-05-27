@@ -1,4 +1,4 @@
-namespace SourceCode.Core.Ad
+namespace SourceCode.Ad
 {
     public interface IAdTriggerActivator
     {

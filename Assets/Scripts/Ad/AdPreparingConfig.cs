@@ -1,7 +1,7 @@
-using SourceCode.Core.Configs;
+using SourceCode.ConfigsCore;
 using UnityEngine;
 
-namespace SourceCode.Core.Ad
+namespace SourceCode.Ad
 {
     [CreateAssetMenu(fileName = nameof(AdPreparingConfig), menuName = "Configs/" + nameof(AdPreparingConfig))]
     public class AdPreparingConfig : ScriptableObject, ISingleConfig

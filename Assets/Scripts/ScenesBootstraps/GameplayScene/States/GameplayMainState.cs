@@ -1,4 +1,5 @@
-using SourceCode.Core.Ad;
+using SourceCode.Ad;
+using SourceCode.Core;
 using SourceCode.Entities.Enemies;
 using SourceCode.Entities.StaticEatableObjects;
 using SourceCode.ScenesBootstraps.GameplayScene.Context;

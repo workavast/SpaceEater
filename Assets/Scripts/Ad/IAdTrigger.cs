@@ -1,6 +1,6 @@
 using System;
 
-namespace SourceCode.Core.Ad
+namespace SourceCode.Ad
 {
     public interface IAdTrigger
     {

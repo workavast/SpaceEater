@@ -1,4 +1,4 @@
-using SourceCode.Core.Ad;
+using SourceCode.Ad;
 using SourceCode.ScenesBootstraps.GameplayScene.EndGameDetection;
 using SourceCode.ScenesBootstraps.GameplayScene.States;
 using SourceCode.ScenesBootstraps.SceneFSM;

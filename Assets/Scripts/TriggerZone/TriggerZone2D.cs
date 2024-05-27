@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace SourceCode.Core.TriggerZone
+namespace SourceCode.TriggerZone
 {
     public class TriggerZone2D : MonoBehaviour
     {

@@ -1,7 +1,7 @@
 using UnityEngine;
 using Zenject;
 
-namespace SourceCode.Core.Ad
+namespace SourceCode.Ad
 {
     public class AdControllerInstaller : MonoInstaller
     {

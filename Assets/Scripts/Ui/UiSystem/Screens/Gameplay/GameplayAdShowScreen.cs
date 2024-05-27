@@ -1,5 +1,4 @@
-using SourceCode.Core.Ad;
-using SourceCode.ScenesBootstraps.GameplayScene;
+using SourceCode.Ad;
 using TMPro;
 using UnityEngine;
 using Zenject;

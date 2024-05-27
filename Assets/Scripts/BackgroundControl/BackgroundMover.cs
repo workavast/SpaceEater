@@ -1,4 +1,3 @@
-using SourceCode.Core;
 using UnityEngine;
 
 namespace SourceCode.BackgroundControl

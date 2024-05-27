@@ -2,7 +2,7 @@ using System;
 using SourceCode.Ui;
 using UnityEngine.SceneManagement;
 
-namespace SourceCode
+namespace SourceCode.Core
 {
     public class SceneLoader
     {

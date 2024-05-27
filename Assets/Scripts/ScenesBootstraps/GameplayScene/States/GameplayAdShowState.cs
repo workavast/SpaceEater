@@ -1,5 +1,5 @@
 using System;
-using SourceCode.Core.Ad;
+using SourceCode.Ad;
 using SourceCode.ScenesBootstraps.GameplayScene.Context;
 using SourceCode.ScenesBootstraps.SceneFSM;
 using SourceCode.Ui.UiSystem;

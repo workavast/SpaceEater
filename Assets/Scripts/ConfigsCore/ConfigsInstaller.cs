@@ -1,7 +1,7 @@
 using UnityEngine;
 using Zenject;
 
-namespace SourceCode.Core.Configs
+namespace SourceCode.ConfigsCore
 {
     public class ConfigsInstaller : MonoInstaller
     {

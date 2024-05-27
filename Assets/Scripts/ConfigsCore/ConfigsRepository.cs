@@ -1,10 +1,7 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using UnityEditor;
 using UnityEngine;
 
-namespace SourceCode.Core.Configs
+namespace SourceCode.ConfigsCore
 {
     [CreateAssetMenu(fileName = nameof(ConfigsRepository), menuName = "Configs/" + nameof(ConfigsRepository))]
     public class ConfigsRepository : ScriptableObject

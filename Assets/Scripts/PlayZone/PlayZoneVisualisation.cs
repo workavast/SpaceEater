@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace SourceCode.Core.PlayZone
+namespace SourceCode.PlayZone
 {
     public class PlayZoneVisualisation : MonoBehaviour
     {

@@ -2,7 +2,7 @@ using System;
 using CustomTimer;
 using YG;
 
-namespace SourceCode.Core.Ad
+namespace SourceCode.Ad
 {
     public class AdController : IAdTrigger, IAdTriggerActivator, IAdPreparingTimer
     {

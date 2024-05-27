@@ -1,5 +1,5 @@
 using DG.Tweening;
-using SourceCode.Core.Configs;
+using SourceCode.ConfigsCore;
 using UnityEngine;
 
 namespace SourceCode.Entities.BlackHole

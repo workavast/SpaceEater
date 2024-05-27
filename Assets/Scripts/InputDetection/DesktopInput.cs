@@ -1,7 +1,7 @@
 using Joystick_Pack.Scripts.Joysticks;
 using UnityEngine;
 
-namespace SourceCode.Core.InputDetectors
+namespace SourceCode.InputDetection
 {
     public class DesktopInput : IInputDetector
     {

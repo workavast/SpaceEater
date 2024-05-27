@@ -1,5 +1,4 @@
 using DG.Tweening;
-using SourceCode.Core;
 using UnityEngine;
 
 namespace SourceCode.BackgroundControl

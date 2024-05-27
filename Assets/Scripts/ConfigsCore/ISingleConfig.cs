@@ -1,4 +1,4 @@
-namespace SourceCode.Core.Configs
+namespace SourceCode.ConfigsCore
 {
     public interface ISingleConfig
     {

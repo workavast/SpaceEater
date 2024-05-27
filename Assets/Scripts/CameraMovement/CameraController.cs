@@ -1,5 +1,4 @@
 using System;
-using CameraMovement;
 using Cinemachine;
 using UnityEngine;
 using Zenject;
