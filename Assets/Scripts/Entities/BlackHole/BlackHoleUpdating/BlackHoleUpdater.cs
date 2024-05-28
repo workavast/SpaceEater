@@ -1,15 +1,14 @@
-using SourceCode.Entities.BlackHole;
 using UnityEngine;
 
-namespace SourceCode.Core
+namespace SourceCode.Entities.BlackHole.BlackHoleUpdating
 {
-    public class PlayerController
+    public class BlackHoleUpdater : IBlackHoleUpdater
     {
         private readonly BlackHoleBehaviour _blackHoleBehaviour;
 
         public bool PlayerIsAlive { get; private set; } = true;
 
-        public PlayerController(BlackHoleBehaviour blackHoleBehaviour)
+        public BlackHoleUpdater(BlackHoleBehaviour blackHoleBehaviour)
         {
             _blackHoleBehaviour = blackHoleBehaviour;
             blackHoleBehaviour.Consumed += () => PlayerIsAlive = false;

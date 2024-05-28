@@ -8,7 +8,7 @@ namespace SourceCode.InputDetection
         public override void InstallBindings()
         {
             var joystick = FindObjectOfType<Joystick>();
-            Container.BindInterfacesAndSelfTo<DesktopInput>().FromNew().AsSingle().WithArguments(joystick);
+            Container.BindInterfacesTo<WebInput>().FromNew().AsSingle().WithArguments(joystick);
         }
     }
 }

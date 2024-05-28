@@ -13,15 +13,21 @@ namespace SourceCode.ScenesBootstraps.GameplayScene
     {
         [SerializeField] private CameraController cameraController;
         [SerializeField] private BackgroundController backgroundController;
-
-        [Inject] private readonly GameplaySceneContext _gameplaySceneContext;
-
+        
+        private  GameplaySceneContext _gameplaySceneContext;
         private GameStateMachine _gameStateMachine;
         private GameStateSwitcher _gameStateSwitcher;
+        private GameplaySceneLoadDetector _gameplaySceneLoadDetector;
+
+        [Inject]
+        public void Construct(GameplaySceneContext gameplaySceneContext)
+        {
+            _gameplaySceneContext = gameplaySceneContext;
+        }
         
         private void Start()
         {
-            var gameplaySceneLoadDetector = new GameplaySceneLoadDetector(_gameplaySceneContext.SceneLoader);
+            _gameplaySceneLoadDetector = new GameplaySceneLoadDetector(_gameplaySceneContext.SceneLoader);
             
             var gameplayInitState = new GameplayInitState(_gameplaySceneContext, cameraController, backgroundController);
             var gameplayLoadingScreenFadeState = new GameplayLoadingScreenFadeState();
@@ -36,8 +42,8 @@ namespace SourceCode.ScenesBootstraps.GameplayScene
                 new GameplayEndState(_gameplaySceneContext)
             };
             _gameStateMachine = new GameStateMachine(states);
-            _gameStateSwitcher = new GameStateSwitcher(_gameStateMachine, _gameplaySceneContext.EndGameDetector,
-                gameplayInitState, gameplayLoadingScreenFadeState, gameplayAdShowState, _gameplaySceneContext.AdTrigger);
+            _gameStateSwitcher = new GameStateSwitcher(_gameStateMachine, gameplayInitState, 
+                gameplayLoadingScreenFadeState, gameplayAdShowState, _gameplaySceneContext);
 
             _gameStateMachine.Init(typeof(GameplayInitState));
         }

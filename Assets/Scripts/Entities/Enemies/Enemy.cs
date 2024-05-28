@@ -12,14 +12,20 @@ namespace SourceCode.Entities.Enemies
     {
         [SerializeField] private TriggerZone2D triggerZone;
         
-        [Inject] private readonly PlayZoneConfig _playZoneConfig;
-        [Inject] private readonly EnemiesConfig _config;
-        
+        private PlayZoneConfig _playZoneConfig;
+        private EnemiesConfig _config;
         private Vector2 _moveDirection;
 
         protected override EatableObjectConfigBase _configBase => _config;
 
-        public event Action<Enemy> OnRemove; 
+        public event Action<Enemy> OnRemove;
+
+        [Inject]
+        public void Construct(PlayZoneConfig playZoneConfig, EnemiesConfig config)
+        {
+            _playZoneConfig = playZoneConfig;
+            _config = config;
+        }
         
         protected override void Awake()
         {

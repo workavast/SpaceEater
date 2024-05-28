@@ -1,15 +1,22 @@
 using UnityEngine;
+using Zenject;
 
 namespace SourceCode.PlayZone
 {
     public class PlayZoneVisualisation : MonoBehaviour
     {
-        [SerializeField] private PlayZoneConfig config;
+        private PlayZoneConfig _config;
+
+        [Inject]
+        public void Construct(PlayZoneConfig config)
+        {
+            _config = config;
+        }
         
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.white;
-            Gizmos.DrawWireSphere(Vector2.zero, config.Radius);
+            Gizmos.DrawWireSphere(Vector2.zero, _config.Radius);
         }
     }
 }

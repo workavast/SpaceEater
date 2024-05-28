@@ -1,5 +1,5 @@
 using SourceCode.Ad;
-using SourceCode.Core;
+using SourceCode.Entities.BlackHole.BlackHoleUpdating;
 using SourceCode.Entities.Enemies;
 using SourceCode.Entities.StaticEatableObjects;
 using SourceCode.ScenesBootstraps.GameplayScene.Context;
@@ -12,9 +12,9 @@ namespace SourceCode.ScenesBootstraps.GameplayScene.States
     public class GameplayMainState : GameStateBase
     {
         private readonly UI_Controller _uiController;
-        private readonly EnemiesUpdater _enemiesUpdater;
-        private readonly StaticEatableObjectsUpdater _staticEatableObjectsUpdater;
-        private readonly PlayerController _playerController;
+        private readonly IEnemiesUpdater _enemiesUpdater;
+        private readonly IStaticEatableObjectsUpdater _staticEatableObjectsUpdater;
+        private readonly IBlackHoleUpdater _blackHoleUpdater;
         private readonly IAdTriggerActivator _adTriggerActivator;
         
         public GameplayMainState(GameplaySceneContext context)
@@ -22,7 +22,7 @@ namespace SourceCode.ScenesBootstraps.GameplayScene.States
             _uiController = context.UIController;
             _enemiesUpdater = context.EnemiesUpdater;
             _staticEatableObjectsUpdater = context.StaticEatableObjectsUpdater;
-            _playerController = context.PlayerController;
+            _blackHoleUpdater = context.BlackHoleUpdater;
             _adTriggerActivator = context.AdTriggerActivator;
         }
         
@@ -39,7 +39,7 @@ namespace SourceCode.ScenesBootstraps.GameplayScene.States
         {
             _enemiesUpdater.ManualUpdate();
             _staticEatableObjectsUpdater.ManualUpdate();
-            _playerController.ManualUpdate();
+            _blackHoleUpdater.ManualUpdate();
 
             _adTriggerActivator.TryActivateFullScreenAd();
         }

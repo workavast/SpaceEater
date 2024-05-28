@@ -1,5 +1,5 @@
 using SourceCode.Entities.BlackHole;
-using SourceCode.Entities.Enemies;
+using SourceCode.Entities.Enemies.Repository;
 using SourceCode.Entities.StaticEatableObjects;
 using SourceCode.ScenesBootstraps.GameplayScene.Context;
 using SourceCode.ScenesBootstraps.SceneFSM;
@@ -11,9 +11,9 @@ namespace SourceCode.ScenesBootstraps.GameplayScene.States
     public class GameplayPauseState : GameStateBase
     {
         private readonly UI_Controller _uiController;
-        private readonly StaticEatableObjectsRepository _staticEatableObjectsRepository;
+        private readonly IStaticEatableObjectsRepository _staticEatableObjectsRepository;
         private readonly BlackHoleBehaviour _blackHoleBehaviour;
-        private readonly EnemiesRepository _enemiesRepository;
+        private readonly IEnemiesRepository _enemiesRepository;
         
         public GameplayPauseState(GameplaySceneContext context)
         {

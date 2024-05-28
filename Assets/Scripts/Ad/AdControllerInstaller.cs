@@ -10,9 +10,9 @@ namespace SourceCode.Ad
         public override void InstallBindings()
         {
             if(useAd)
-                Container.BindInterfacesAndSelfTo<AdController>().FromNew().AsSingle();
+                Container.BindInterfacesTo<AdController>().FromNew().AsSingle();
             else
-                Container.BindInterfacesAndSelfTo<UnActiveAdController>().FromNew().AsSingle();
+                Container.BindInterfacesTo<UnActiveAdController>().FromNew().AsSingle();
         }
     }
 }

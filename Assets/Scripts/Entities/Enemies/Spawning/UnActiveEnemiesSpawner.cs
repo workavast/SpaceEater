@@ -1,6 +1,6 @@
 namespace SourceCode.Entities.Enemies.Spawning
 {
-    public class UnActiveEnemiesSpawner : IEnemySpawner
+    public class UnActiveEnemiesSpawner : IEnemiesSpawner
     {
         public void Init()
         {

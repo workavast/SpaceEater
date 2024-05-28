@@ -12,7 +12,6 @@ namespace SourceCode.ScenesBootstraps.GameplayScene.States
     public class GameplayAdShowState : GameStateBase
     {
         private readonly UI_Controller _uiController;
-        private readonly GameplayAdShowScreen _gameplayAdShowScreen;
         private readonly IAdPreparingTimer _adPreparingTimer;
         
         public event Action AdShowEnded;
@@ -21,7 +20,6 @@ namespace SourceCode.ScenesBootstraps.GameplayScene.States
         {
             _uiController = context.UIController;
             _adPreparingTimer = context.AdPreparingTimer;
-            _gameplayAdShowScreen = UI_ScreenRepository.GetScreen<GameplayAdShowScreen>();
 
             _adPreparingTimer.AdPrepared += YandexGame.FullscreenShow;
         }

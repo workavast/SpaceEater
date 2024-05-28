@@ -19,12 +19,11 @@ namespace SourceCode.Entities.BlackHole
     {
         [SerializeField] private TriggerZone2D triggerZone2D;
         
-        [Inject] private readonly PlayZoneConfig _playZoneConfig;
-        [Inject] private readonly BlackHoleConfig _config;
-        [Inject] private readonly IInputDetector _inputDetector;
-        [Inject] private readonly EventBus _eventBus;
-        
         private readonly List<EntityBase> _eatableObjects = new(2);
+        private PlayZoneConfig _playZoneConfig;
+        private BlackHoleConfig _config;
+        private IInputDetector _inputDetector;
+        private EventBus _eventBus;
         private BlackHoleSizeUpdater _blackHoleSizeUpdater;
         
         public float TargetSize { get; private set; }
@@ -36,6 +35,16 @@ namespace SourceCode.Entities.BlackHole
         /// return direction and distance of move
         /// </summary>
         public event Action<Vector2, float> OnMove;
+
+        [Inject]
+        public void Construct(PlayZoneConfig playZoneConfig, BlackHoleConfig config, IInputDetector inputDetector,
+            EventBus eventBus)
+        {
+            _playZoneConfig = playZoneConfig;
+            _config = config;
+            _inputDetector = inputDetector;
+            _eventBus = eventBus;
+        }
         
         protected override void Awake()
         {

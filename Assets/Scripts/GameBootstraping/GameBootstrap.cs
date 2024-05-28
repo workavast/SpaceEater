@@ -1,5 +1,4 @@
-﻿using SourceCode;
-using SourceCode.Core;
+﻿using SourceCode.Core;
 using UnityEngine;
 
 namespace Initializers

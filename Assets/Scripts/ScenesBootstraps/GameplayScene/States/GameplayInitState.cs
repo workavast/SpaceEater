@@ -16,10 +16,10 @@ namespace SourceCode.ScenesBootstraps.GameplayScene.States
         private readonly UI_Controller _uiController;
         private readonly CameraController _cameraController;
         private readonly BackgroundController _backgroundController;
-        private readonly EnvironmentGenerator _environmentGenerator;
+        private readonly IEnvironmentGenerator _environmentGenerator;
         private readonly BlackHoleBehaviour _blackHoleBehaviour;
         private readonly SceneLoader _sceneLoader;
-        private readonly IEnemySpawner _enemiesSpawner;
+        private readonly IEnemiesSpawner _enemiesSpawner;
 
         public event Action Initialized;
 

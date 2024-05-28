@@ -8,10 +8,15 @@ namespace SourceCode.CameraMovement
     [RequireComponent(typeof(CinemachineVirtualCamera))]
     public class CameraController : MonoBehaviour
     {
-        [Inject] private readonly CameraConfig _config;
-
+        private CameraConfig _config;
         private CameraLensSizeUpdater _cameraLensSizeUpdater;
         private CinemachineVirtualCamera _cinemachineVirtualCamera;
+
+        [Inject]
+        public void Construct(CameraConfig config)
+        {
+            _config = config;
+        }
         
         private void Awake()
         {

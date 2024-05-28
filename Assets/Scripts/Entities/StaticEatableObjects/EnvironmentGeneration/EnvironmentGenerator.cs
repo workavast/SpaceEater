@@ -9,7 +9,7 @@ using Random = UnityEngine.Random;
 
 namespace SourceCode.Entities.StaticEatableObjects.EnvironmentGeneration
 {
-    public class EnvironmentGenerator
+    public class EnvironmentGenerator : IEnvironmentGenerator
     {
         private readonly EnvironmentSpawnConfig _config;
         private readonly StaticEatableObjectsFactory _factory;
@@ -67,6 +67,7 @@ namespace SourceCode.Entities.StaticEatableObjects.EnvironmentGeneration
                 }
             }
             
+            //TODO: remove coroutine throw factory;
             _factory.StartCoroutine(ApplyGeneration(spawnTuples));
         }
         

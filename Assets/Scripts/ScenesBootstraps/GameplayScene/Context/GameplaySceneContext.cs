@@ -1,7 +1,9 @@
 using SourceCode.Ad;
 using SourceCode.Core;
 using SourceCode.Entities.BlackHole;
+using SourceCode.Entities.BlackHole.BlackHoleUpdating;
 using SourceCode.Entities.Enemies;
+using SourceCode.Entities.Enemies.Repository;
 using SourceCode.Entities.Enemies.Spawning;
 using SourceCode.Entities.StaticEatableObjects;
 using SourceCode.Entities.StaticEatableObjects.EnvironmentGeneration;
@@ -16,13 +18,13 @@ namespace SourceCode.ScenesBootstraps.GameplayScene.Context
         public readonly BlackHoleBehaviour BlackHoleBehaviour;
         public readonly SceneLoader SceneLoader;
         public readonly UI_Controller UIController;
-        public readonly PlayerController PlayerController;
-        public readonly StaticEatableObjectsRepository StaticEatableObjectsRepository;
-        public readonly StaticEatableObjectsUpdater StaticEatableObjectsUpdater;
-        public readonly EnemiesRepository EnemiesRepository;
-        public readonly IEnemySpawner EnemiesSpawner;
-        public readonly EnemiesUpdater EnemiesUpdater;
-        public readonly EnvironmentGenerator EnvironmentGenerator;
+        public readonly IBlackHoleUpdater BlackHoleUpdater;
+        public readonly IStaticEatableObjectsRepository StaticEatableObjectsRepository;
+        public readonly IStaticEatableObjectsUpdater StaticEatableObjectsUpdater;
+        public readonly IEnemiesRepository EnemiesRepository;
+        public readonly IEnemiesSpawner EnemiesSpawner;
+        public readonly IEnemiesUpdater EnemiesUpdater;
+        public readonly IEnvironmentGenerator EnvironmentGenerator;
         public readonly EndGameDetector EndGameDetector;
         public readonly IAdTrigger AdTrigger;
         public readonly IAdTriggerActivator AdTriggerActivator;
@@ -32,13 +34,13 @@ namespace SourceCode.ScenesBootstraps.GameplayScene.Context
         private GameplaySceneContext(
             UI_Controller uiController,
             BlackHoleBehaviour blackHoleBehaviour, 
-            EnemiesRepository enemiesRepository,
-            EnemiesUpdater enemiesUpdater,
-            IEnemySpawner enemiesSpawner,
-            StaticEatableObjectsRepository staticEatableObjectsRepository,
-            StaticEatableObjectsUpdater staticEatableObjectsUpdater,
-            PlayerController playerController,
-            EnvironmentGenerator environmentGenerator,
+            IEnemiesRepository enemiesRepository,
+            IEnemiesUpdater enemiesUpdater,
+            IEnemiesSpawner enemiesSpawner,
+            IStaticEatableObjectsRepository staticEatableObjectsRepository,
+            IStaticEatableObjectsUpdater staticEatableObjectsUpdater,
+            IBlackHoleUpdater blackHoleUpdater,
+            IEnvironmentGenerator environmentGenerator,
             EndGameDetector endGameDetector, 
             IAdTrigger adTrigger,
             IAdTriggerActivator adTriggerActivator, 
@@ -48,7 +50,7 @@ namespace SourceCode.ScenesBootstraps.GameplayScene.Context
             UIController = uiController;
             AdTrigger = adTrigger;
             BlackHoleBehaviour = blackHoleBehaviour;
-            PlayerController = playerController;
+            BlackHoleUpdater = blackHoleUpdater;
             
             StaticEatableObjectsRepository = staticEatableObjectsRepository;
             StaticEatableObjectsUpdater = staticEatableObjectsUpdater;

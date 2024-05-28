@@ -17,22 +17,23 @@ namespace SourceCode.Entities.StaticEatableObjects
         private void StaticEatableObjectsFactoryBinding()
         {
             var factory = FindObjectOfType<StaticEatableObjectsFactory>();
-            Container.BindInstance(factory).AsSingle();
+            //TODO: need remove AndSelfTo, but it required in environment generation
+            Container.BindInterfacesAndSelfTo(factory.GetType()).FromInstance(factory).AsSingle();
         }
 
         private void StaticEatableObjectsRepositoryBinding()
         {
-            Container.Bind<StaticEatableObjectsRepository>().FromNew().AsSingle();
+            Container.BindInterfacesTo<StaticEatableObjectsRepository>().FromNew().AsSingle();
         }
         
         private void StaticEatableObjectsUpdaterBinding()
         {
-            Container.Bind<StaticEatableObjectsUpdater>().FromNew().AsSingle();
+            Container.BindInterfacesTo<StaticEatableObjectsUpdater>().FromNew().AsSingle();
         }
 
         private void StaticEatableObjectsBySizeRemoverBinding()
         {
-            Container.BindInterfacesAndSelfTo<StaticEatableObjectsBySizeRemover>().FromNew().AsSingle().NonLazy();
+            Container.BindInterfacesTo<StaticEatableObjectsBySizeRemover>().FromNew().AsSingle().NonLazy();
         }
     }
 }

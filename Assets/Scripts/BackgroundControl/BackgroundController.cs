@@ -9,11 +9,16 @@ namespace SourceCode.BackgroundControl
         [SerializeField] private Transform background;
         [SerializeField] private Transform stars;
         
-        [Inject] private readonly BackgroundConfig _config;
-
+        private BackgroundConfig _config;
         private BackgroundMover _backgroundMover;
         private BackgroundSizeUpdater _backgroundSizeUpdater;
 
+        [Inject]
+        public void Construct(BackgroundConfig config)
+        {
+            _config = config;
+        }
+        
         private void Awake()
         {
             _backgroundMover = new BackgroundMover(transform, background, stars, _config);

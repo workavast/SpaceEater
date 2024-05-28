@@ -1,4 +1,5 @@
 using SourceCode.Ad;
+using SourceCode.ScenesBootstraps.GameplayScene.Context;
 using SourceCode.ScenesBootstraps.GameplayScene.EndGameDetection;
 using SourceCode.ScenesBootstraps.GameplayScene.States;
 using SourceCode.ScenesBootstraps.SceneFSM;
@@ -16,16 +17,16 @@ namespace SourceCode.ScenesBootstraps.GameplayScene
         private readonly GameplayAdShowState _gameplayAdShowState;
         private readonly IAdTrigger _adTrigger;
 
-        public GameStateSwitcher(GameStateMachine gameStateMachine, EndGameDetector endGameDetector, 
-            GameplayInitState gameplayInitState, GameplayLoadingScreenFadeState gameplayLoadingScreenFadeState, 
-            GameplayAdShowState gameplayAdShowState, IAdTrigger adTrigger)
+        public GameStateSwitcher(GameStateMachine gameStateMachine, GameplayInitState gameplayInitState, 
+            GameplayLoadingScreenFadeState gameplayLoadingScreenFadeState, GameplayAdShowState gameplayAdShowState, 
+            GameplaySceneContext context)
         {
             _gameStateMachine = gameStateMachine;
-            _endGameDetector = endGameDetector;
             _gameplayInitState = gameplayInitState;
             _gameplayLoadingScreenFadeState = gameplayLoadingScreenFadeState;
             _gameplayAdShowState = gameplayAdShowState;
-            _adTrigger = adTrigger;
+            _endGameDetector = context.EndGameDetector;
+            _adTrigger = context.AdTrigger;
 
             _gameplayInitState.Initialized += OnGameInitialized;
             _gameplayLoadingScreenFadeState.FadeEnded += OnGameFadeEnded;

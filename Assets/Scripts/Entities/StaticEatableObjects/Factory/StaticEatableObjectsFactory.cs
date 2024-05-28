@@ -8,13 +8,12 @@ using Random = UnityEngine.Random;
 
 namespace SourceCode.Entities.StaticEatableObjects.Factory
 {
-    public class StaticEatableObjectsFactory : MonoBehaviour
+    public class StaticEatableObjectsFactory : MonoBehaviour, IStaticEatableObjectsFactory
     {
-        private DiContainer _container;
-        
         private readonly Dictionary<StaticEatableObjectType, Transform> _parents = new();
         private readonly Dictionary<StaticEatableObjectType, List<StaticEatableObject>> _eatableObjects = new();
-
+        private DiContainer _container;
+        
         public event Action<StaticEatableObject> OnCreate;
 
         [Inject]

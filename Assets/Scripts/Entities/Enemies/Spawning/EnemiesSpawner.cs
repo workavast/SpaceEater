@@ -6,16 +6,16 @@ using UnityEngine;
 
 namespace SourceCode.Entities.Enemies.Spawning
 {
-    public class EnemiesSpawner : IEnemySpawner
+    public class EnemiesSpawner : IEnemiesSpawner
     {
         private readonly EnemiesSpawnConfig _config;
-        private readonly EnemiesFactory _factory;
+        private readonly IEnemyFactory _factory;
         private readonly BlackHoleBehaviour _blackHoleBehaviour;
         private readonly PlayZoneConfig _playZoneConfig;
         
         private float _blackHolePrevSize;
         
-        public EnemiesSpawner(EnemiesSpawnConfig config, EnemiesFactory factory, BlackHoleBehaviour blackHoleBehaviour, PlayZoneConfig playZoneConfig)
+        public EnemiesSpawner(EnemiesSpawnConfig config, IEnemyFactory factory, BlackHoleBehaviour blackHoleBehaviour, PlayZoneConfig playZoneConfig)
         {
             _config = config;
             _factory = factory;

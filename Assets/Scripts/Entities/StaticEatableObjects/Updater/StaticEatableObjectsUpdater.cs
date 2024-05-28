@@ -3,12 +3,12 @@ using UnityEngine;
 
 namespace SourceCode.Entities.StaticEatableObjects
 {
-    public class StaticEatableObjectsUpdater
+    public class StaticEatableObjectsUpdater : IStaticEatableObjectsUpdater
     {
-        private readonly StaticEatableObjectsRepository _staticEatableObjectsRepository;
+        private readonly IStaticEatableObjectsRepository _staticEatableObjectsRepository;
         private readonly List<StaticEatableObject> _buffer = new List<StaticEatableObject>(1024);
 
-        public StaticEatableObjectsUpdater(StaticEatableObjectsRepository staticEatableObjectsRepository)
+        public StaticEatableObjectsUpdater(IStaticEatableObjectsRepository staticEatableObjectsRepository)
         {
             _staticEatableObjectsRepository = staticEatableObjectsRepository;
         }

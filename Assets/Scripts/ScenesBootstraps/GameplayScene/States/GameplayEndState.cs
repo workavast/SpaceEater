@@ -1,4 +1,4 @@
-using SourceCode.Core;
+using SourceCode.Entities.BlackHole.BlackHoleUpdating;
 using SourceCode.Entities.Enemies;
 using SourceCode.Entities.StaticEatableObjects;
 using SourceCode.ScenesBootstraps.GameplayScene.Context;
@@ -12,35 +12,35 @@ namespace SourceCode.ScenesBootstraps.GameplayScene.States
     public class GameplayEndState : GameStateBase
     {
         private readonly UI_Controller _uiController;
-        private readonly EnemiesUpdater _enemiesUpdater;
-        private readonly StaticEatableObjectsUpdater _staticEatableObjectsUpdater;
-        private readonly PlayerController _playerController;
+        private readonly IEnemiesUpdater _enemiesUpdater;
+        private readonly IStaticEatableObjectsUpdater _staticEatableObjectsUpdater;
+        private readonly IBlackHoleUpdater _blackHoleUpdater;
 
         public GameplayEndState(GameplaySceneContext context)
         {
             _uiController = context.UIController;
             _enemiesUpdater = context.EnemiesUpdater;
             _staticEatableObjectsUpdater = context.StaticEatableObjectsUpdater;
-            _playerController = context.PlayerController;
+            _blackHoleUpdater = context.BlackHoleUpdater;
         }
         
         public GameplayEndState(
             UI_Controller uiController, 
-            EnemiesUpdater enemiesUpdater, 
-            StaticEatableObjectsUpdater staticEatableObjectsUpdater,
-            PlayerController playerController)
+            IEnemiesUpdater enemiesUpdater, 
+            IStaticEatableObjectsUpdater staticEatableObjectsUpdater,
+            IBlackHoleUpdater blackHoleUpdater)
         {
             _uiController = uiController;
             _enemiesUpdater = enemiesUpdater;
             _staticEatableObjectsUpdater = staticEatableObjectsUpdater;
-            _playerController = playerController;
+            _blackHoleUpdater = blackHoleUpdater;
         }
         
         public override void Enter()
         {
             _uiController.SetScreen<GameplayEndScreen>();
             var gameplayEndScreen = UI_ScreenRepository.GetScreen<GameplayEndScreen>();
-            gameplayEndScreen.SetGameSuccess(_playerController.PlayerIsAlive);
+            gameplayEndScreen.SetGameSuccess(_blackHoleUpdater.PlayerIsAlive);
             YandexGame.ReviewShow(YandexGame.auth);
         }
 

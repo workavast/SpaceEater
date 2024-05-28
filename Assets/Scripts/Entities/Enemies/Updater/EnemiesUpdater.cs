@@ -1,14 +1,15 @@
 using System.Collections.Generic;
+using SourceCode.Entities.Enemies.Repository;
 using UnityEngine;
 
 namespace SourceCode.Entities.Enemies
 {
-    public class EnemiesUpdater
+    public class EnemiesUpdater : IEnemiesUpdater
     {
-        private readonly EnemiesRepository _enemiesRepository;
+        private readonly IEnemiesRepository _enemiesRepository;
         private readonly List<Enemy> _buffer = new(8);
 
-        public EnemiesUpdater(EnemiesRepository enemiesRepository)
+        public EnemiesUpdater(IEnemiesRepository enemiesRepository)
         {
             _enemiesRepository = enemiesRepository;
         }

@@ -1,6 +1,6 @@
 namespace SourceCode.Entities.Enemies.Spawning
 {
-    public interface IEnemySpawner
+    public interface IEnemiesSpawner
     {
         public void Init();
     }

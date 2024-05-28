@@ -3,13 +3,13 @@ using UnityEngine;
 
 namespace SourceCode.InputDetection
 {
-    public class DesktopInput : IInputDetector
+    public class WebInput : IInputDetector
     {
         private readonly Joystick _joystick;
         
         public Vector2 MoveDirection { get; private set; }
 
-        private DesktopInput(Joystick joystick)
+        private WebInput(Joystick joystick)
         {
             _joystick = joystick;
         }

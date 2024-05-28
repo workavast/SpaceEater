@@ -6,10 +6,10 @@ namespace SourceCode.Ui.Elements
 {
     public class LocalizationButton : Button
     {
-        private LocalizationManager _localizationManager;
+        private ILocalizationManager _localizationManager;
 
         [Inject]
-        public void Construct(LocalizationManager localizationManager)
+        public void Construct(ILocalizationManager localizationManager)
         {
             _localizationManager = localizationManager;
         }

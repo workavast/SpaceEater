@@ -6,7 +6,7 @@ namespace SourceCode.Entities.StaticEatableObjects.EnvironmentGeneration
     {
         public override void InstallBindings()
         {
-            Container.Bind<EnvironmentGenerator>().FromNew().AsSingle();
+            Container.BindInterfacesTo<EnvironmentGenerator>().FromNew().AsSingle();
         }
     }
 }

@@ -8,15 +8,15 @@ namespace SourceCode.ScenesBootstraps.GameplayScene.EndGameDetection
     public class EndGameDetector
     {
         private readonly GameEndDetectorConfig _config;
-        private readonly StaticEatableObjectsRepository _staticEatableObjectsRepository;
+        private readonly IStaticEatableObjectsRepository _staticEatableObjectsRepository;
         
         private float _initialStaticObjectsSize;
         private float _currentStaticObjectsSize;
         
         public event Action GameEnded;
         
-        public EndGameDetector(GameEndDetectorConfig config, IEndGameDetectionTarget blackHoleBehaviour, EnvironmentGenerator environmentGenerator, 
-            StaticEatableObjectsRepository staticEatableObjectsRepository)
+        public EndGameDetector(GameEndDetectorConfig config, IEndGameDetectionTarget blackHoleBehaviour, IEnvironmentGenerator environmentGenerator, 
+            IStaticEatableObjectsRepository staticEatableObjectsRepository)
         {
             _config = config;
             

@@ -1,4 +1,5 @@
 using SourceCode.Entities.Enemies.Factory;
+using SourceCode.Entities.Enemies.Repository;
 using SourceCode.Entities.Enemies.Spawning;
 using UnityEngine;
 using Zenject;
@@ -20,25 +21,25 @@ namespace SourceCode.Entities.Enemies
         private void EnemiesFactoryBinding()
         {
             var factory = FindObjectOfType<EnemiesFactory>();
-            Container.BindInstance(factory).AsSingle();   
+            Container.BindInterfacesTo(factory.GetType()).FromInstance(factory).AsSingle();   
         }
 
         private void EnemiesRepositoryBinding()
         {
-            Container.BindInterfacesAndSelfTo<EnemiesRepository>().FromNew().AsSingle();
+            Container.BindInterfacesTo<EnemiesRepository>().FromNew().AsSingle();
         }
 
         private void EnemiesUpdaterBinding()
         {
-            Container.BindInterfacesAndSelfTo<EnemiesUpdater>().FromNew().AsSingle();
+            Container.BindInterfacesTo<EnemiesUpdater>().FromNew().AsSingle();
         }
         
         private void EnemiesSpawnerBinding()
         {
             if (useEnemiesSpawner)
-                Container.BindInterfacesAndSelfTo<EnemiesSpawner>().FromNew().AsSingle();
+                Container.BindInterfacesTo<EnemiesSpawner>().FromNew().AsSingle();
             else
-                Container.BindInterfacesAndSelfTo<UnActiveEnemiesSpawner>().FromNew().AsSingle();
+                Container.BindInterfacesTo<UnActiveEnemiesSpawner>().FromNew().AsSingle();
         }
     }
 }

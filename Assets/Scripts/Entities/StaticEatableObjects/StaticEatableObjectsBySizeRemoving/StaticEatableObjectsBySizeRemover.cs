@@ -6,12 +6,12 @@ namespace SourceCode.Entities.StaticEatableObjects.StaticEatableObjectsBySizeRem
     public class StaticEatableObjectsBySizeRemover : IStaticEatableObjectsBySizeRemover
     {
         private readonly StaticEatableObjectsBySizeRemoverConfig _config;
-        private readonly StaticEatableObjectsRepository _repository;
+        private readonly IStaticEatableObjectsRepository _repository;
         private readonly BlackHoleBehaviour _blackHoleBehaviour;
         private readonly List<StaticEatableObject> _objectsForDeleting = new(64);
         
         public StaticEatableObjectsBySizeRemover(StaticEatableObjectsBySizeRemoverConfig config, 
-            StaticEatableObjectsRepository repository, BlackHoleBehaviour blackHoleBehaviour)
+            IStaticEatableObjectsRepository repository, BlackHoleBehaviour blackHoleBehaviour)
         {
             _config = config;
             _repository = repository;

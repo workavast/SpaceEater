@@ -5,7 +5,7 @@ using UnityEngine.Localization.Settings;
 
 namespace SourceCode.Localization
 {
-    public class LocalizationManager
+    public class LocalizationManager : ILocalizationManager
     {
         private bool _active;
         

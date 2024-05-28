@@ -9,10 +9,6 @@ namespace SourceCode.Ad
         public event Action AdPreparedTimerUpdated;
         public event Action AdPrepared;
         public event Action AdActivationTriggered;
-
-        public UnActiveAdController()
-        {
-        }
         
         public void ManualUpdate(float deltaTime)
         {

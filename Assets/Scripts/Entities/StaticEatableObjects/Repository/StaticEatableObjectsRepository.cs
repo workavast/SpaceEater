@@ -5,16 +5,16 @@ using UnityEngine;
 
 namespace SourceCode.Entities.StaticEatableObjects
 {
-    public class StaticEatableObjectsRepository
+    public class StaticEatableObjectsRepository : IStaticEatableObjectsRepository
     {
-        private readonly StaticEatableObjectsFactory _factory;
+        private readonly IStaticEatableObjectsFactory _factory;
         private readonly List<StaticEatableObject> _eatableObjects = new();
 
         public IReadOnlyList<StaticEatableObject> EatableObjects => _eatableObjects;
 
         public event Action<StaticEatableObject> RemovedEatableObjects;
         
-        public StaticEatableObjectsRepository(StaticEatableObjectsFactory factory)
+        public StaticEatableObjectsRepository(IStaticEatableObjectsFactory factory)
         {
             _factory = factory;
             _factory.OnCreate += Add;
