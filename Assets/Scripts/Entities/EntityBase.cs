@@ -14,6 +14,7 @@ namespace SourceCode.Entities
         private Timer _eatTimer;
         private bool _isConsumed;
         
+        public bool IsAlive { get; private set; } = true;
         public float Size => transform.localScale.x * _colliderRadius;
         protected abstract EatableObjectConfigBase _configBase { get; }
         
@@ -37,6 +38,7 @@ namespace SourceCode.Entities
             _eatTimer = new Timer(_configBase.EatTime, 0, true);
             _eatTimer.OnTimerEnd += () =>
             {
+                IsAlive = false;
                 Consumed?.Invoke();
                 ConsumedWithSize?.Invoke(Size);
                 Destroy(gameObject);

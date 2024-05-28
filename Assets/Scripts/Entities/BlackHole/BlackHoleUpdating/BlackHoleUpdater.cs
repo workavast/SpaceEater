@@ -6,12 +6,11 @@ namespace SourceCode.Entities.BlackHole.BlackHoleUpdating
     {
         private readonly BlackHoleBehaviour _blackHoleBehaviour;
 
-        public bool PlayerIsAlive { get; private set; } = true;
+        public bool PlayerIsAlive => _blackHoleBehaviour.IsAlive;
 
         public BlackHoleUpdater(BlackHoleBehaviour blackHoleBehaviour)
         {
             _blackHoleBehaviour = blackHoleBehaviour;
-            blackHoleBehaviour.Consumed += () => PlayerIsAlive = false;
         }
 
         public void ManualUpdate()

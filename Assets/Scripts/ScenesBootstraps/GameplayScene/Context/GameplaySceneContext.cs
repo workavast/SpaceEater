@@ -8,6 +8,7 @@ using SourceCode.Entities.Enemies.Spawning;
 using SourceCode.Entities.StaticEatableObjects;
 using SourceCode.Entities.StaticEatableObjects.EnvironmentGeneration;
 using SourceCode.Entities.StaticEatableObjects.StaticEatableObjectsBySizeRemoving;
+using SourceCode.ReviewRequest;
 using SourceCode.ScenesBootstraps.GameplayScene.EndGameDetection;
 using SourceCode.Ui.UiSystem;
 
@@ -30,40 +31,44 @@ namespace SourceCode.ScenesBootstraps.GameplayScene.Context
         public readonly IAdTriggerActivator AdTriggerActivator;
         public readonly IAdPreparingTimer AdPreparingTimer;
         public readonly IStaticEatableObjectsBySizeRemover StaticEatableObjectsBySizeRemover;
+        public readonly IReviewRequester ReviewRequester;
 
         private GameplaySceneContext(
             UI_Controller uiController,
+            EndGameDetector endGameDetector, 
             BlackHoleBehaviour blackHoleBehaviour, 
+            IBlackHoleUpdater blackHoleUpdater,
             IEnemiesRepository enemiesRepository,
             IEnemiesUpdater enemiesUpdater,
             IEnemiesSpawner enemiesSpawner,
             IStaticEatableObjectsRepository staticEatableObjectsRepository,
             IStaticEatableObjectsUpdater staticEatableObjectsUpdater,
-            IBlackHoleUpdater blackHoleUpdater,
+            IStaticEatableObjectsBySizeRemover staticEatableObjectsBySizeRemover, 
             IEnvironmentGenerator environmentGenerator,
-            EndGameDetector endGameDetector, 
             IAdTrigger adTrigger,
             IAdTriggerActivator adTriggerActivator, 
             IAdPreparingTimer adPreparingTimer,
-            IStaticEatableObjectsBySizeRemover staticEatableObjectsBySizeRemover)
+            IReviewRequester reviewRequester)
         {
             UIController = uiController;
-            AdTrigger = adTrigger;
+            EndGameDetector = endGameDetector;
             BlackHoleBehaviour = blackHoleBehaviour;
             BlackHoleUpdater = blackHoleUpdater;
             
-            StaticEatableObjectsRepository = staticEatableObjectsRepository;
-            StaticEatableObjectsUpdater = staticEatableObjectsUpdater;
-
             EnemiesRepository = enemiesRepository;
             EnemiesUpdater = enemiesUpdater;
             EnemiesSpawner = enemiesSpawner;
 
+            StaticEatableObjectsRepository = staticEatableObjectsRepository;
+            StaticEatableObjectsUpdater = staticEatableObjectsUpdater;
+            StaticEatableObjectsBySizeRemover = staticEatableObjectsBySizeRemover;
             EnvironmentGenerator = environmentGenerator;
-            EndGameDetector = endGameDetector;
+
+            AdTrigger = adTrigger;
             AdTriggerActivator = adTriggerActivator;
             AdPreparingTimer = adPreparingTimer;
-            StaticEatableObjectsBySizeRemover = staticEatableObjectsBySizeRemover;
+            
+            ReviewRequester = reviewRequester;
 
             SceneLoader = new SceneLoader();
         }

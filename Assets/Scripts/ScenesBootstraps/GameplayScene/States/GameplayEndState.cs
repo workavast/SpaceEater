@@ -1,11 +1,11 @@
 using SourceCode.Entities.BlackHole.BlackHoleUpdating;
 using SourceCode.Entities.Enemies;
 using SourceCode.Entities.StaticEatableObjects;
+using SourceCode.ReviewRequest;
 using SourceCode.ScenesBootstraps.GameplayScene.Context;
 using SourceCode.ScenesBootstraps.SceneFSM;
 using SourceCode.Ui.UiSystem;
 using SourceCode.Ui.UiSystem.Screens.Gameplay;
-using YG;
 
 namespace SourceCode.ScenesBootstraps.GameplayScene.States
 {
@@ -15,6 +15,7 @@ namespace SourceCode.ScenesBootstraps.GameplayScene.States
         private readonly IEnemiesUpdater _enemiesUpdater;
         private readonly IStaticEatableObjectsUpdater _staticEatableObjectsUpdater;
         private readonly IBlackHoleUpdater _blackHoleUpdater;
+        private readonly IReviewRequester _reviewRequester;
 
         public GameplayEndState(GameplaySceneContext context)
         {
@@ -22,18 +23,7 @@ namespace SourceCode.ScenesBootstraps.GameplayScene.States
             _enemiesUpdater = context.EnemiesUpdater;
             _staticEatableObjectsUpdater = context.StaticEatableObjectsUpdater;
             _blackHoleUpdater = context.BlackHoleUpdater;
-        }
-        
-        public GameplayEndState(
-            UI_Controller uiController, 
-            IEnemiesUpdater enemiesUpdater, 
-            IStaticEatableObjectsUpdater staticEatableObjectsUpdater,
-            IBlackHoleUpdater blackHoleUpdater)
-        {
-            _uiController = uiController;
-            _enemiesUpdater = enemiesUpdater;
-            _staticEatableObjectsUpdater = staticEatableObjectsUpdater;
-            _blackHoleUpdater = blackHoleUpdater;
+            _reviewRequester = context.ReviewRequester;
         }
         
         public override void Enter()
@@ -41,7 +31,7 @@ namespace SourceCode.ScenesBootstraps.GameplayScene.States
             _uiController.SetScreen<GameplayEndScreen>();
             var gameplayEndScreen = UI_ScreenRepository.GetScreen<GameplayEndScreen>();
             gameplayEndScreen.SetGameSuccess(_blackHoleUpdater.PlayerIsAlive);
-            YandexGame.ReviewShow(YandexGame.auth);
+            _reviewRequester.SendRequest();
         }
 
         public override void Exit()
