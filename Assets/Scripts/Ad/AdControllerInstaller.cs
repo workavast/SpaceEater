@@ -1,3 +1,4 @@
+using SourceCode.Ad.Controllers;
 using UnityEngine;
 using Zenject;
 
@@ -10,7 +11,11 @@ namespace SourceCode.Ad
         public override void InstallBindings()
         {
             if(useAd)
-                Container.BindInterfacesTo<AdController>().FromNew().AsSingle();
+#if PLATFORM_WEBGL
+                Container.BindInterfacesTo<YandexGamesAdController>().FromNew().AsSingle();
+#elif PLATFORM_ANDROID
+                Container.BindInterfacesTo<AndroidAdController>().FromNew().AsSingle();
+#endif
             else
                 Container.BindInterfacesTo<UnActiveAdController>().FromNew().AsSingle();
         }

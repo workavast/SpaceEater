@@ -1,6 +1,6 @@
 using System;
 
-namespace SourceCode.Ad
+namespace SourceCode.Ad.Controllers
 {
     public class UnActiveAdController: IAdTrigger, IAdTriggerActivator, IAdPreparingTimer
     {
