@@ -16,6 +16,12 @@ namespace SourceCode.Core.GlobalData
             localizationSettingsSave = new();
         }
         
+        public PlayerGlobalDataSave(PlayerGlobalData playerGlobalData)
+        {
+            volumeSettingsSave = new VolumeSettingsSave(playerGlobalData.VolumeSettings);
+            localizationSettingsSave = new LocalizationSettingsSave(playerGlobalData.LocalizationSettings);
+        }
+        
         public PlayerGlobalDataSave(
             VolumeSettings volumeSettings,
             LocalizationSettings localizationSettings)

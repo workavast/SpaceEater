@@ -1,7 +1,7 @@
 using System;
 using SourceCode.Core.GlobalData.Localization;
 using SourceCode.Core.GlobalData.Volume;
-using SourceCode.Core.SavingAndLoading;
+using SourceCode.SavingAndLoading;
 using UnityEngine;
 
 namespace SourceCode.Core.GlobalData
@@ -26,6 +26,8 @@ namespace SourceCode.Core.GlobalData
 
 #if PLATFORM_WEBGL
             _saveAndLoader = new YandexGamesSaveAndLoader();
+#elif PLATFORM_ANDROID
+            _saveAndLoader = new AndroidSaveAndLoader();
 #endif
             
             LoadData();
@@ -33,11 +35,11 @@ namespace SourceCode.Core.GlobalData
         }
         
         public void ResetSaves() 
-            => _saveAndLoader.ResetSaves();
+            => _saveAndLoader.ResetSave();
         
         private void LoadData()
         {
-            var save = _saveAndLoader.LoadData(out var isFirstSession);
+            var save = _saveAndLoader.Load(out var isFirstSession);
             
             IsFirstSession = isFirstSession;
             VolumeSettings.LoadData(save.volumeSettingsSave);

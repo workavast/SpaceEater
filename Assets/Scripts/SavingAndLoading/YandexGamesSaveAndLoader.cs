@@ -2,11 +2,11 @@ using SourceCode.Core.GlobalData;
 using UnityEngine;
 using YG;
 
-namespace SourceCode.Core.SavingAndLoading
+namespace SourceCode.SavingAndLoading
 {
     public class YandexGamesSaveAndLoader : ISaveAndLoader
     {
-        public PlayerGlobalDataSave LoadData(out bool isFirstSession)
+        public PlayerGlobalDataSave Load(out bool isFirstSession)
         {
             isFirstSession = YandexGame.savesData.isFirstSession;
             if (isFirstSession)
@@ -25,14 +25,12 @@ namespace SourceCode.Core.SavingAndLoading
         public void Save(PlayerGlobalData playerGlobalData)
         {
             Debug.Log("-||- Save Data");
-
-            var save = new PlayerGlobalDataSave(playerGlobalData.VolumeSettings, playerGlobalData.LocalizationSettings);
-            
+            var save = new PlayerGlobalDataSave(playerGlobalData);
             YandexGame.savesData.playerGlobalDataSave = save;
             YandexGame.SaveProgress();
         }
         
-        public void ResetSaves()
+        public void ResetSave()
         {
             Debug.Log("-||- Reset saves");
             YandexGame.ResetSaveProgress();
