@@ -1,11 +1,11 @@
 using System;
 using SourceCode.Ad;
+using SourceCode.Ad.FullScreenAd;
 using SourceCode.ScenesBootstraps.GameplayScene.Context;
 using SourceCode.ScenesBootstraps.SceneFSM;
 using SourceCode.Ui.UiSystem;
 using SourceCode.Ui.UiSystem.Screens.Gameplay;
 using UnityEngine;
-using YG;
 
 namespace SourceCode.ScenesBootstraps.GameplayScene.States
 {
@@ -13,6 +13,7 @@ namespace SourceCode.ScenesBootstraps.GameplayScene.States
     {
         private readonly UI_Controller _uiController;
         private readonly IAdPreparingTimer _adPreparingTimer;
+        private readonly IFullScreenAd _fullScreenAd = new YandexGamesFullScreenAd();
         
         public event Action AdShowEnded;
         
@@ -21,20 +22,20 @@ namespace SourceCode.ScenesBootstraps.GameplayScene.States
             _uiController = context.UIController;
             _adPreparingTimer = context.AdPreparingTimer;
 
-            _adPreparingTimer.AdPrepared += YandexGame.FullscreenShow;
+            _adPreparingTimer.AdPrepared += _fullScreenAd.Show;
         }
         
         public override void Enter()
         {
             _uiController.SetScreen<GameplayAdShowScreen>();
-            YandexGame.CloseFullAdEvent += OnAdShowed;
-            YandexGame.ErrorFullAdEvent += OnAdShowed;
+            _fullScreenAd.Showed += OnAdShowed;
+            _fullScreenAd.OnError += OnAdShowed;
         }
 
         public override void Exit()
         {
-            YandexGame.CloseFullAdEvent -= OnAdShowed;
-            YandexGame.ErrorFullAdEvent -= OnAdShowed;
+            _fullScreenAd.Showed -= OnAdShowed;
+            _fullScreenAd.OnError -= OnAdShowed;
         }
 
         public override void ManualUpdate()
