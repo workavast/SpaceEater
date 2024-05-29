@@ -37,7 +37,9 @@ namespace SourceCode.ScenesBootstraps.GameplayScene.States
 
         public override void Enter()
         {
+#if PLATFORM_WEBGL
             YandexPluginGameReadyApiInitializer.Initialize();
+#endif
             FpsCap.Initialize();
             
             _uiController.Initialize();

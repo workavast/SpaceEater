@@ -21,7 +21,9 @@ namespace SourceCode.ScenesBootstraps.MainMenuScene
         
         private void Start()
         {
+#if PLATFORM_WEBGL
             YandexPluginGameReadyApiInitializer.Initialize();
+#endif
             FpsCap.Initialize();
             _uiController.Initialize();
             
