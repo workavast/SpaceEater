@@ -1,12 +1,19 @@
 using SourceCode.Core.GlobalData;
+using SourceCode.Localization;
+using SourceCode.Localization.LocalizationInitializing;
 using UnityEngine;
 using UnityEngine.Localization.Settings;
-using YG;
 
 namespace Initializers
 {
     public class LocalizationInitializer : InitializerBase
     {
+#if PLATFORM_WEBGL
+        private readonly ILocalizationInitializer _localizationInitializer = new YandexGamesLocalizationInitializer();
+#elif PLATFORM_ANDROID
+        private readonly ILocalizationInitializer _localizationInitializer = new AndroidLocalizationInitializer();
+#endif
+        
         public LocalizationInitializer(InitializerBase[] initializers = null) 
             : base(initializers) { }
 
@@ -19,26 +26,9 @@ namespace Initializers
 
             int langIndex = 1;
             if (PlayerGlobalData.Instance.IsFirstSession)
-            {
-                switch (YandexGame.lang)
-                {
-                    case "ru":
-                        langIndex = 1;
-                        break;
-                    case "tr":
-                        langIndex = 2;
-                        break;
-                    default://en
-                        langIndex = 0;
-                        break;
-                }
-                Debug.Log($"-||- InitLocalization isFirstSession: {YandexGame.lang} | {langIndex}");
-            }
+                langIndex = _localizationInitializer.GetLocalization();
             else
-            {
-                Debug.Log($"-||- InitLocalization not first: {YandexGame.lang} | {langIndex}");
                 langIndex = PlayerGlobalData.Instance.LocalizationSettings.LocalizationId;
-            }
             
             LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[langIndex];
             
