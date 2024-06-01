@@ -1,8 +1,8 @@
 using System;
 
-namespace SourceCode.Ad
+namespace SourceCode.Ad.Preparing
 {
-    public interface IAdTrigger
+    public interface IAdPreparedTrigger
     {
         public event Action AdActivationTriggered;
     }

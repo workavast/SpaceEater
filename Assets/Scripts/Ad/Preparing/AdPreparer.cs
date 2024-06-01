@@ -1,10 +1,12 @@
 using System;
 using CustomTimer;
+using SourceCode.Ad.AdControllers;
 
-namespace SourceCode.Ad.Controllers
+namespace SourceCode.Ad.Preparing
 {
-    public class AndroidAdController : IAdTrigger, IAdPreparingTimer, IAdTriggerActivator
+    public class AdPreparer : IAdPreparedTrigger, IAdPreparingTimer, IAdTriggerActivator
     {
+        private readonly IAdTimer _adTimer;
         private readonly Timer _adPreparingTimer;
 
         public int CurrentPreparingTimerValue { get; private set; }
@@ -13,13 +15,11 @@ namespace SourceCode.Ad.Controllers
         public event Action AdPrepared;
         public event Action AdPreparedTimerUpdated;
         
-        public AndroidAdController(AdPreparingConfig config)
+        public AdPreparer(AdPreparingConfig config, IAdTimer adTimer)
         {
+            _adTimer = adTimer;
             _adPreparingTimer = new Timer(config.AdPreparingTime, 0, true);
-            _adPreparingTimer.OnTimerEnd += () =>
-            {
-                AdPrepared?.Invoke();
-            };
+            _adPreparingTimer.OnTimerEnd += () => AdPrepared?.Invoke();
         }
         
         public void ManualUpdate(float deltaTime) 
@@ -38,8 +38,7 @@ namespace SourceCode.Ad.Controllers
         
         public void TryActivateFullScreenAd()
         {
-            //TODO: integrate yandex mobile ad
-            // if (YandexGame.timerShowAd < YandexGame.Instance.infoYG.fullscreenAdInterval)
+            if (!_adTimer.AdReady)
                 return;
             
             _adPreparingTimer.Reset();

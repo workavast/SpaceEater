@@ -42,6 +42,8 @@ namespace YandexMobileAds.Common
         public void Show()
         {
             Debug.Log(TAG + MethodBase.GetCurrentMethod().Name);
+            OnAdShown?.Invoke(default, default);
+            OnAdDismissed?.Invoke(default, default);
         }
 
         public void Destroy()

@@ -1,4 +1,5 @@
-using SourceCode.Ad;
+using SourceCode.Ad.AdControllers;
+using SourceCode.Ad.Preparing;
 using SourceCode.Core;
 using SourceCode.Entities.BlackHole;
 using SourceCode.Entities.BlackHole.BlackHoleUpdating;
@@ -27,11 +28,12 @@ namespace SourceCode.ScenesBootstraps.GameplayScene.Context
         public readonly IEnemiesUpdater EnemiesUpdater;
         public readonly IEnvironmentGenerator EnvironmentGenerator;
         public readonly EndGameDetector EndGameDetector;
-        public readonly IAdTrigger AdTrigger;
+        public readonly IAdPreparedTrigger AdPreparedTrigger;
         public readonly IAdTriggerActivator AdTriggerActivator;
         public readonly IAdPreparingTimer AdPreparingTimer;
         public readonly IStaticEatableObjectsBySizeRemover StaticEatableObjectsBySizeRemover;
         public readonly IReviewRequester ReviewRequester;
+        public readonly IFullScreenAd FullScreenAd;
 
         private GameplaySceneContext(
             UI_Controller uiController,
@@ -45,10 +47,11 @@ namespace SourceCode.ScenesBootstraps.GameplayScene.Context
             IStaticEatableObjectsUpdater staticEatableObjectsUpdater,
             IStaticEatableObjectsBySizeRemover staticEatableObjectsBySizeRemover, 
             IEnvironmentGenerator environmentGenerator,
-            IAdTrigger adTrigger,
+            IAdPreparedTrigger adPreparedTrigger,
             IAdTriggerActivator adTriggerActivator, 
             IAdPreparingTimer adPreparingTimer,
-            IReviewRequester reviewRequester)
+            IReviewRequester reviewRequester,
+            IFullScreenAd fullScreenAd)
         {
             UIController = uiController;
             EndGameDetector = endGameDetector;
@@ -64,11 +67,12 @@ namespace SourceCode.ScenesBootstraps.GameplayScene.Context
             StaticEatableObjectsBySizeRemover = staticEatableObjectsBySizeRemover;
             EnvironmentGenerator = environmentGenerator;
 
-            AdTrigger = adTrigger;
+            AdPreparedTrigger = adPreparedTrigger;
             AdTriggerActivator = adTriggerActivator;
             AdPreparingTimer = adPreparingTimer;
             
             ReviewRequester = reviewRequester;
+            FullScreenAd = fullScreenAd;
 
             SceneLoader = new SceneLoader();
         }

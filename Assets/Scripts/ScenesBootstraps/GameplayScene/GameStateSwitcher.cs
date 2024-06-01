@@ -1,4 +1,5 @@
 using SourceCode.Ad;
+using SourceCode.Ad.Preparing;
 using SourceCode.ScenesBootstraps.GameplayScene.Context;
 using SourceCode.ScenesBootstraps.GameplayScene.EndGameDetection;
 using SourceCode.ScenesBootstraps.GameplayScene.States;
@@ -15,7 +16,7 @@ namespace SourceCode.ScenesBootstraps.GameplayScene
         private readonly GameplayInitState _gameplayInitState;
         private readonly GameplayLoadingScreenFadeState _gameplayLoadingScreenFadeState;
         private readonly GameplayAdShowState _gameplayAdShowState;
-        private readonly IAdTrigger _adTrigger;
+        private readonly IAdPreparedTrigger _adPreparedTrigger;
 
         public GameStateSwitcher(GameStateMachine gameStateMachine, GameplayInitState gameplayInitState, 
             GameplayLoadingScreenFadeState gameplayLoadingScreenFadeState, GameplayAdShowState gameplayAdShowState, 
@@ -26,13 +27,13 @@ namespace SourceCode.ScenesBootstraps.GameplayScene
             _gameplayLoadingScreenFadeState = gameplayLoadingScreenFadeState;
             _gameplayAdShowState = gameplayAdShowState;
             _endGameDetector = context.EndGameDetector;
-            _adTrigger = context.AdTrigger;
+            _adPreparedTrigger = context.AdPreparedTrigger;
 
             _gameplayInitState.Initialized += OnGameInitialized;
             _gameplayLoadingScreenFadeState.FadeEnded += OnGameFadeEnded;
             _endGameDetector.GameEnded += OnGameEnded;
             _gameplayAdShowState.AdShowEnded += OnAdShowEnded;
-            _adTrigger.AdActivationTriggered += OnAdActivationTriggered;
+            _adPreparedTrigger.AdActivationTriggered += OnAdPreparedActivationTriggered;
             
             var gameplayMainScreen = UI_ScreenRepository.GetScreen<GameplayMainScreen>();
             gameplayMainScreen.PauseButtonClicked += OnGamePaused;
@@ -41,7 +42,7 @@ namespace SourceCode.ScenesBootstraps.GameplayScene
             gameplayMenuScreen.ContinueButtonClicked += OnGameContinued;
         }
 
-        private void OnAdActivationTriggered()
+        private void OnAdPreparedActivationTriggered()
         {
             if(_gameStateMachine.CurrentState != typeof(GameplayMainState))
                 return;

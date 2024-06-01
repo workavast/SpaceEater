@@ -1,8 +1,8 @@
 using System;
 
-namespace SourceCode.Ad.Controllers
+namespace SourceCode.Ad.Preparing
 {
-    public class UnActiveAdController: IAdTrigger, IAdTriggerActivator, IAdPreparingTimer
+    public class UnActiveAdPreparer : IAdPreparedTrigger, IAdTriggerActivator, IAdPreparingTimer
     {
         public int CurrentPreparingTimerValue { get; private set; }
         

@@ -1,6 +1,6 @@
 using System;
 
-namespace SourceCode.Ad
+namespace SourceCode.Ad.Preparing
 {
     public interface IAdPreparingTimer
     {

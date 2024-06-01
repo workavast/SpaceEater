@@ -1,4 +1,4 @@
-namespace SourceCode.Ad
+namespace SourceCode.Ad.Preparing
 {
     public interface IAdTriggerActivator
     {

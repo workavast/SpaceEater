@@ -1,6 +1,6 @@
 using System;
-using SourceCode.Ad;
-using SourceCode.Ad.FullScreenAd;
+using SourceCode.Ad.AdControllers;
+using SourceCode.Ad.Preparing;
 using SourceCode.ScenesBootstraps.GameplayScene.Context;
 using SourceCode.ScenesBootstraps.SceneFSM;
 using SourceCode.Ui.UiSystem;
@@ -13,7 +13,7 @@ namespace SourceCode.ScenesBootstraps.GameplayScene.States
     {
         private readonly UI_Controller _uiController;
         private readonly IAdPreparingTimer _adPreparingTimer;
-        private readonly IFullScreenAd _fullScreenAd = new YandexGamesFullScreenAd();
+        private readonly IFullScreenAd _fullScreenAd;
         
         public event Action AdShowEnded;
         
@@ -21,21 +21,22 @@ namespace SourceCode.ScenesBootstraps.GameplayScene.States
         {
             _uiController = context.UIController;
             _adPreparingTimer = context.AdPreparingTimer;
+            _fullScreenAd = context.FullScreenAd;
 
-            _adPreparingTimer.AdPrepared += _fullScreenAd.Show;
+            _adPreparingTimer.AdPrepared += _fullScreenAd.ShowFullScreen;
         }
         
         public override void Enter()
         {
             _uiController.SetScreen<GameplayAdShowScreen>();
-            _fullScreenAd.Showed += OnAdShowed;
-            _fullScreenAd.OnError += OnAdShowed;
+            _fullScreenAd.FullScreenAdShowed += OnAdFullScreenShowed;
+            _fullScreenAd.FullScreenShowAdFailed += OnAdFullScreenShowed;
         }
 
         public override void Exit()
         {
-            _fullScreenAd.Showed -= OnAdShowed;
-            _fullScreenAd.OnError -= OnAdShowed;
+            _fullScreenAd.FullScreenAdShowed -= OnAdFullScreenShowed;
+            _fullScreenAd.FullScreenShowAdFailed -= OnAdFullScreenShowed;
         }
 
         public override void ManualUpdate()
@@ -48,7 +49,7 @@ namespace SourceCode.ScenesBootstraps.GameplayScene.States
             
         }
 
-        private void OnAdShowed()
+        private void OnAdFullScreenShowed()
         {
             AdShowEnded?.Invoke();
         }
