@@ -32,6 +32,7 @@ namespace SourceCode.Ad.AdControllers.Android
                 return;
             }
 
+            _adLoadTimer.Reset(true);
             ShowInterstitial();
         }
 
@@ -45,6 +46,7 @@ namespace SourceCode.Ad.AdControllers.Android
         {
             OnAdLoaded -= Show;
             AdLoadFailed -= OnAdLoadFailed;
+            _adLoadTimer.Reset(true);
             ManualFailedShow();
         }
     }
