@@ -51,6 +51,10 @@ MonoBehaviour:
     m_Key: AdAfter
     m_Metadata:
       m_Items: []
+  - m_Id: 4009626179928064
+    m_Key: GameName
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

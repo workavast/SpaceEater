@@ -54,6 +54,12 @@ MonoBehaviour:
     m_Localized: "Reklam sonras\u0131"
     m_Metadata:
       m_Items: []
+  - m_Id: 4009626179928064
+    m_Localized: 'Uzay yiyen
+
+'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
