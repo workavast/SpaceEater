@@ -10,44 +10,52 @@ namespace SourceCode.Ad.AdControllers.Android
         public FullScreenAdEnv(AndroidFullScreenAdEnvConfig config)
         {
             _adLoadTimer = new Timer(config.AdLoadTimer, 0, true);
-            _adLoadTimer.OnTimerEnd += OnAdLoadTimerEnd;
+            _adLoadTimer.OnTimerEnd += ManualFailedShow;
             
-            RequestToLoadInterstitial();
+            OnAdShowSuccess += OnAdEnded;
+            OnAdShowFailed += OnAdEnded;
+            OnAdDismissed += OnAdEnded;
+            
+            OnAdLoaded += OnAdLoad;
+            AdLoadFailed -= OnAdLoadFailed;
+
+            TryLoadAd();
         }
 
-        public void ManualUpdate()
-        {
-            _adLoadTimer.Tick(Time.unscaledDeltaTime);
-        }
-        
+        public void ManualUpdate() 
+            => _adLoadTimer.Tick(Time.unscaledDeltaTime);
+
         public void Show()
         {
-            Debug.Log("---- Try show");
             if (!AdLoaded)
             {
-                Debug.Log("Interstitial is not ready yet");
+                Debug.LogWarning("Interstitial is not ready yet");
                 OnAdLoaded += Show;
-                AdLoadFailed += OnAdLoadFailed;
-                RequestToLoadInterstitial();
+                TryLoadAd();
                 return;
             }
 
-            _adLoadTimer.Reset(true);
+            OnAdLoaded -= Show;
             ShowInterstitial();
         }
 
-        private void OnAdLoadSuccess() 
-            => RequestToLoadInterstitial();
-        
-        private void OnAdLoadFailed()
-            => RequestToLoadInterstitial();
+        private void OnAdEnded() 
+            => TryLoadAd();
 
-        private void OnAdLoadTimerEnd()
+        private void TryLoadAd()
         {
-            OnAdLoaded -= Show;
-            AdLoadFailed -= OnAdLoadFailed;
-            _adLoadTimer.Reset(true);
-            ManualFailedShow();
+            _adLoadTimer.Reset();
+            RequestToLoadInterstitial();
+        }
+        
+        private void OnAdLoad() 
+            => _adLoadTimer.SetPause();
+
+        private void OnAdLoadFailed()
+        {
+            if (_adLoadTimer.TimerIsEnd)
+                return;
+            RequestToLoadInterstitial();
         }
     }
 }

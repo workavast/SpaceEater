@@ -23,6 +23,7 @@ namespace SourceCode.Ad.AdControllers.Android
         //ad events
         public event Action OnAdShowSuccess;
         public event Action OnAdShowFailed;
+        public event Action OnAdDismissed;
 
         protected FullScreenAd()
         {
@@ -105,6 +106,7 @@ namespace SourceCode.Ad.AdControllers.Android
             _interstitial.Destroy();
             _interstitial = null;
             AdLoaded = false;
+            OnAdDismissed?.Invoke();
         }
 
         private void HandleAdFailedToShow(object sender, AdFailureEventArgs args)
