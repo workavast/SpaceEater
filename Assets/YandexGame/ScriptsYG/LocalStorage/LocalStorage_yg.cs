@@ -6,18 +6,20 @@ namespace YG
 {
     public partial class YandexGame
     {
+#if PLATFORM_WEBGL
         [DllImport("__Internal")]
         private static extern void SaveToLocalStorage(string key, string value);
 
         [DllImport("__Internal")]
         private static extern string LoadFromLocalStorage(string key);
 
-
         [DllImport("__Internal")]
         private static extern int HasKeyInLocalStorage(string key);
+#endif
 
         public static bool HasKey(string key)
         {
+#if PLATFORM_WEBGL
             try
             {
                 return HasKeyInLocalStorage(key) == 1;
@@ -27,10 +29,19 @@ namespace YG
                 Debug.LogError(e.Message);
                 return false;
             }
+#endif
+            return false;
         }
 
+#if PLATFORM_WEBGL
         [DllImport("__Internal")]
         private static extern void RemoveFromLocalStorage(string key);
-        public static void RemoveLocalSaves() => RemoveFromLocalStorage("savesData");
+#endif
+        public static void RemoveLocalSaves()
+        {
+#if PLATFORM_WEBGL
+            RemoveFromLocalStorage("savesData");
+#endif
+        }
     }
 }

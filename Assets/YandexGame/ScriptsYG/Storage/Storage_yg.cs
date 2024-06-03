@@ -16,14 +16,14 @@ namespace YG
         private enum DataState { Exist, NotExist, Broken };
         private static bool isResetProgress;
 
-
+#if PLATFORM_WEBGL
         [DllImport("__Internal")]
         private static extern string InitCloudStorage_js();
-
+#endif
         [InitBaisYG]
         public static void InitCloudStorage()
         {
-#if !UNITY_EDITOR
+#if PLATFORM_WEBGL
             Debug.Log("Init Storage inGame");
             Instance.SetLoadSaves(InitCloudStorage_js());
 #else
@@ -95,7 +95,7 @@ namespace YG
         public static void SaveLocal()
         {
             Message("Save Local");
-#if !UNITY_EDITOR
+#if PLATFORM_WEBGL
 #if YG_NEWTONSOFT_FOR_SAVES
             SaveToLocalStorage("savesData", JsonConvert.SerializeObject(savesData));
 #else
@@ -112,10 +112,12 @@ namespace YG
                 ResetSaveProgress();
             else
             {
+#if PLATFORM_WEBGL
 #if YG_NEWTONSOFT_FOR_SAVES
                 savesData = JsonConvert.DeserializeObject<SavesYG>(LoadFromLocalStorage("savesData"));
-#else
+#elif UNITY_EDITOR
                 savesData = JsonUtility.FromJson<SavesYG>(LoadFromLocalStorage("savesData"));
+#endif
 #endif
             }
         }
@@ -141,7 +143,7 @@ namespace YG
         public void _SaveProgress()
         {
             savesData.idSave++;
-#if !UNITY_EDITOR
+#if PLATFORM_WEBGL
                 if (!infoYG.saveCloud || (infoYG.saveCloud && infoYG.localSaveSync))
                 {
                     SaveLocal();
@@ -152,7 +154,7 @@ namespace YG
                     timerSaveCloud = 0;
                     SaveCloud();
                 }
-#else
+#elif UNITY_EDITOR
             SaveEditor();
 #endif
         }
@@ -160,11 +162,11 @@ namespace YG
 
         public void _LoadProgress()
         {
-#if !UNITY_EDITOR
+#if PLATFORM_WEBGL
             if (!infoYG.saveCloud)
                 LoadLocal();
             else LoadCloud();
-#else
+#elif UNITY_EDITOR
             LoadEditor();
 #endif
             if (savesData.idSave > 0)
@@ -225,10 +227,12 @@ namespace YG
             {
                 try
                 {
+#if PLATFORM_WEBGL
 #if YG_NEWTONSOFT_FOR_SAVES
                     localData = JsonConvert.DeserializeObject<SavesYG>(LoadFromLocalStorage("savesData"));
 #else
                     localData = JsonUtility.FromJson<SavesYG>(LoadFromLocalStorage("savesData"));
+#endif
 #endif
                 }
                 catch (Exception e)
@@ -280,10 +284,12 @@ namespace YG
                 Message("Cloud Saves - " + cloudDataState);
                 Message("Local Saves - Broken! Data Recovering...");
                 ResetSaveProgress();
+#if PLATFORM_WEBGL
 #if YG_NEWTONSOFT_FOR_SAVES
                 savesData = JsonConvert.DeserializeObject<SavesYG>(LoadFromLocalStorage("savesData"));
 #else
                 savesData = JsonUtility.FromJson<SavesYG>(LoadFromLocalStorage("savesData"));
+#endif
 #endif
                 Message("Local Saves Partially Restored!");
             }
@@ -294,28 +300,31 @@ namespace YG
             }
         }
 
+#if PLATFORM_WEBGL
         [DllImport("__Internal")]
         private static extern void SaveYG(string jsonData, bool flush);
-
+#endif
+        
         public static void SaveCloud()
         {
             Message("Save Cloud");
 #if YG_NEWTONSOFT_FOR_SAVES
             SaveYG(JsonConvert.SerializeObject(savesData), Instance.infoYG.flush);
-#else
+#elif PLATFORM_WEBGL
             SaveYG(JsonUtility.ToJson(savesData), Instance.infoYG.flush);
 #endif
         }
 
+#if PLATFORM_WEBGL
         [DllImport("__Internal")]
         private static extern string LoadYG(bool sendback);
-
+#endif
         public static void LoadCloud()
         {
             Message("Load Cloud");
-#if !UNITY_EDITOR
+#if PLATFORM_WEBGL
             LoadYG(true);
-#else
+#elif UNITY_EDITOR
             LoadEditor();
 #endif
         }

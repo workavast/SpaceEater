@@ -15,14 +15,14 @@ namespace YG
         private static bool isInitPayments;
 
         // Initialization
-
+#if PLATFORM_WEBGL
         [DllImport("__Internal")]
         private static extern string InitPayments_js();
-
+#endif
         [InitYG]
         public static void InitPayments()
         {
-#if !UNITY_EDITOR
+#if PLATFORM_WEBGL
             Debug.Log("Init Payments inGame");
             Instance.PaymentsEntries(InitPayments_js());
 #else
@@ -40,14 +40,14 @@ namespace YG
 
 
         // Sending messages
-
+#if PLATFORM_WEBGL
         [DllImport("__Internal")]
         private static extern void GetPayments_js();
-
+#endif
         public static void GetPayments()
         {
             Message("Get Payments");
-#if !UNITY_EDITOR
+#if PLATFORM_WEBGL
             GetPayments_js();
 #else
             Instance.PaymentsEntries("");
@@ -70,34 +70,38 @@ namespace YG
             return null;
         }
 
-
+#if PLATFORM_WEBGL
         [DllImport("__Internal")]
         private static extern void ConsumePurchase_js(string id);
-
+#endif
+        
         public static void ConsumePurchaseByID(string id)
         {
-#if !UNITY_EDITOR
+#if PLATFORM_WEBGL
             ConsumePurchase_js(id);
 #endif
         }
 
+#if PLATFORM_WEBGL
         [DllImport("__Internal")]
         private static extern void ConsumePurchase_js();
-
+#endif
+        
         public static void ConsumePurchases()
         {
-#if !UNITY_EDITOR
+#if PLATFORM_WEBGL
             ConsumePurchase_js();
 #endif
         }
 
-
+#if PLATFORM_WEBGL
         [DllImport("__Internal")]
         private static extern void BuyPayments_js(string id);
-
+#endif
+        
         public static void BuyPayments(string id)
         {
-#if !UNITY_EDITOR
+#if PLATFORM_WEBGL
             BuyPayments_js(id);
 #else
             Message($"Buy Payment. ID: {id}");
@@ -113,7 +117,7 @@ namespace YG
 
         public void PaymentsEntries(string data)
         {
-#if !UNITY_EDITOR
+#if PLATFORM_WEBGL
             if (data == "none")
                 return;
 

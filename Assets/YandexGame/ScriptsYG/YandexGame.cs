@@ -103,9 +103,10 @@ namespace YG
             }
         }
 
+#if PLATFORM_WEBGL
         [DllImport("__Internal")]
         private static extern void InitGame_js();
-
+#endif
         private void Start()
         {
             if (infoYG.AdWhenLoadingScene)
@@ -115,7 +116,7 @@ namespace YG
             {
                 if (infoYG.leaderboardEnable)
                 {
-#if !UNITY_EDITOR
+#if PLATFORM_WEBGL
                     Debug.Log("Init Leaderbords inGame");
                     _InitLeaderboard();
 #else
@@ -126,7 +127,7 @@ namespace YG
                 CallStartYG();
                 _SDKEnabled = true;
                 GetDataInvoke();
-#if !UNITY_EDITOR
+#if PLATFORM_WEBGL
                 InitGame_js();
 #endif
             }
@@ -196,12 +197,13 @@ namespace YG
         // Sending messages
 
         #region Init Leaderboard
+#if PLATFORM_WEBGL
         [DllImport("__Internal")]
         private static extern void InitLeaderboard();
-
+#endif
         public void _InitLeaderboard()
         {
-#if !UNITY_EDITOR
+#if PLATFORM_WEBGL
             InitLeaderboard();
 #endif
 #if UNITY_EDITOR
@@ -212,18 +214,19 @@ namespace YG
         #endregion Init Leaderboard
 
         #region Fullscren Ad Show
+#if PLATFORM_WEBGL
         [DllImport("__Internal")]
         private static extern void FullAdShow();
-
+#endif
         public void _FullscreenShow()
         {
             if (!nowAdsShow && timerShowAd >= infoYG.fullscreenAdInterval)
             {
                 timerShowAd = 0;
                 onAdNotification?.Invoke();
-#if !UNITY_EDITOR
+#if PLATFORM_WEBGL
                 FullAdShow();
-#else
+#elif UNITY_EDITOR
                 Message("Fullscren Ad");
                 FullAdInEditor();
 #endif
@@ -248,9 +251,10 @@ namespace YG
         #endregion Fullscren Ad Show
 
         #region Rewarded Video Show
+#if PLATFORM_WEBGL
         [DllImport("__Internal")]
         private static extern void RewardedShow(int id);
-
+#endif
         public void _RewardedShow(int id)
         {
             Message("Rewarded Ad Show");
@@ -258,9 +262,9 @@ namespace YG
             if (!nowFullAd && !nowVideoAd)
             {
                 onAdNotification?.Invoke();
-#if !UNITY_EDITOR
+#if PLATFORM_WEBGL
                 RewardedShow(id);
-#else
+#elif UNITY_EDITOR
                 AdRewardInEditor(id);
 #endif
             }
@@ -280,11 +284,13 @@ namespace YG
         #endregion Rewarded Video Show
 
         #region URL
+#if PLATFORM_WEBGL
         [DllImport("__Internal")]
         private static extern void OpenURL(string url);
-
+#endif
         public static void OnURL(string url)
         {
+#if PLATFORM_WEBGL
             try
             {
                 OpenURL(url);
@@ -294,13 +300,14 @@ namespace YG
                 Debug.LogError("The first method of following the link failed! Error:\n" + error + "\nInstead of the first method, let's try to call the second method 'Application.OpenURL'");
                 Application.OpenURL(url);
             }
+#endif
         }
 
         public void _OnURL_Yandex_DefineDomain(string url)
         {
             url = "https://yandex." + EnvironmentData.domain + "/games/" + url;
             Message("URL Transition (yandexGames.DefineDomain) url: " + url);
-#if !UNITY_EDITOR
+#if PLATFORM_WEBGL
             if (EnvironmentData.domain != null && EnvironmentData.domain != "")
             {
                 OnURL(url);
@@ -314,7 +321,7 @@ namespace YG
         public void _OnAnyURL(string url)
         {
             Message("Any URL Transition. url: " + url);
-#if !UNITY_EDITOR
+#if PLATFORM_WEBGL
             OnURL(url);
 #else
             Application.OpenURL(url);
@@ -323,9 +330,10 @@ namespace YG
         #endregion URL
 
         #region Leaderboard
+#if PLATFORM_WEBGL
         [DllImport("__Internal")]
         private static extern void SetLeaderboardScores(string nameLB, int score);
-
+#endif
         public static void NewLeaderboardScores(string nameLB, int score)
         {
             if (Instance.infoYG.leaderboardEnable && auth)
@@ -334,7 +342,7 @@ namespace YG
                     playerName == "anonymous")
                     return;
 
-#if !UNITY_EDITOR
+#if PLATFORM_WEBGL
                 Message("New Liderboard Record: " + score);
                 SetLeaderboardScores(nameLB, score);
 #else
@@ -379,9 +387,10 @@ namespace YG
             }
         }
 
+#if PLATFORM_WEBGL
         [DllImport("__Internal")]
         private static extern void GetLeaderboardScores(string nameLB, int maxQuantityPlayers, int quantityTop, int quantityAround, string photoSizeLB, bool auth);
-
+#endif
         public static void GetLeaderboard(string nameLB, int maxQuantityPlayers, int quantityTop, int quantityAround, string photoSizeLB)
         {
             void NoData()
@@ -402,7 +411,7 @@ namespace YG
                 onGetLeaderboard?.Invoke(lb);
             }
 
-#if !UNITY_EDITOR
+#if PLATFORM_WEBGL
             if (Instance.infoYG.leaderboardEnable)
             {
                 Message("Get Leaderboard");
@@ -412,7 +421,7 @@ namespace YG
             {
                 NoData();
             }
-#else
+#elif UNITY_EDITOR
             Message("Get Leaderboard - " + nameLB);
 
             if (Instance.infoYG.leaderboardEnable)
@@ -442,13 +451,14 @@ namespace YG
         #endregion Leaderboard
 
         #region Review Show
+#if PLATFORM_WEBGL
         [DllImport("__Internal")]
         private static extern void ReviewInternal();
-
+#endif
         public void _ReviewShow(bool authDialog)
         {
             Message("Review");
-#if !UNITY_EDITOR
+#if PLATFORM_WEBGL
             if (authDialog)
             {
                 if (_auth) ReviewInternal();
@@ -467,12 +477,13 @@ namespace YG
         #endregion Review Show
 
         #region Prompt
+#if PLATFORM_WEBGL
         [DllImport("__Internal")]
         private static extern void PromptShowInternal();
-
+#endif
         public static void PromptShow()
         {
-#if !UNITY_EDITOR
+#if PLATFORM_WEBGL
             if (EnvironmentData.promptCanShow)
                 PromptShowInternal();
 #else
@@ -487,14 +498,15 @@ namespace YG
         #endregion Prompt
 
         #region Sticky Ad
+#if PLATFORM_WEBGL
         [DllImport("__Internal")]
         private static extern void StickyAdActivityInternal(bool activity);
-
+#endif
         public static void StickyAdActivity(bool activity)
         {
             if (activity) Message("Sticky Ad Show");
             else Message("Sticky Ad Hide");
-#if !UNITY_EDITOR
+#if PLATFORM_WEBGL
             StickyAdActivityInternal(activity);
 #endif
         }
@@ -519,7 +531,7 @@ namespace YG
         {
             nowFullAd = false;
             timerShowAd = 0;
-#if !UNITY_EDITOR
+#if PLATFORM_WEBGL
             if (wasShown == "true")
             {
                 Message("Closed Ad Interstitial");
@@ -720,7 +732,7 @@ namespace YG
 
         #region Update
         public static float timerShowAd;
-#if !UNITY_EDITOR
+#if PLATFORM_WEBGL
         static float timerSaveCloud = 62;
 #endif
 
@@ -730,7 +742,7 @@ namespace YG
             timerShowAd += Time.unscaledDeltaTime;
 
             // Таймер для облачных сохранений
-#if !UNITY_EDITOR
+#if PLATFORM_WEBGL
             if (infoYG.saveCloud)
                 timerSaveCloud += Time.unscaledDeltaTime;
 #endif

@@ -8,33 +8,35 @@ namespace YG
         public static JsonEnvironmentData EnvironmentData = new JsonEnvironmentData();
 
         // Initialization
-
+#if PLATFORM_WEBGL
         [DllImport("__Internal")]
         private static extern string InitEnvironmentData_js();
+#endif
 
         [InitBaisYG]
         public static void InitEnvirData()
         {
-#if !UNITY_EDITOR
+#if PLATFORM_WEBGL
             Debug.Log("Init Envir inGame");
             string data = InitEnvironmentData_js();
             if (data != "null")
                 EnvironmentData = JsonUtility.FromJson<JsonEnvironmentData>(data);
-#else
+#elif UNITY_EDITOR
             InitEnvirForEditor();
 #endif
         }
 
         // Requesting Data
-
+#if PLATFORM_WEBGL
         [DllImport("__Internal")]
         private static extern string RequestingEnvironmentData_js(bool sendback);
-
+#endif
+        
         public static void RequesEnvirData(bool sendback = true)
         {
-#if !UNITY_EDITOR
+#if PLATFORM_WEBGL
             RequestingEnvironmentData_js(sendback);
-#else
+#elif UNITY_EDITOR
             InitEnvirForEditor();
             GetDataInvoke();
 #endif

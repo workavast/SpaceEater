@@ -29,19 +29,20 @@ namespace YG
 
         JsonAuth jsonAuth = new JsonAuth();
 
-
+#if PLATFORM_WEBGL
         [DllImport("__Internal")]
         private static extern string InitPlayer_js();
+#endif
 
         [InitYG]
         public static void InitializationGame()
         {
             _photoSize = Instance.infoYG.GetPlayerPhotoSize();
-#if !UNITY_EDITOR
+#if PLATFORM_WEBGL
             Debug.Log("Init Auth inGame");
             string playerData = InitPlayer_js();
             Instance.SetInitializationSDK(playerData);
-#else
+#elif UNITY_EDITOR 
             InitPlayerForEditor();
 #endif
         }
@@ -75,14 +76,16 @@ namespace YG
             Instance.SetInitializationSDK(json);
         }
 #endif
-
+      
+#if PLATFORM_WEBGL
         [DllImport("__Internal")]
         public static extern void RequestAuth_js(bool sendback);
+#endif
         public static void RequestAuth(bool sendback = true)
         {
-#if !UNITY_EDITOR
+#if PLATFORM_WEBGL
             RequestAuth_js(sendback);
-#else
+#elif UNITY_EDITOR 
             InitPlayerForEditor();
 #endif
         }
@@ -124,9 +127,10 @@ namespace YG
             GetDataInvoke();
         }
 
-
+#if PLATFORM_WEBGL
         [DllImport("__Internal")]
         private static extern void OpenAuthDialog();
+#endif
 
         public static void AuthDialog()
         {
@@ -135,7 +139,7 @@ namespace YG
             else
                 Message("SDK Яндекс Игр предлагает войти в аккаунт только тем пользователям, которые еще не вошли.");
 
-#if !UNITY_EDITOR
+#if PLATFORM_WEBGL
             OpenAuthDialog();
 #endif
         }

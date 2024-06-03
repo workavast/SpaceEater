@@ -21,6 +21,10 @@ namespace YG.Insides.Utils
         public static void AddDefine(string define)
         {
             BuildTargetGroup buildTargetGroup = EditorUserBuildSettings.selectedBuildTargetGroup;
+
+            if (buildTargetGroup != BuildTargetGroup.WebGL)
+                return;
+            
             string defines = PlayerSettings.GetScriptingDefineSymbols(UnityEditor.Build.NamedBuildTarget.FromBuildTargetGroup(buildTargetGroup));
 
             if (defines.Contains(define))

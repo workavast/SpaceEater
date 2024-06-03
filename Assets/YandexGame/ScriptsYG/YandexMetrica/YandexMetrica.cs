@@ -58,15 +58,19 @@ namespace YG
         }
 #endif
 
+#if PLATFORM_WEBGL
         [System.Runtime.InteropServices.DllImport("__Internal")]
         private static extern bool YandexMetricaSendInternal(string eventName, string eventData);
+#endif
 
         private static void YandexMetricaSend(string eventName, string eventData)
         {
+#if PLATFORM_WEBGL
             if (YandexGame.Instance.infoYG.metricaEnable)
             {
                 YandexMetricaSendInternal(eventName, eventData);
             }
+#endif
         }
     }
 }
