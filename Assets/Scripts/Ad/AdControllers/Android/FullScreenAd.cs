@@ -9,6 +9,7 @@ namespace SourceCode.Ad.AdControllers.Android
     {
         // Replace demo Unit ID 'demo-interstitial-yandex' with actual Ad Unit ID
         private const string AdUnitId = "demo-interstitial-yandex";
+        private const string AdUnitIdMain = "R-M-9084369-1";
         
         public bool IsShowAtTheMoment;
         public bool AdLoaded;
@@ -62,7 +63,7 @@ namespace SourceCode.Ad.AdControllers.Android
             _interstitial = null;
             AdLoaded = false;
             
-            _interstitialAdLoader.LoadAd(CreateAdRequest(AdUnitId));
+            _interstitialAdLoader.LoadAd(CreateAdRequest(AdUnitIdMain));
             Debug.Log("Interstitial is requested");
         }
         
