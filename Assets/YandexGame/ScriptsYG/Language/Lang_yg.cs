@@ -12,7 +12,7 @@ namespace YG
         [InitYG]
         public static void InitLang()
         {
-#if PLATFORM_WEBGL
+#if !UNITY_EDITOR && PLATFORM_WEBGL
             Debug.Log("Init Lang inGame");
 #endif
             if (!Instance.infoYG.LocalizationEnable ||
@@ -51,7 +51,7 @@ namespace YG
         
         public void _LanguageRequest()
         {
-#if PLATFORM_WEBGL
+#if !UNITY_EDITOR && PLATFORM_WEBGL
 
             SetLanguage(LangRequest_js());
 #elif UNITY_EDITOR

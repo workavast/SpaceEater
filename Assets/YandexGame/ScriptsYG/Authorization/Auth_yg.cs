@@ -38,7 +38,7 @@ namespace YG
         public static void InitializationGame()
         {
             _photoSize = Instance.infoYG.GetPlayerPhotoSize();
-#if PLATFORM_WEBGL
+#if !UNITY_EDITOR && PLATFORM_WEBGL
             Debug.Log("Init Auth inGame");
             string playerData = InitPlayer_js();
             Instance.SetInitializationSDK(playerData);
@@ -83,7 +83,7 @@ namespace YG
 #endif
         public static void RequestAuth(bool sendback = true)
         {
-#if PLATFORM_WEBGL
+#if !UNITY_EDITOR && PLATFORM_WEBGL
             RequestAuth_js(sendback);
 #elif UNITY_EDITOR 
             InitPlayerForEditor();
@@ -139,7 +139,7 @@ namespace YG
             else
                 Message("SDK Яндекс Игр предлагает войти в аккаунт только тем пользователям, которые еще не вошли.");
 
-#if PLATFORM_WEBGL
+#if !UNITY_EDITOR && PLATFORM_WEBGL
             OpenAuthDialog();
 #endif
         }

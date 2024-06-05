@@ -16,7 +16,7 @@ namespace YG
         [InitBaisYG]
         public static void InitEnvirData()
         {
-#if PLATFORM_WEBGL
+#if !UNITY_EDITOR && PLATFORM_WEBGL
             Debug.Log("Init Envir inGame");
             string data = InitEnvironmentData_js();
             if (data != "null")
@@ -34,7 +34,7 @@ namespace YG
         
         public static void RequesEnvirData(bool sendback = true)
         {
-#if PLATFORM_WEBGL
+#if !UNITY_EDITOR && PLATFORM_WEBGL
             RequestingEnvironmentData_js(sendback);
 #elif UNITY_EDITOR
             InitEnvirForEditor();

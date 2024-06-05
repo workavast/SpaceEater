@@ -65,7 +65,7 @@ namespace YG
 
         private static void YandexMetricaSend(string eventName, string eventData)
         {
-#if PLATFORM_WEBGL
+#if !UNITY_EDITOR && PLATFORM_WEBGL
             if (YandexGame.Instance.infoYG.metricaEnable)
             {
                 YandexMetricaSendInternal(eventName, eventData);

@@ -116,7 +116,7 @@ namespace YG
             {
                 if (infoYG.leaderboardEnable)
                 {
-#if PLATFORM_WEBGL
+#if !UNITY_EDITOR && PLATFORM_WEBGL
                     Debug.Log("Init Leaderbords inGame");
                     _InitLeaderboard();
 #else
@@ -127,7 +127,7 @@ namespace YG
                 CallStartYG();
                 _SDKEnabled = true;
                 GetDataInvoke();
-#if PLATFORM_WEBGL
+#if !UNITY_EDITOR && PLATFORM_WEBGL
                 InitGame_js();
 #endif
             }
@@ -203,7 +203,7 @@ namespace YG
 #endif
         public void _InitLeaderboard()
         {
-#if PLATFORM_WEBGL
+#if !UNITY_EDITOR && PLATFORM_WEBGL
             InitLeaderboard();
 #endif
 #if UNITY_EDITOR
@@ -224,7 +224,7 @@ namespace YG
             {
                 timerShowAd = 0;
                 onAdNotification?.Invoke();
-#if PLATFORM_WEBGL
+#if !UNITY_EDITOR && PLATFORM_WEBGL
                 FullAdShow();
 #elif UNITY_EDITOR
                 Message("Fullscren Ad");
@@ -262,7 +262,7 @@ namespace YG
             if (!nowFullAd && !nowVideoAd)
             {
                 onAdNotification?.Invoke();
-#if PLATFORM_WEBGL
+#if !UNITY_EDITOR && PLATFORM_WEBGL
                 RewardedShow(id);
 #elif UNITY_EDITOR
                 AdRewardInEditor(id);
@@ -290,7 +290,7 @@ namespace YG
 #endif
         public static void OnURL(string url)
         {
-#if PLATFORM_WEBGL
+#if !UNITY_EDITOR && PLATFORM_WEBGL
             try
             {
                 OpenURL(url);
@@ -307,7 +307,7 @@ namespace YG
         {
             url = "https://yandex." + EnvironmentData.domain + "/games/" + url;
             Message("URL Transition (yandexGames.DefineDomain) url: " + url);
-#if PLATFORM_WEBGL
+#if !UNITY_EDITOR && PLATFORM_WEBGL
             if (EnvironmentData.domain != null && EnvironmentData.domain != "")
             {
                 OnURL(url);
@@ -321,7 +321,7 @@ namespace YG
         public void _OnAnyURL(string url)
         {
             Message("Any URL Transition. url: " + url);
-#if PLATFORM_WEBGL
+#if !UNITY_EDITOR && PLATFORM_WEBGL
             OnURL(url);
 #else
             Application.OpenURL(url);
@@ -342,7 +342,7 @@ namespace YG
                     playerName == "anonymous")
                     return;
 
-#if PLATFORM_WEBGL
+#if !UNITY_EDITOR && PLATFORM_WEBGL
                 Message("New Liderboard Record: " + score);
                 SetLeaderboardScores(nameLB, score);
 #else
@@ -411,7 +411,7 @@ namespace YG
                 onGetLeaderboard?.Invoke(lb);
             }
 
-#if PLATFORM_WEBGL
+#if !UNITY_EDITOR && PLATFORM_WEBGL
             if (Instance.infoYG.leaderboardEnable)
             {
                 Message("Get Leaderboard");
@@ -458,7 +458,7 @@ namespace YG
         public void _ReviewShow(bool authDialog)
         {
             Message("Review");
-#if PLATFORM_WEBGL
+#if !UNITY_EDITOR && PLATFORM_WEBGL
             if (authDialog)
             {
                 if (_auth) ReviewInternal();
@@ -483,7 +483,7 @@ namespace YG
 #endif
         public static void PromptShow()
         {
-#if PLATFORM_WEBGL
+#if !UNITY_EDITOR && PLATFORM_WEBGL
             if (EnvironmentData.promptCanShow)
                 PromptShowInternal();
 #else
@@ -506,7 +506,7 @@ namespace YG
         {
             if (activity) Message("Sticky Ad Show");
             else Message("Sticky Ad Hide");
-#if PLATFORM_WEBGL
+#if !UNITY_EDITOR && PLATFORM_WEBGL
             StickyAdActivityInternal(activity);
 #endif
         }
@@ -531,7 +531,7 @@ namespace YG
         {
             nowFullAd = false;
             timerShowAd = 0;
-#if PLATFORM_WEBGL
+#if !UNITY_EDITOR && PLATFORM_WEBGL
             if (wasShown == "true")
             {
                 Message("Closed Ad Interstitial");
@@ -732,7 +732,7 @@ namespace YG
 
         #region Update
         public static float timerShowAd;
-#if PLATFORM_WEBGL
+#if !UNITY_EDITOR && PLATFORM_WEBGL
         static float timerSaveCloud = 62;
 #endif
 
@@ -742,7 +742,7 @@ namespace YG
             timerShowAd += Time.unscaledDeltaTime;
 
             // Таймер для облачных сохранений
-#if PLATFORM_WEBGL
+#if !UNITY_EDITOR && PLATFORM_WEBGL
             if (infoYG.saveCloud)
                 timerSaveCloud += Time.unscaledDeltaTime;
 #endif

@@ -22,7 +22,7 @@ namespace YG
         [InitYG]
         public static void InitPayments()
         {
-#if PLATFORM_WEBGL
+#if !UNITY_EDITOR && PLATFORM_WEBGL
             Debug.Log("Init Payments inGame");
             Instance.PaymentsEntries(InitPayments_js());
 #else
@@ -47,7 +47,7 @@ namespace YG
         public static void GetPayments()
         {
             Message("Get Payments");
-#if PLATFORM_WEBGL
+#if !UNITY_EDITOR && PLATFORM_WEBGL
             GetPayments_js();
 #else
             Instance.PaymentsEntries("");
@@ -77,7 +77,7 @@ namespace YG
         
         public static void ConsumePurchaseByID(string id)
         {
-#if PLATFORM_WEBGL
+#if !UNITY_EDITOR && PLATFORM_WEBGL
             ConsumePurchase_js(id);
 #endif
         }
@@ -89,7 +89,7 @@ namespace YG
         
         public static void ConsumePurchases()
         {
-#if PLATFORM_WEBGL
+#if !UNITY_EDITOR && PLATFORM_WEBGL
             ConsumePurchase_js();
 #endif
         }
@@ -101,7 +101,7 @@ namespace YG
         
         public static void BuyPayments(string id)
         {
-#if PLATFORM_WEBGL
+#if !UNITY_EDITOR && PLATFORM_WEBGL
             BuyPayments_js(id);
 #else
             Message($"Buy Payment. ID: {id}");
@@ -117,7 +117,7 @@ namespace YG
 
         public void PaymentsEntries(string data)
         {
-#if PLATFORM_WEBGL
+#if !UNITY_EDITOR && PLATFORM_WEBGL
             if (data == "none")
                 return;
 

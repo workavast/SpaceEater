@@ -19,7 +19,7 @@ namespace YG
 
         public static bool HasKey(string key)
         {
-#if PLATFORM_WEBGL
+#if !UNITY_EDITOR && PLATFORM_WEBGL
             try
             {
                 return HasKeyInLocalStorage(key) == 1;
@@ -39,7 +39,7 @@ namespace YG
 #endif
         public static void RemoveLocalSaves()
         {
-#if PLATFORM_WEBGL
+#if !UNITY_EDITOR && PLATFORM_WEBGL
             RemoveFromLocalStorage("savesData");
 #endif
         }

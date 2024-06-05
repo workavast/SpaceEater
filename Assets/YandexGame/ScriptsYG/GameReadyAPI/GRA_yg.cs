@@ -23,7 +23,7 @@ namespace YG
             if (!gameReadyUsed)
             {
                 gameReadyUsed = true;
-#if PLATFORM_WEBGL
+#if !UNITY_EDITOR && PLATFORM_WEBGL
                 GameReadyAPI_js();
 #endif
             }
