@@ -8,7 +8,12 @@ namespace SourceCode.Ad.AdControllers
         
         public override event Action FullScreenAdShowed;
         public override event Action FullScreenShowAdFailed;
-        
+
+        public override void PrepareAd()
+        {
+            
+        }
+
         public override void ShowFullScreen()
         {
             FullScreenAdShowed?.Invoke();

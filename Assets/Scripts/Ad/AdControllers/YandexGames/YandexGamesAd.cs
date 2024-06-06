@@ -15,7 +15,12 @@ namespace SourceCode.Ad.AdControllers.YandexGames
             YandexGame.CloseFullAdEvent += () => FullScreenAdShowed?.Invoke();
             YandexGame.ErrorFullAdEvent += () => FullScreenShowAdFailed?.Invoke();
         }
-        
+
+        public override void PrepareAd()
+        {
+            
+        }
+
         public override void ShowFullScreen() 
             => YandexGame.FullscreenShow();
     }

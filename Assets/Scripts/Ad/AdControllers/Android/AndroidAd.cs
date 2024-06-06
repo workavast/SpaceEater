@@ -10,7 +10,7 @@ namespace SourceCode.Ad.AdControllers.Android
         private readonly FullScreenAdEnv _fullScreenAdEnv;
         private readonly Timer _adTimer;
 
-        public override bool AdReady => _adTimer.CurrentTime / _adTimer.MaxTime >= 1;
+        public override bool AdReady => _adTimer.CurrentTime >= _adTimer.MaxTime;
         
         public override event Action FullScreenAdShowed;
         public override event Action FullScreenShowAdFailed;
@@ -20,14 +20,26 @@ namespace SourceCode.Ad.AdControllers.Android
             _adTimer = new Timer(androidFullScreenAdEnvConfig.TimerBeforeAdShow);
             _fullScreenAdEnv = new FullScreenAdEnv(androidFullScreenAdEnvConfig);
 
-            _fullScreenAdEnv.OnAdShowSuccess += () => _adTimer.Reset();
-            _fullScreenAdEnv.OnAdShowSuccess += () => FullScreenAdShowed?.Invoke();
-            _fullScreenAdEnv.OnAdShowFailed += () => FullScreenShowAdFailed?.Invoke();
+            _fullScreenAdEnv.OnAdShowSuccess += () =>
+            {
+                _adTimer.Reset();
+                FullScreenAdShowed?.Invoke();
+            };
+            _fullScreenAdEnv.OnAdShowFailed += () =>
+            {
+                _adTimer.Reset();
+                FullScreenShowAdFailed?.Invoke();
+            };
+            _fullScreenAdEnv.OnAdDismissed += () =>
+            {
+                _adTimer.Reset();
+                FullScreenShowAdFailed?.Invoke();
+            };
         }
 
         public void Tick()
         {
-            if(!_fullScreenAdEnv.IsShowAtTheMoment)
+            if (!_fullScreenAdEnv.IsShowAtTheMoment)
                 _adTimer.Tick(Time.unscaledDeltaTime);
             
             _fullScreenAdEnv.ManualUpdate();
@@ -38,18 +50,23 @@ namespace SourceCode.Ad.AdControllers.Android
             _fullScreenAdEnv?.Dispose();
         }
 
+        public override void PrepareAd()
+        {
+            _fullScreenAdEnv.Prepare();
+        }
+
         public override void ShowFullScreen()
         {
             if(_fullScreenAdEnv.IsShowAtTheMoment)
             {
-                Debug.LogError($"Ad show at the moment");
+                Debug.LogError($"-AD- Ad show at the moment");
                 FullScreenShowAdFailed?.Invoke();
                 return;
             }
             
-            if(_adTimer.CurrentTime < _adTimer.MaxTime)
+            if(!AdReady)
             {
-                Debug.LogError($"Ad timer dont ready");
+                Debug.LogError($"-AD- Ad timer dont ready");
                 FullScreenShowAdFailed?.Invoke();
                 return;
             }

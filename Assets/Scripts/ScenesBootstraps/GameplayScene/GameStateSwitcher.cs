@@ -33,7 +33,7 @@ namespace SourceCode.ScenesBootstraps.GameplayScene
             _gameplayLoadingScreenFadeState.FadeEnded += OnGameFadeEnded;
             _endGameDetector.GameEnded += OnGameEnded;
             _gameplayAdShowState.AdShowEnded += OnAdShowEnded;
-            _adPreparedTrigger.AdActivationTriggered += OnAdPreparedActivationTriggered;
+            _adPreparedTrigger.AdPreparingTriggered += OnAdPreparingTriggered;
             
             var gameplayMainScreen = UI_ScreenRepository.GetScreen<GameplayMainScreen>();
             gameplayMainScreen.PauseButtonClicked += OnGamePaused;
@@ -42,7 +42,7 @@ namespace SourceCode.ScenesBootstraps.GameplayScene
             gameplayMenuScreen.ContinueButtonClicked += OnGameContinued;
         }
 
-        private void OnAdPreparedActivationTriggered()
+        private void OnAdPreparingTriggered()
         {
             if(_gameStateMachine.CurrentState != typeof(GameplayMainState))
                 return;

@@ -8,7 +8,8 @@ namespace SourceCode.Ad.AdControllers
         
         public abstract event Action FullScreenAdShowed;
         public abstract event Action FullScreenShowAdFailed;
-        
+
+        public abstract void PrepareAd();
         public abstract void ShowFullScreen();
     }
 }

@@ -8,7 +8,7 @@ namespace SourceCode.Ad.Preparing
         
         public event Action AdPreparedTimerUpdated;
         public event Action AdPrepared;
-        public event Action AdActivationTriggered;
+        public event Action AdPreparingTriggered;
         
         public void ManualUpdate(float deltaTime)
         {

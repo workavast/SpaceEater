@@ -4,20 +4,22 @@ using SourceCode.Ad.AdControllers;
 
 namespace SourceCode.Ad.Preparing
 {
-    public class AdPreparer : IAdPreparedTrigger, IAdPreparingTimer, IAdTriggerActivator
+    public sealed class AdPreparer : IAdPreparedTrigger, IAdPreparingTimer, IAdTriggerActivator
     {
         private readonly IAdTimer _adTimer;
+        private readonly IFullScreenAd _fullScreenAd;
         private readonly Timer _adPreparingTimer;
 
         public int CurrentPreparingTimerValue { get; private set; }
         
-        public event Action AdActivationTriggered;
+        public event Action AdPreparingTriggered;
         public event Action AdPrepared;
         public event Action AdPreparedTimerUpdated;
         
-        public AdPreparer(AdPreparingConfig config, IAdTimer adTimer)
+        public AdPreparer(AdPreparingConfig config, IAdTimer adTimer, IFullScreenAd fullScreenAd)
         {
             _adTimer = adTimer;
+            _fullScreenAd = fullScreenAd;
             _adPreparingTimer = new Timer(config.AdPreparingTime, 0, true);
             _adPreparingTimer.OnTimerEnd += () => AdPrepared?.Invoke();
         }
@@ -41,8 +43,9 @@ namespace SourceCode.Ad.Preparing
             if (!_adTimer.AdReady)
                 return;
             
+            _fullScreenAd.PrepareAd();
             _adPreparingTimer.Reset();
-            AdActivationTriggered?.Invoke();
+            AdPreparingTriggered?.Invoke();
         }
     }
 }

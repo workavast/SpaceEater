@@ -11,8 +11,8 @@ namespace SourceCode.Ad.AdControllers.Android
         private const string AdUnitId = "demo-interstitial-yandex";
         private const string AdUnitIdMain = "R-M-9084369-1";
         
-        public bool IsShowAtTheMoment;
-        public bool AdLoaded;
+        public bool IsShowAtTheMoment { get; private set; }
+        public bool AdLoaded { get; private set; }
         
         private readonly InterstitialAdLoader _interstitialAdLoader;
         private Interstitial _interstitial;
@@ -42,15 +42,16 @@ namespace SourceCode.Ad.AdControllers.Android
         {
             if (_interstitial == null)
             {
-                // Debug.Log("Interstitial is not ready yet");
-                throw new Exception("Interstitial is not ready yet");
-                // return;
+                Debug.LogError("-AD- Interstitial is not ready yet");
+                OnAdShowFailed?.Invoke();
+                return;
             }
 
             _interstitial.OnAdShown += HandleAdShown;
             _interstitial.OnAdFailedToShow += HandleAdFailedToShow;
             _interstitial.OnAdDismissed += HandleAdDismissed;
             IsShowAtTheMoment = true;
+            AdLoaded = false;
             _interstitial.Show();
         }
 
@@ -63,13 +64,18 @@ namespace SourceCode.Ad.AdControllers.Android
             _interstitial = null;
             AdLoaded = false;
             
+            _interstitialAdLoader.CancelLoading();
             _interstitialAdLoader.LoadAd(CreateAdRequest(AdUnitIdMain));
-            Debug.Log("Interstitial is requested");
+            Debug.Log("-AD- Interstitial is requested");
         }
         
-        protected void ManualFailedShow()
-            => OnAdShowFailed?.Invoke();
-        
+        protected void ManualShowFailed()
+        {
+            Debug.Log($"-AD- ManualFailedShow event received");
+            IsShowAtTheMoment = false;
+            OnAdShowFailed?.Invoke();
+        }
+
         private AdRequestConfiguration CreateAdRequest(string adUnitId)
         {
             return new AdRequestConfiguration.Builder(adUnitId).Build();
@@ -77,7 +83,7 @@ namespace SourceCode.Ad.AdControllers.Android
 
         private void HandleAdLoaded(object sender, InterstitialAdLoadedEventArgs args)
         {
-            Debug.Log("HandleAdLoaded event received");
+            Debug.Log("-AD- HandleAdLoaded event received");
             
             _interstitial = args.Interstitial;
             AdLoaded = true;
@@ -86,14 +92,15 @@ namespace SourceCode.Ad.AdControllers.Android
 
         private void HandleAdFailedToLoad(object sender, AdFailedToLoadEventArgs args)
         {
-            Debug.Log($"HandleAdFailedToLoad event received with message: {args.Message}");
+            Debug.Log($"-AD- HandleAdFailedToLoad event received with message: {args.Message}");
             
+            AdLoaded = false;
             AdLoadFailed?.Invoke();
         }
         
         private void HandleAdShown(object sender, EventArgs args)
         {
-            Debug.Log("HandleAdShown event received");
+            Debug.Log("-AD- HandleAdShown event received");
             
             IsShowAtTheMoment = false;
             OnAdShowSuccess?.Invoke();
@@ -101,18 +108,17 @@ namespace SourceCode.Ad.AdControllers.Android
 
         private void HandleAdDismissed(object sender, EventArgs args)
         {
-            Debug.Log("HandleAdDismissed event received");
+            Debug.Log("-AD- HandleAdDismissed event received");
 
             IsShowAtTheMoment = false;
             _interstitial.Destroy();
             _interstitial = null;
-            AdLoaded = false;
             OnAdDismissed?.Invoke();
         }
 
         private void HandleAdFailedToShow(object sender, AdFailureEventArgs args)
         {
-            Debug.Log($"HandleAdFailedToShow event received with message: {args.Message}");
+            Debug.Log($"-AD- HandleAdFailedToShow event received with message: {args.Message}");
 
             IsShowAtTheMoment = false;
             OnAdShowFailed?.Invoke();
