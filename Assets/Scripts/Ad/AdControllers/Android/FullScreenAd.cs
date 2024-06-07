@@ -36,6 +36,7 @@ namespace SourceCode.Ad.AdControllers.Android
         public void Dispose()
         {
             _interstitial?.Destroy();
+            _interstitialAdLoader.CancelLoading();
         }
         
         protected void ShowInterstitial()
@@ -103,6 +104,8 @@ namespace SourceCode.Ad.AdControllers.Android
             Debug.Log("-AD- HandleAdShown event received");
             
             IsShowAtTheMoment = false;
+            _interstitial?.Destroy();
+            _interstitial = null;
             OnAdShowSuccess?.Invoke();
         }
 
@@ -111,7 +114,7 @@ namespace SourceCode.Ad.AdControllers.Android
             Debug.Log("-AD- HandleAdDismissed event received");
 
             IsShowAtTheMoment = false;
-            _interstitial.Destroy();
+            _interstitial?.Destroy();
             _interstitial = null;
             OnAdDismissed?.Invoke();
         }
@@ -121,6 +124,8 @@ namespace SourceCode.Ad.AdControllers.Android
             Debug.Log($"-AD- HandleAdFailedToShow event received with message: {args.Message}");
 
             IsShowAtTheMoment = false;
+            _interstitial?.Destroy();
+            _interstitial = null;
             OnAdShowFailed?.Invoke();
         }
     }
