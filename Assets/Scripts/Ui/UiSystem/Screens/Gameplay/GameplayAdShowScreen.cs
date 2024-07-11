@@ -1,3 +1,4 @@
+using System;
 using SourceCode.Ad;
 using SourceCode.Ad.Preparing;
 using TMPro;
@@ -28,5 +29,9 @@ namespace SourceCode.Ui.UiSystem.Screens.Gameplay
             _currentTimerValue = time;
             timer.text = "" + time;
         }
+        
+        
+        private void OnEnable() 
+            => SetTimerValue();
     }
 }

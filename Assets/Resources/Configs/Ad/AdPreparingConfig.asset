@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 319c123426ec4481a4b07dbe3a047807, type: 3}
   m_Name: AdPreparingConfig
   m_EditorClassIdentifier: 
-  adPreparingTime: 3
+  adPreparingTime: 2

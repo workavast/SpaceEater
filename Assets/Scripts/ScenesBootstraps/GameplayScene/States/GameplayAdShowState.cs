@@ -29,6 +29,7 @@ namespace SourceCode.ScenesBootstraps.GameplayScene.States
         public override void Enter()
         {
             _uiController.SetScreen<GameplayAdShowScreen>();
+            _adPreparingTimer.ManualUpdate(0);
             _fullScreenAd.FullScreenAdShowed += OnAdFullScreenShowed;
             _fullScreenAd.FullScreenShowAdFailed += OnAdFullScreenShowed;
         }

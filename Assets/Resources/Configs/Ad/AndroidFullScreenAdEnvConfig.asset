@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d770919026a3434591e71000ee9f6091, type: 3}
   m_Name: AndroidFullScreenAdEnvConfig
   m_EditorClassIdentifier: 
-  <TimerBeforeAdShow>k__BackingField: 60
-  <AdLoadTimer>k__BackingField: 3
+  <TimerBeforeAdShow>k__BackingField: 120
+  <AdLoadTimer>k__BackingField: 2
